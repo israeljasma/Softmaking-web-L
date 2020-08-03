@@ -1,3 +1,17 @@
+## Version Laravel : 7.22.4
+# install composer
+- https://getcomposer.org/
+
+# install laravel global
+- composer global require laravel/installer
+
+# development server
+- php artisan serve
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
