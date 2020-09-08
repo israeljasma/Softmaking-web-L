@@ -21,8 +21,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    //public function index(Request $request)
     public function index()
     {
+        //Testting alerts
+        //$request->session()->flash('success','test success message');
+        //$request->session()->flash('warning','test warning message');
+        //$request->session()->flash('error','test error message');
         return view('home');
     }
 }
