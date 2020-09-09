@@ -25,4 +25,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/users', 'UsersController', ['except' => ['show', 'store']]);
 });
 
-Route::resource('/admin/users/id/invoices', 'Admin\invoicesDocumentController', ['except' => ['show', 'store']]);
+//Route::resource('/admin/users/id/invoices', 'Admin\invoicesDocumentController', ['except' => ['show', 'store']]);
+
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
+    Route::resource('/invoices', 'invoicesDocumentController', ['except' => ['show', 'store']]);
+});
