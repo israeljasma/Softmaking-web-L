@@ -15,6 +15,7 @@
                             <th scope="col">Nombre</th>
                             <th scope="col">Email</th>
                             <th scope="col">Rol</th>
+                            <th scope="col">Facturas</th>
                             <th scope="col">Acciones</th>
                           </tr>
                         </thead>
@@ -25,6 +26,7 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ implode(',', $user->roles()->get()->pluck('name')->toArray()) }}</td>
+                                    <td><a href="{{ route('invoices.index') }}"><button type="button" class="btn btn-primary float-left">Ver</button></a></td>
                                     <td>                                           
                                         @can('edit-users')
                                             <a href="{{ route('admin.users.edit', $user->id) }}"><button type="button" class="btn btn-primary float-left">Editar</button></a>
