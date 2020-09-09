@@ -56,4 +56,8 @@ class User extends Authenticatable
 
         return false;
     }
+
+    public function invoiceDocuments(){
+        return $this->hasMany('App\InvoiceDocument');
+    }
 }
