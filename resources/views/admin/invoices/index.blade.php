@@ -15,6 +15,7 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    <a href="{{ route('admin.invoices.create', $user) }}"><button type="submit" class="btn btn-primary">Crear</button></a>
                 </div>
             </div>
         </div>

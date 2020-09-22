@@ -18,6 +18,9 @@ class CreateInvoiceDocumentsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('date');
+            $table->string('file');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

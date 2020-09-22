@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use App\InvoiceDocument;
 use Illuminate\Http\Request;
 
 class invoicesDocumentController extends Controller
@@ -17,10 +18,9 @@ class invoicesDocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        $users = User::all();
-        return view('admin.invoices.index')->with('users', $users);
+        return view('admin.invoices.index')->with('user', $user);
     }
 
     /**
@@ -28,9 +28,9 @@ class invoicesDocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(User $user)
     {
-        //
+        return view('admin.invoices.create')->with('user', $user);
     }
 
     /**
@@ -39,9 +39,26 @@ class invoicesDocumentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
-        //
+        //dd($user);
+        $data = new InvoiceDocument;
+        if($request->file('file')){
+            $file=$request->file('file');
+            // $filename = $file->getClientOriginalName();
+            $fileName=time().$file->getClientOriginalName();
+            //$fileName=time().str_random(5).'.'.$file->getClientOriginalExtension();
+            $request->file->move('storage/'. $fileName);
+
+            $data->file = $fileName;
+        }
+        $data->name=$request->name;
+        $data->description=$request->description;
+        $data->date=$request->date;
+        $data->user_id=$user->id;
+
+        $data->save();
+        return view('admin.invoices.index')->with('user', $user);
     }
 
     /**
