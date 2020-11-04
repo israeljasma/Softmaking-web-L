@@ -24,12 +24,3 @@
         </button>
     </div>
 @endif
-
-
-<script>
-    window.setTimeout(function(){
-        $(".alert").fadeTo(300,0).slideDown(1000, function(){
-            $(this).remove();
-        });
-    }, 2000);
-</script>
