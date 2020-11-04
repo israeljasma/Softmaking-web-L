@@ -99,6 +99,7 @@ class UsersController extends Controller
         }
 
         return redirect()->route('admin.users.index');
+        //dd($request);
     }
 
     /**

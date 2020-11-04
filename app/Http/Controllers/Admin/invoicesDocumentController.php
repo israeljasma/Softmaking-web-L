@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\InvoiceDocument;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class invoicesDocumentController extends Controller
 {
@@ -20,7 +22,8 @@ class invoicesDocumentController extends Controller
      */
     public function index(User $user)
     {
-        return view('admin.invoices.index')->with('user', $user);
+        $invoices = InvoiceDocument::all();
+        return view('admin.invoices.index', compact('invoices'))->with('user', $user);
     }
 
     /**
@@ -45,20 +48,21 @@ class invoicesDocumentController extends Controller
         $data = new InvoiceDocument;
         if($request->file('file')){
             $file=$request->file('file');
-            // $filename = $file->getClientOriginalName();
-            $fileName=time().$file->getClientOriginalName();
-            //$fileName=time().str_random(5).'.'.$file->getClientOriginalExtension();
-            $request->file->move('storage/'. $fileName);
-
-            $data->file = $fileName;
+            $random = Str::random(40);
+            $fileName = $random.'.'.$file->getClientOriginalExtension();
+            $request->file('file')->storeAs('public',$fileName);
+            $data->file = $fileName;            
         }
+
         $data->name=$request->name;
         $data->description=$request->description;
         $data->date=$request->date;
         $data->user_id=$user->id;
 
         $data->save();
-        return view('admin.invoices.index')->with('user', $user);
+
+        $invoices = InvoiceDocument::all();
+        return view('admin.invoices.index', compact('invoices'))->with('user', $user);
     }
 
     /**
@@ -67,9 +71,11 @@ class invoicesDocumentController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user, InvoiceDocument $invoice)
     {
-        //
+        $invoiceUser = InvoiceDocument::find($invoice->id);
+        return view('admin.invoices.show', compact('invoiceUser'))->with('user', $user);
+        //return view('admin.invoices.show')->with('user', $user);
     }
 
     /**
@@ -78,9 +84,10 @@ class invoicesDocumentController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $user, InvoiceDocument $invoice)
     {
-        //
+        $invoiceUser = InvoiceDocument::find($invoice->id);
+        return view('admin.invoices.edit', compact('invoiceUser'))->with('user', $user);
     }
 
     /**
@@ -92,7 +99,24 @@ class invoicesDocumentController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        // if($request->file){
+        //     dd($request);
+        //     $file=$request->file('file');
+        //     $random = Str::random(40);
+        //     $fileName = $random.'.'.$file->getClientOriginalExtension();
+        //     $request->file('file')->storeAs('public',$fileName);
+        //     $data->file = $fileName;
+        // }else{
+        //     dd("pum feo");
+        // }
+
+        // $data->name=$request->name;
+        // $data->description=$request->description;
+        // $data->date=$request->date;
+        // $data->user_id=$user->id;
+
+        // $data->save();
+        //dd($request->file);
     }
 
     /**
@@ -101,8 +125,43 @@ class invoicesDocumentController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user, InvoiceDocument $invoice)
     {
+        //dd($invoice);
+        $invoice = InvoiceDocument::find($invoice->id);
+        Storage::delete('public/'.$invoice->file);
+        $invoice->delete();
+        
+        $invoices = InvoiceDocument::all();
+        return redirect()->route('admin.invoices.index', ['user' => $user]);
+        //dd(Storage::delete('storage/app/public/'.$invoice->file));
+        //dd($files = Storage::files('public'));
+        
+        //dd($files = Storage::files('public'));
+        // if(Storage::exists($invoice->file)){
+
+        //     \Storage::delete('/public/storage'.$invoice->file);
+        
+        //   }else{
+        
+        //     dd('File does not exists.');
+        //     //dd($invoice->file);
+        
+        //   }
+    }
+
+    public function dd(User $user, InvoiceDocument $invoice){
         //
+    }
+
+
+    public function downloaddd(User $user, InvoiceDocument $invoice)
+    {
+        //dd($invoice);
+        $url = Storage::temporaryUrl(
+            $invoice->file, now()->addMinutes(5)
+        );
+
+        return $url;
     }
 }
