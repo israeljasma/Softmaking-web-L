@@ -27,7 +27,7 @@
             </div>
             <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <a class="flex items-center" href="{{ url('/') }}">
-                    <img class="block h-8 w-auto" src="{{ asset('imgs/logo-sm.png') }}" alt="Workflow logo">
+                    <img class="block h-8 w-auto" src="{{ asset('imgs/logo-sm.png') }}" alt="Logo de Softmaking">
                     <span
                         class="hidden lg:block h-8 w-auto ml-2 text-xl text-white uppercase font-black align-middle">{{ config('app.name', 'Laravel') }}</span>
                 </a>

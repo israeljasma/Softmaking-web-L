@@ -50,14 +50,14 @@
                                 </div>
                             </div>
                             <div class="hidden md:block md:ml-4 md:pr-2">
-                                <a href="#"
+                                <a href="#clientes"
                                     class="font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Clientes</a>
-                                <a href="#"
+                                <a href="#about"
                                     class="ml-6 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Acerca
                                     de</a>
-                                <a href="#"
+                                <a href="#services"
                                     class="ml-6 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Servicios</a>
-                                <a href="#"
+                                <a href="#contact"
                                     class="ml-6 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Contacto</a>
                                 <a href="{{ route('login') }}"
                                     class="ml-6 font-bold text-blue-600 hover:text-blue-900 transition duration-150 ease-in-out">{{ __('Login') }}</a>

@@ -52,8 +52,8 @@
                         </button>
                     </div>
                     <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                        <a class="flex items-center" href="{{ url('/') }}">
-                            <img class="block h-8 w-auto" src="{{ asset('imgs/logo-sm.png') }}" alt="Workflow logo">
+                        <a class="flex items-center" href="{{ url('/home') }}">
+                            <img class="block h-8 w-auto" src="{{ asset('imgs/logo-sm.png') }}" alt="Logo de Softmaking">
                             <span
                                 class="hidden lg:block h-8 w-auto ml-2 text-xl text-white uppercase font-bold align-middle">{{ config('app.name', 'Laravel') }}</span>
                         </a>
@@ -144,20 +144,41 @@
         </nav>
 
 
-        <main class="py-4">
-            <div class="container mx-auto">
+        <main class="flex items-center justify-center mx-2">
+            <div class="container">
                 @include('partials.alerts')
                 @yield('content')
             </div>
-
         </main>
     </div>
 
     <style>
+        html,
+        body {
+            height: 100%;
+        }
+
         .active {
             display: block;
         }
-
+      
+        @media (min-width: 640px) {
+          table {
+            display: inline-table !important;
+          }
+      
+          thead tr:not(:first-child) {
+            display: none;
+          }
+        }
+      
+        td:not(:last-child) {
+          border-bottom: 0;
+        }
+      
+        th:not(:last-child) {
+          border-bottom: 2px solid rgba(0, 0, 0, .1);
+        }
     </style>
 
     <script>
