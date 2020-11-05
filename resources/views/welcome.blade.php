@@ -4,8 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ asset('imgs/logo-sm.png') }}">
 
-    <title>Laravel</title>
+    <title>SOFTMAKING</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -32,7 +33,7 @@
                         <nav class="relative flex items-center justify-between sm:h-10 lg:justify-start">
                             <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                                 <div class="flex items-center justify-between w-full md:w-auto">
-                                    <a href="#" aria-label="Home">
+                                    <a href="{{ url('/') }}" aria-label="Home">
                                         <img class="block h-8 w-auto" src="{{ asset('imgs/logo-sm.png') }}"
                                             alt="logo SoftMaking">
                                     </a>
@@ -58,11 +59,10 @@
                                     class="ml-6 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Servicios</a>
                                 <a href="#"
                                     class="ml-6 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Contacto</a>
-                                <a href="#"
-                                    class="ml-6 font-bold text-blue-600 hover:text-blue-900 transition duration-150 ease-in-out">Inicio
-                                    Sesión</a>
-                                <a href="#"
-                                    class="ml-6 font-bold text-blue-600 hover:text-blue-900 transition duration-150 ease-in-out">Registrarse</a>
+                                <a href="{{ route('login') }}"
+                                    class="ml-6 font-bold text-blue-600 hover:text-blue-900 transition duration-150 ease-in-out">{{ __('Login') }}</a>
+                                <a href="{{ route('register') }}"
+                                    class="ml-6 font-bold text-blue-600 hover:text-blue-900 transition duration-150 ease-in-out">{{ __('Register') }}</a>
                             </div>
                         </nav>
                     </div>
