@@ -132,13 +132,13 @@
                 </div>
             </div>
             <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-                    src="https://images.unsplash.com/photo-1590314524895-c5983ed24e75?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
-                    alt="">
+                <img class="h-56 w-full object-cover hidden lg:block sm:h-72 md:h-96 lg:w-full lg:h-full"
+                    src="https://images.unsplash.com/photo-1587613990174-1f14ba3be7cb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+                    alt="Imagen de fondo del Hero Section">
             </div>
         </div>
 
-        <section class="container mx-auto my-8 py-8">
+        <section class="container mx-auto my-8 pt-8 pb-8 md:pb-24">
             <h1 class="text-4xl font-bold text-center text-blue-700 mb-6">Algunos de nuestros clientes</h1>
             <div class="flex flex-col md:flex-row w-full justify-center items-center px-16 md:px-4">
                 <img class="w-auto h-auto md:w-1/4 inline-block"
@@ -152,7 +152,8 @@
             </div>
         </section>
 
-        <section class="container mx-auto mb-12 md:mb-48">
+        <section class="mx-auto mb-12 md:mb-48 py-48 px-12 rounded-lg relative">
+            <div class="absolute w-full h-full transform skew-y-3 bg-gray-100 shadow-sm top-0 right-0 -z-10"></div>
             <div class="relative">
                 <h1 class="text-5xl font-bold text-center text-blue-700 mb-6 z-10">¡Tenemos lo que necesitas!</h1>
                 <h1
@@ -175,18 +176,20 @@
 
                 <div class="p-2 sm:p-10 text-center cursor-pointer mx-auto">
                     <div
-                        class="py-16 max-w-sm rounded overflow-hidden shadow-lg hover:bg-white transition duration-500  bg-white">
+                        class="py-16 max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-700 transition duration-500 bg-gray-800">
                         <div class="space-y-10">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="text-blue-700 w-24 mx-auto" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
+                            <div class="bg-white rounded-full w-16 h-16 mx-auto flex shadow-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-800 w-8 mx-auto" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
 
-                            <div class="px-6 py-4">
-                                <div class="space-y-5">
+                            <div class="px-6 py-4 h-48">
+                                <div class="space-y-5 text-gray-100">
                                     <div class="font-bold text-xl mb-2">Desarrollos</div>
-                                    <p class="text-gray-700 text-base">
+                                    <p class="text-base">
                                         Proyectos innovadores, escalables y de alto impacto · Aplicaciones web ·
                                         Aplicaciones móviles · Consultoria · Integración de sistemas · Administración y
                                         mantenimiento de sistemas.
@@ -199,16 +202,17 @@
 
                 <div class="p-2 sm:p-10 text-center cursor-pointer mx-auto">
                     <div
-                        class="py-16 max-w-sm rounded overflow-hidden shadow-lg hover:bg-white transition duration-500  bg-white">
+                        class="py-16 max-w-sm rounded overflow-hidden shadow-lg hover:bg-blue-600 transition duration-500 bg-blue-700">
                         <div class="space-y-10">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="text-blue-700 w-24 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <div class="bg-white rounded-full w-16 h-16 mx-auto flex shadow-lg">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="text-blue-700 w-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
                           </svg>
-
-                            <div class="px-6 py-4">
-                                <div class="space-y-5">
+                        </div>
+                            <div class="px-6 py-4 h-48">
+                                <div class="space-y-5 text-white">
                                     <div class="font-bold text-xl mb-2">Soporte Técnico</div>
-                                    <p class="text-gray-700 text-base">
+                                    <p class="text-base">
                                         Brindamos Soporte técnico ya sea a productos desarrollados por nosotros como a
                                         equipos de empresa y pymes.
                                     </p>
@@ -220,14 +224,14 @@
             </div>
         </section>
 
-        <section class="container mx-auto my-12 md:my-48">
+        <section class="mx-auto px-12 py-12 md:py-48 bg-gray-800">
             <div class="relative">
                 <h1 class="text-5xl font-bold text-center text-blue-700 mb-6">Mantengámonos en contacto</h1>
                 <h1
                     class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-gray-100 absolute -z-10">
                     Mantengámonos en contacto</h1>
             </div>
-            <p class="text-xl text-justify mx-4">¿Listo para comenzar tu próximo proyecto con nosotros? ¡Eso es genial!
+            <p class="text-xl text-gray-100 text-justify mx-4">¿Listo para comenzar tu próximo proyecto con nosotros? ¡Eso es genial!
                 ¡Llámenos o envíenos un correo electrónico y nos pondremos en contacto con usted lo antes posible!</p>
         </section>
 
