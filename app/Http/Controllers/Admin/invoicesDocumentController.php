@@ -97,26 +97,25 @@ class invoicesDocumentController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user, InvoiceDocument $invoice)
     {
-        // if($request->file){
-        //     dd($request);
-        //     $file=$request->file('file');
-        //     $random = Str::random(40);
-        //     $fileName = $random.'.'.$file->getClientOriginalExtension();
-        //     $request->file('file')->storeAs('public',$fileName);
-        //     $data->file = $fileName;
-        // }else{
-        //     dd("pum feo");
-        // }
+        $invoiceUser = InvoiceDocument::find($invoice->id);
+        if($request->file){
+            $file=$request->file('file');
+            $random = Str::random(40);
+            $fileName = $random.'.'.$file->getClientOriginalExtension();
+            $request->file('file')->storeAs('public',$fileName);
+            Storage::delete('public/'.$invoiceUser->file);
+            $invoiceUser->file = $fileName;
+        }
+        $invoiceUser->name=$request->name;
+        $invoiceUser->description=$request->description;
+        $invoiceUser->date=$request->date;
+        $invoiceUser->user_id=$user->id;
 
-        // $data->name=$request->name;
-        // $data->description=$request->description;
-        // $data->date=$request->date;
-        // $data->user_id=$user->id;
-
-        // $data->save();
-        //dd($request->file);
+        $invoiceUser->save();
+        
+        return redirect()->route('admin.invoices.index',['user' => $user->id]);
     }
 
     /**
