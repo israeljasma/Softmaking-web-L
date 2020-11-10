@@ -35,15 +35,20 @@
                     <td class="border-grey-light border hover:bg-gray-100 p-3 h-12 text-left md:text-center"><a href="#" class="px-3 py-1 border border-transparent text-base rounded text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:border-blue-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg">Descargar</a></td>
                     <td class="border-grey-light border hover:bg-gray-100 p-3 h-12">
                         <div class="flex justify-start md:justify-center">
-                            <a class="px-3 md:py-1 mr-2 border border-transparent text-base rounded text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:border-yellow-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
-                                href="{{ route('admin.invoices.edit', [$user, $invoice->id]) }}">Editar</a>
-                            <form action="{{ route('admin.invoices.destroy', [$user, $invoice->id]) }}" method="POST"
-                                class="float-left">
-                                @csrf
-                                {{ method_field('DELETE') }}
-                                <button type="submit"
-                                    class="px-3 md:py-1 border border-transparent text-base rounded text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:border-red-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg">Eliminar</button>
-                            </form>
+                            @can('edit-invoices')
+                                <a class="px-3 md:py-1 mr-2 border border-transparent text-base rounded text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:border-yellow-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
+                                    href="{{ route('admin.invoices.edit', [$user, $invoice->id]) }}">Editar</a>
+                            @endcan
+
+                            @can('delete-invoices')
+                                <form action="{{ route('admin.invoices.destroy', [$user, $invoice->id]) }}" method="POST"
+                                    class="float-left">
+                                    @csrf
+                                    {{ method_field('DELETE') }}
+                                    <button type="submit"
+                                        class="px-3 md:py-1 border border-transparent text-base rounded text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:border-red-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg">Eliminar</button>
+                                </form>
+                            @endcan
                         </div>
 
                     </td>

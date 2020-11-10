@@ -38,6 +38,10 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         // Invoices
+        Gate::define('manage-invoices', function($user){
+            return $user->hasAnyRoles(['Admin', 'SuperAdmin']);
+        });
+
         Gate::define('edit-invoices', function($user){
             return $user->hasAnyRoles(['Admin', 'SuperAdmin']);
         });
