@@ -24,7 +24,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
+        // Users
         Gate::define('manage-users', function($user){
             return $user->hasAnyRoles(['Admin', 'SuperAdmin']);
         });
@@ -34,6 +34,15 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('delete-users', function($user){
+            return $user->hasRole('SuperAdmin');
+        });
+
+        // Invoices
+        Gate::define('edit-invoices', function($user){
+            return $user->hasAnyRoles(['Admin', 'SuperAdmin']);
+        });
+
+        Gate::define('delete-invoices', function($user){
             return $user->hasRole('SuperAdmin');
         });
     }

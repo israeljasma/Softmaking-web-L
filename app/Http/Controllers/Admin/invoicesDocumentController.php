@@ -8,6 +8,7 @@ use App\InvoiceDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Gate;
 
 class invoicesDocumentController extends Controller
 {
@@ -86,6 +87,9 @@ class invoicesDocumentController extends Controller
      */
     public function edit(User $user, InvoiceDocument $invoice)
     {
+        if(Gate::denies('edit-invoices')){
+            return redirect()->route('home');
+        }
         $invoiceUser = InvoiceDocument::find($invoice->id);
         return view('admin.invoices.edit', compact('invoiceUser'))->with('user', $user);
     }
@@ -126,7 +130,10 @@ class invoicesDocumentController extends Controller
      */
     public function destroy(User $user, InvoiceDocument $invoice)
     {
-        //dd($invoice);
+        if(Gate::denies('delete-invoices')){
+            return redirect()->route('home');
+        }
+
         $invoice = InvoiceDocument::find($invoice->id);
         Storage::delete('public/'.$invoice->file);
         $invoice->delete();
