@@ -30,3 +30,14 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
 Route::namespace('Admin')->prefix('admin/users/{user}')->name('admin.')->middleware('can:manage-invoices')->group(function($user){
     Route::resource('/invoices', 'invoicesDocumentController', ['except' => []]);
 });
+
+// Render in view
+Route::get('/contact', [
+    'uses' => 'ContactUsFormController@createForm'
+]);
+
+// Post form data
+Route::post('/contact', [
+    'uses' => 'ContactUsFormController@ContactUsForm',
+    'as' => 'contact.store'
+]);
