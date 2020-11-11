@@ -23,7 +23,7 @@ class invoicesDocumentController extends Controller
      */
     public function index(User $user)
     {
-        $invoices = InvoiceDocument::all();
+        $invoices = InvoiceDocument::where('user_id', $user->getKey())->get();
         return view('admin.invoices.index', compact('invoices'))->with('user', $user);
     }
 
@@ -62,7 +62,7 @@ class invoicesDocumentController extends Controller
 
         $data->save();
 
-        $invoices = InvoiceDocument::all();
+        $invoices = InvoiceDocument::where('user_id', $user->getKey())->get();
         return view('admin.invoices.index', compact('invoices'))->with('user', $user);
     }
 
