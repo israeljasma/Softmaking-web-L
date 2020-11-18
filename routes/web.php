@@ -21,15 +21,19 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Admin route users
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
     Route::resource('/users', 'UsersController', ['except' => ['show', 'store']]);
 });
 
-//Route::resource('/admin/users/id/invoices', 'Admin\invoicesDocumentController', ['except' => ['show', 'store']]);
-
+// Admin route invoices
 Route::namespace('Admin')->prefix('admin/users/{user}')->name('admin.')->middleware('can:manage-invoices')->group(function($user){
     Route::resource('/invoices', 'invoicesDocumentController', ['except' => []]);
 });
+
+// User route invoices
+Route::get('/home/invoices', 'Admin\invoicesDocumentController@indexUser')->name('user.invoices.index');
+Route::resource('home/invoices', 'Admin\invoicesDocumentController',['except' => ['index','store', 'create', 'show', 'edit', 'update', 'destroy']]);
 
 // Render in view
 Route::get('/contact', [

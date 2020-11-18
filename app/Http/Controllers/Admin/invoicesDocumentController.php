@@ -7,6 +7,7 @@ use App\User;
 use App\InvoiceDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Gate;
 
@@ -156,8 +157,10 @@ class invoicesDocumentController extends Controller
         //   }
     }
 
-    public function dd(User $user, InvoiceDocument $invoice){
-        //
+    public function indexUser(){
+
+        $invoices = InvoiceDocument::where('user_id', Auth::id())->get();
+        return view('user.invoices.index', compact('invoices'));
     }
 
 
