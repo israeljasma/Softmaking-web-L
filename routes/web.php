@@ -33,6 +33,7 @@ Route::namespace('Admin')->prefix('admin/users/{user}')->name('admin.')->middlew
 
 // User route invoices
 Route::get('/home/invoices', 'Admin\invoicesDocumentController@indexUser')->name('user.invoices.index');
+Route::get('/home/invoices/{invoice}', 'Admin\invoicesDocumentController@showUser', function ($invoice){})->name('user.invoices.show');
 Route::resource('home/invoices', 'Admin\invoicesDocumentController',['except' => ['index','store', 'create', 'show', 'edit', 'update', 'destroy']]);
 
 // Render in view

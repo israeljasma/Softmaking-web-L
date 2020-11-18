@@ -27,7 +27,7 @@
                     <td class="border-grey-light border hover:bg-gray-100 p-3 h-12">{{ $invoice->description }}</td>
                     <td class="border-grey-light border hover:bg-gray-100 p-3 h-12">{{ $invoice->date }}</td>
                     <td class="border-grey-light border hover:bg-gray-100 p-3 h-12 text-left md:text-center"><a class="px-3 md:py-1 mr-2 border border-transparent text-base rounded text-white bg-gray-400 hover:bg-gray-500 focus:outline-none focus:border-gray-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
-                            href="">Ver</a></td>
+                            href="{{ route('user.invoices.show', $invoice->id) }}">Ver</a></td>
                     <td class="border-grey-light border hover:bg-gray-100 p-3 h-12 text-left md:text-center"><a href="#" class="px-3 py-1 border border-transparent text-base rounded text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:border-blue-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg">Descargar</a></td>
                     {{-- <td>{{ implode(
                             ',',

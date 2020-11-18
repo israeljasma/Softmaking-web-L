@@ -163,6 +163,12 @@ class invoicesDocumentController extends Controller
         return view('user.invoices.index', compact('invoices'));
     }
 
+    public function showUser(InvoiceDocument $invoice)
+    {
+        $invoiceUser = InvoiceDocument::find($invoice->id);
+        return view('user.invoices.show', compact('invoiceUser'));
+    }
+
 
     public function downloaddd(User $user, InvoiceDocument $invoice)
     {
