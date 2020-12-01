@@ -1,8 +1,9 @@
 <?php
 
-namespace Database\Seeders;
+//namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Category;
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -13,10 +14,10 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        Role::truncate();
+        Category::truncate();
 
-        Role::create(['name' => 'Categoria 1']);
-        Role::create(['name' => 'Categoria 2']);
-        Role::create(['name' => 'Categoria 3']);
+        Category::create(['name' => 'Categoria 1']);
+        Category::create(['name' => 'Categoria 2']);
+        Category::create(['name' => 'Categoria 3']);
     }
 }
