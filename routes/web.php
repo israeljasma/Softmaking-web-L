@@ -38,6 +38,9 @@ Route::namespace('Admin')->prefix('home')->name('user.')->group(function(){
     Route::resource('/invoices', 'invoicesDocumentController',['except' => ['index','store', 'create', 'show', 'edit', 'update', 'destroy']]);
 });
 
+// User route tickets
+Route::resource('/home/ticket', 'TicketsController',['except' => []]);
+
 // Render in view
 Route::get('/contact', [
     'uses' => 'ContactUsFormController@createForm'
