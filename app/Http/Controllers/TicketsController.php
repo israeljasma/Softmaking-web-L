@@ -7,6 +7,7 @@ use App\Ticket;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class TicketsController extends Controller
 {
@@ -51,7 +52,7 @@ class TicketsController extends Controller
         $ticket = new Ticket([
             'title'     => $request->input('title'),
             'user_id'   => Auth::user()->id,
-            'ticket_id' => strtoupper(str_random(10)),
+            'ticket_id' => strtoupper(Str::random(10)),
             'category_id'   => $request->input('category'),
             'priority'  => $request->input('priority'),
             'message'   => $request->input('message'),
@@ -61,7 +62,8 @@ class TicketsController extends Controller
         $ticket->save();
 
         //$mailer->sendTicketInformation(Auth::user(), $ticket);
-        index();
+        $tickets = Ticket::where('user_id', Auth::id())->get();
+        return view('tickets.index', compact('tickets'));
     }
 
     /**
