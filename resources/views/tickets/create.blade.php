@@ -67,6 +67,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="message" class="col-md-2 col-form-label text-md-right">Mensaje</label>
+
+                            <div class="col-md-6">
+                                <textarea id="message" type="text" class="form-control @error('message') is-invalid @enderror" name="message" value="" required autofocus></textarea>
+
+                                @error('message')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         @csrf
                         {{ method_field('POST') }}
                         {{-- Archivos, falta configurar --}}
