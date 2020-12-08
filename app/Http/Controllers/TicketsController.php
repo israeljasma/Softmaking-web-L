@@ -41,18 +41,39 @@ class TicketsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title'     => 'required',
+            'category'  => 'required',
+            'priority'  => 'required',
+            'message'   => 'required'
+        ]);
+
+        $ticket = new Ticket([
+            'title'     => $request->input('title'),
+            'user_id'   => Auth::user()->id,
+            'ticket_id' => strtoupper(str_random(10)),
+            'category_id'   => $request->input('category'),
+            'priority'  => $request->input('priority'),
+            'message'   => $request->input('message'),
+            'status'    => "Abierto"
+        ]);
+
+        $ticket->save();
+
+        //$mailer->sendTicketInformation(Auth::user(), $ticket);
+        index();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param \App\Ticket $ticket
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Ticket $ticket)
     {
-        //
+        $ticket = Ticket::find($ticket->id);
+        return view('ticket.show', compact('ticket'));
     }
 
     /**
