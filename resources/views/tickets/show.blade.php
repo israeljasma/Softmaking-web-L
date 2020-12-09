@@ -46,7 +46,7 @@
                             <label for="updated_at" class="col-md-2 col-form-label text-md-right">Última actualización:</label>
     
                             <div class="col-md-6">
-                                <label id="updated_at" class="col-form-label text-md-right">{{ $ticket->updated_at }}</label>
+                                <label id="updated_at" class="col-form-label text-md-right">{{ $ticket->updated_at->diffForHumans() }}</label>
                             </div>
                         </div>
 
