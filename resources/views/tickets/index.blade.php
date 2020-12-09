@@ -29,7 +29,8 @@
                     <td class="border-grey-light border hover:bg-gray-100 p-3 h-12">{{ $ticket->title }}</td>
                     <td class="border-grey-light border hover:bg-gray-100 p-3 h-12">{{ $ticket->status }}</td>
                     <td class="border-grey-light border hover:bg-gray-100 p-3 h-12">{{ $ticket->updated_at }}</td>
-                    <td class="border-grey-light border hover:bg-gray-100 p-3 h-12">Ver</td>
+                    <td class="border-grey-light border hover:bg-gray-100 p-3 h-12"><a class="px-3 md:py-1 mr-2 border border-transparent text-base rounded text-white bg-gray-400 hover:bg-gray-500 focus:outline-none focus:border-gray-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
+                        href="{{ route('ticket.show', [$ticket->id]) }}">Ver</a></td>
                 </tr>
             @endforeach
         </tbody>
