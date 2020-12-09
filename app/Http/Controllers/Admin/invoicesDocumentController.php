@@ -46,7 +46,12 @@ class invoicesDocumentController extends Controller
      */
     public function store(Request $request, User $user)
     {
-        //dd($user);
+        $this->validate($request, [
+            'name'          => 'required',
+            'description'   => 'required',
+            'date'          => 'required',
+            'file'          => 'required|mimes:pdf'
+        ]);
         $data = new InvoiceDocument;
         if($request->file('file')){
             $file=$request->file('file');
