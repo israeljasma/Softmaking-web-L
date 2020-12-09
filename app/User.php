@@ -60,4 +60,12 @@ class User extends Authenticatable
     public function invoiceDocuments(){
         return $this->hasMany('App\InvoiceDocument');
     }
+
+    public function comments(){
+        return $this->hasMany('App\Comment');
+    }
+
+    public function tickets(){
+        return $this->hasMany('App\Ticket');
+    }
 }
