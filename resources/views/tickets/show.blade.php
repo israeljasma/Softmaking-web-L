@@ -57,6 +57,29 @@
                                 <label id="message" class="col-form-label text-md-right">{{ $ticket->message }}</label>
                             </div>
                         </div>
+
+                        <div class="comment-form">
+                            <form action="{{ route('comment.store') }}" method="POST">
+                                <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
+
+                                <div class="form-group row">
+                                    <label for="comment" class="col-md-2 col-form-label text-md-right">Comentario</label>
+        
+                                    <div class="col-md-6">
+                                        <textarea id="comment" type="text" class="form-control @error('comment') is-invalid @enderror" name="comment" value="" required autofocus></textarea>
+        
+                                        @error('comment')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $comment }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                @csrf
+                                {{ method_field('POST') }}
+                                <button type="submit" class="btn btn-primary">Agregar comentario</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
