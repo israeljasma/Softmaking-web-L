@@ -58,12 +58,30 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="comment" class="col-md-2 col-form-label text-md-right">Comentarios:</label>
+
+                            @foreach ($comments as $comment)
+                                <div class="panel panel-@if($ticket->user->id === $comment->user_id) {{"default"}}@else{{"success"}}@endif">
+                                    <div class="panel panel-heading">
+                                        {{ $comment->user->name }}
+                                        <span class="pull-right">{{ $comment->created_at->format('Y-m-d') }}</span>
+                                    </div>
+                        
+                                    <div class="panel panel-body">
+                                        {{ $comment->comment }}        
+                                    </div>
+                                </div>
+                            @endforeach
+
+                        </div>
+
                         <div class="comment-form">
                             <form action="{{ route('comment.store') }}" method="POST">
                                 <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
 
                                 <div class="form-group row">
-                                    <label for="comment" class="col-md-2 col-form-label text-md-right">Comentario</label>
+                                    <label for="comment" class="col-md-2 col-form-label text-md-right">Nuevo comentario</label>
         
                                     <div class="col-md-6">
                                         <textarea id="comment" type="text" class="form-control @error('comment') is-invalid @enderror" name="comment" value="" required autofocus></textarea>
