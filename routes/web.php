@@ -38,8 +38,9 @@ Route::namespace('Admin')->prefix('home')->name('user.')->group(function(){
     Route::resource('/invoices', 'invoicesDocumentController',['except' => ['index','store', 'create', 'show', 'edit', 'update', 'destroy']]);
 });
 
-// User route tickets
+// User route tickets & comments
 Route::resource('/home/ticket', 'TicketsController',['except' => []]);
+Route::resource('/home/ticket/comment', 'CommentsController', ['except' => []]);
 
 // Render in view
 Route::get('/contact', [
