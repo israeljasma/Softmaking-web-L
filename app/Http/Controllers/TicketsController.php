@@ -75,7 +75,10 @@ class TicketsController extends Controller
     public function show(Ticket $ticket)
     {
         $ticket = Ticket::find($ticket->id);
-        return view('tickets.show', compact('ticket'));
+        
+        $comments = $ticket->comments;
+
+        return view('tickets.show', compact('ticket', 'comments'));
     }
 
     /**

@@ -53,7 +53,10 @@ class CommentsController extends Controller
         //     $mailer->sendTicketComments($comment->ticket->user, Auth::user(), $comment->ticket, $comment);
         // }
         $ticket = Ticket::find($request->ticket_id);
-        return view('tickets.show', compact('ticket'));
+
+        $comments = $ticket->comments;
+
+        return view('tickets.show', compact('ticket', 'comments'));
     }
 
     /**
