@@ -68,11 +68,11 @@
                     </div>
 
                     <!--
-            Mobile menu, toggle classes based on menu state.   
+            Mobile menu, toggle classes based on menu state.
             Menu open: "block", Menu closed: "hidden"
         -->
-                    <div id="nav-content" class="hidden sm:hidden">
-                        <div class="px-2 pt-2 pb-3 bg-blue-700">
+                    <div id="nav-content" class="absolute w-full hidden">
+                        <div class="mx-2 px-2 pt-2 pb-3 rounded shadow-sm bg-blue-700">
                             @guest
                                 <a class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
                                     href="#clientes">Clientes</a>
@@ -96,7 +96,7 @@
                                 @endcan
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                                                                document.getElementById('logout-form').submit();"
+                                                                                                        document.getElementById('logout-form').submit();"
                                     class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
                                     role="menuitem">{{ __('Logout') }}</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -109,7 +109,7 @@
                     <main class="mt-48 mx-auto max-w-screen-xl px-4 sm:px-6 md:px-8">
                         <div class="sm:text-center lg:text-left">
                             <h2
-                                class="text-4xl tracking-tight leading-10 font-bold text-gray-900 sm:text-3xl md:text-5xl sm:leading-none md:text-6xl">
+                                class="text-4xl tracking-tight leading-10 font-bold text-gray-900 sm:text-3xl md:text-5xl sm:leading-none lg:text-6xl">
                                 Creando ideas
                                 <br class="xl:hidden">
                                 <span class="text-blue-700">entregando soluciones</span>
@@ -134,7 +134,8 @@
             <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
                 <img class="h-56 w-full object-cover hidden lg:block sm:h-72 md:h-96 lg:w-full lg:h-full"
                     src="https://images.unsplash.com/photo-1587613990174-1f14ba3be7cb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
-                    alt="Imagen de fondo del Hero Section">
+                    alt="Imagen de fondo del Hero Section"
+                    style="filter:brightness(0.5);">
             </div>
         </div>
 
@@ -145,13 +146,13 @@
                         src="{{ asset('imgs/clients/capmar-logo.png') }}" alt="logo de Capmar"></a>
                 <a href="https://rk3.cl/" target="_blank" class="mx-auto"><img class="w-auto h-auto inline-block"
                         src="{{ asset('imgs/clients/rk3-logo.png') }}" alt="logo de RK3"></a>
-                <a href="https://vyvingenieria.cl/" target="_blank" class="mx-auto"><img class="w-auto h-auto inline-block"
-                        src="{{ asset('imgs/clients/v&v-logo.png') }}" alt="logo de v&v"
-                        style="filter:contrast(0.9)"></a>
+                <a href="https://vyvingenieria.cl/" target="_blank" class="mx-auto"><img
+                        class="w-auto h-auto inline-block" src="{{ asset('imgs/clients/v&v-logo.png') }}"
+                        alt="logo de v&v" style="filter:contrast(0.9)"></a>
                 <a href="javascript:void(0)" class="mx-auto"><img class="w-auto h-auto inline-block md:w-11/12"
                         src="{{ asset('imgs/clients/jeit-logo.png') }}" alt="logo de JEIT"></a>
-                <a href="https://www.redcruzdelmar.cl" target="_blank" class="mx-auto"><img class="w-auto h-auto inline-block"
-                        src="{{ asset('imgs/clients/ambcruzmar-logo.png') }}"
+                <a href="https://www.redcruzdelmar.cl" target="_blank" class="mx-auto"><img
+                        class="w-auto h-auto inline-block" src="{{ asset('imgs/clients/ambcruzmar-logo.png') }}"
                         alt="logo de ambulancias Cruz del Mar"></a>
             </div>
         </section>
@@ -232,17 +233,49 @@
             </div>
         </section>
 
-        <section class="mx-auto px-12 py-12 md:py-48 bg-gray-800">
+        <section class="mx-auto px-4 md:px-12 py-12 md:py-48 bg-gray-800">
             <div class="relative">
                 <h1 class="text-3xl md:text-5xl font-bold text-center text-blue-700 mb-6">Mantengámonos en contacto</h1>
                 <h1
                     class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-gray-100 absolute -z-10">
                     Mantengámonos en contacto</h1>
             </div>
-            <p class="text-xl text-gray-100 text-justify mx-4">¿Listo para comenzar tu próximo proyecto con nosotros?
-                ¡Eso es genial!
-                ¡Llámenos o envíenos un correo electrónico y nos pondremos en contacto con usted lo antes posible!</p>
+            <div class="grid md:grid-cols-2 gap-2">
+                <p class="text-xl text-gray-100 text-justify px-8 pt-6 mb-4">¿Listo para comenzar tu próximo proyecto
+                    con nosotros?
+                    ¡Eso es genial!
+                    ¡Llámenos o envíenos un correo electrónico y nos pondremos en contacto con usted lo antes posible!
+                </p>
                 @include('mails.contact')
+            </div>
+        </section>
+
+        <section class="mx-auto px-4 md:px-12 py-12 md:py-48 bg-gray-300">
+            <div class="relative">
+                <h1 class="text-3xl md:text-5xl font-bold text-center text-blue-700 mb-6">Equipo de trabajo</h1>
+                <h1
+                    class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-gray-100 absolute -z-10">
+                    Equipo de trabajo</h1>
+                    <div class="grid grid-flow-col gap-2 w-full justify-center items-center px-16 md:px-4">
+                        <div>Integrante 1</div>
+                        <div>Integrante 2</div>
+                        <div>Integrante 3</div>
+                    </div>
+            </div>
+        </section>
+
+        <section class="mx-auto px-4 md:px-12 py-12 md:py-48 bg-gray-500">
+            <div class="relative">
+                <h1 class="text-3xl md:text-5xl font-bold text-center text-blue-700 mb-6">Puedes seguirnos en nuestras redes sociales</h1>
+                <h1
+                    class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-gray-100 absolute -z-10">
+                    Nuestras redes sociales</h1>
+                <div class="grid grid-flow-col gap-2 w-full justify-center items-center px-16 md:px-4">
+                    <a href="#">FB</a>
+                    <a href="#">TW</a>
+                    <a href="#">IG</a>
+                </div>
+            </div>
         </section>
 
     </div>

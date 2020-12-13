@@ -1,5 +1,4 @@
 <div class="container mx-auto mt-5">
-
     <!-- Success message -->
     @if (Session::has('success'))
         <div class="fixed z-10 inset-0 overflow-y-auto" id="modal-contact">
@@ -51,11 +50,13 @@
         action="{{ action('ContactUsFormController@createForm') }}">
 
         @csrf
+        <h4 class="text-2xl font-semibold">¿Tienes alguna duda?</h4>
+        <p class="leading-relaxed mt-1 mb-4 text-gray-600">Completa el siguiente formulario y nos contactaremos contigo dentro de las 24 horas</p>
 
-        <div class="form-group">
+        <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Nombre</label>
             <input type="text"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline {{ $errors->has('name') ? 'error' : '' }}"
+                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline {{ $errors->has('name') ? 'error' : '' }}"
                 name="name" id="name" required>
 
             <!-- Error -->
@@ -66,10 +67,10 @@
             @endif
         </div>
 
-        <div class="form-group">
+        <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Correo electrónico</label>
             <input type="email"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline {{ $errors->has('email') ? 'error' : '' }}"
+                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline {{ $errors->has('email') ? 'error' : '' }}"
                 name="email" id="email" required>
 
             @if ($errors->has('email'))
@@ -79,10 +80,10 @@
             @endif
         </div>
 
-        <div class="form-group">
+        <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Teléfono</label>
             <input type="text"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline {{ $errors->has('phone') ? 'error' : '' }}"
+                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline {{ $errors->has('phone') ? 'error' : '' }}"
                 name="phone" id="phone" required>
 
             @if ($errors->has('phone'))
@@ -92,10 +93,10 @@
             @endif
         </div>
 
-        <div class="form-group">
+        <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="subject">Asunto</label>
             <input type="text"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline {{ $errors->has('subject') ? 'error' : '' }}"
+                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline {{ $errors->has('subject') ? 'error' : '' }}"
                 name="subject" id="subject" required>
 
             @if ($errors->has('subject'))
@@ -105,10 +106,10 @@
             @endif
         </div>
 
-        <div class="form-group">
+        <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="message">Mensaje</label>
             <textarea
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline {{ $errors->has('message') ? 'error' : '' }}"
+                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline {{ $errors->has('message') ? 'error' : '' }}"
                 name="message" id="message" rows="4" required></textarea>
 
             @if ($errors->has('message'))
@@ -119,6 +120,6 @@
         </div>
 
         <input type="submit" name="send" value="Enviar"
-            class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-700 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out">
+            class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-full shadow-xl text-white bg-blue-700 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out">
     </form>
 </div>
