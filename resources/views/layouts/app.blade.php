@@ -32,7 +32,7 @@
                 <div class="relative flex items-center justify-between h-16">
                     <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                         <!-- Mobile menu button-->
-                        <button id="navbar-toggler" onclick="toggleMenu()"
+                        <button id="navbar-toggler" onclick="toggleElement('nav-content')"
                             class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white transition duration-150 ease-in-out"
                             aria-label="{{ __('Toggle navigation') }}" aria-expanded="false">
 
@@ -73,8 +73,8 @@
                                         <div>
                                             <button
                                                 class="flex items-center text-sm text-white font-light border-2 border-transparent rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out"
-                                                id="user-menu" aria-label="User menu" aria-haspopup="true">
-                                                <span class="mr-2">{{ Auth::user()->name }}</span>
+                                                id="user-menu" aria-label="User menu" aria-haspopup="true" onclick="toggleElement('dropdown-user')">
+                                                <span class="mx-2">{{ Auth::user()->name }}</span>
                                                 <svg class="h-8 w-8 rounded-full" aria-hidden="true" focusable="false"
                                                     data-prefix="fas" data-icon="user-circle"
                                                     class="svg-inline--fa fa-user-circle fa-w-16" role="img"
@@ -85,7 +85,7 @@
                                                 </svg>
                                             </button>
                                         </div>
-                                        <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg">
+                                        <div id="dropdown-user" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg hidden">
                                             <div class="py-1 rounded-md bg-white shadow-xs" role="menu"
                                                 aria-orientation="vertical" aria-labelledby="user-menu">
                                                 @can('manage-users')
@@ -113,7 +113,7 @@
             </div>
 
             <!--
-                Mobile menu, toggle classes based on menu state.   
+                Mobile menu, toggle classes based on menu state.
                 Menu open: "block", Menu closed: "hidden"
             -->
             <div id="nav-content" class="hidden sm:hidden">
@@ -161,29 +161,29 @@
         .active {
             display: block;
         }
-      
+
         @media (min-width: 640px) {
           table {
             display: inline-table !important;
           }
-      
+
           thead tr:not(:first-child) {
             display: none;
           }
         }
-      
+
         td:not(:last-child) {
           border-bottom: 0;
         }
-      
+
         th:not(:last-child) {
           border-bottom: 2px solid rgba(0, 0, 0, .1);
         }
     </style>
 
     <script>
-        function toggleMenu() {
-            document.getElementById("nav-content").classList.toggle("hidden");
+        function toggleElement(element) {
+            document.getElementById(element).classList.toggle("hidden");
         }
     </script>
 </body>

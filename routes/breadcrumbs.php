@@ -11,6 +11,14 @@ Breadcrumbs::for('users', function ($trail) {
     $trail->push('Users', url('admin/users'));
 });
 
+// Home > Users > [User] > Inovices > Create Invoice
+Breadcrumbs::for('user', function ($trail, $user) {
+    $trail->parent('users');
+    $trail->push($user->id);
+    $trail->push('Invoices', url('home/invoices'));
+    $trail->push('Create');
+});
+
 // Home > Users > Invoices
 Breadcrumbs::for('invoices', function ($trail) {
     $trail->parent('users');
