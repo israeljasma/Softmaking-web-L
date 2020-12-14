@@ -56,7 +56,7 @@ class CommentsController extends Controller
 
         $comments = $ticket->comments;
 
-        return view('tickets.show', compact('ticket', 'comments'));
+        return redirect()->route('ticket.show', [$ticket, $comment]);
     }
 
     /**

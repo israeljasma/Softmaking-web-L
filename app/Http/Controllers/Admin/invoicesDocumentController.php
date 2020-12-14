@@ -69,7 +69,8 @@ class invoicesDocumentController extends Controller
         $data->save();
 
         $invoices = InvoiceDocument::where('user_id', $user->getKey())->get();
-        return view('admin.invoices.index', compact('invoices'))->with('user', $user);
+
+        return redirect()->route('admin.invoices.index', [$user]);
     }
 
     /**

@@ -63,7 +63,8 @@ class TicketsController extends Controller
 
         //$mailer->sendTicketInformation(Auth::user(), $ticket);
         $tickets = Ticket::where('user_id', Auth::id())->get();
-        return view('tickets.index', compact('tickets'));
+    
+        return redirect()->route('ticket.index');
     }
 
     /**
