@@ -38,7 +38,7 @@
                                         <img class="block h-8 w-auto" src="{{ asset('imgs/logo-sm.png') }}"
                                             alt="logo SoftMaking">
                                     </a>
-                                    <div class="-mr-2 flex items-center md:hidden">
+                                    <div class="flex items-center md:hidden">
                                         <button type="button" onclick="toggleElement('nav-content')"
                                             class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
                                             id="main-menu" aria-label="Main menu" aria-haspopup="true">
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                             <div class="hidden md:block md:ml-4 md:pr-2">
-                                <a href="#clientes"
+                                <a href="#clients"
                                     class="font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Clientes</a>
                                 <a href="#about"
                                     class="ml-6 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Acerca
@@ -97,7 +97,7 @@
                                 @endcan
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                                                                                                document.getElementById('logout-form').submit();"
+                                                                                                                                    document.getElementById('logout-form').submit();"
                                     class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
                                     role="menuitem">{{ __('Logout') }}</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -122,7 +122,7 @@
                             </p>
                             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                                 <div class="rounded-md shadow">
-                                    <a href="#"
+                                    <a href="#clients"
                                         class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-700 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
                                         Saber más
                                     </a>
@@ -139,8 +139,8 @@
             </div>
         </div>
 
-        <section class="container mx-auto my-8 pt-8 pb-8 md:pb-24">
-            <h1 class="text-4xl font-bold text-center text-blue-700 mb-6">Algunos de nuestros clientes</h1>
+        <section id="clients" class="container mx-auto my-8 pt-8 pb-8 md:pb-24">
+            <h1 class="text-4xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700">Algunos de nuestros clientes</h1>
             <div class="grid md:grid-flow-col gap-2 w-full justify-center items-center px-16 md:px-4">
                 <a href="https://nuevacapmar.cl" target="_blank" rel="noreferrer" class="mx-auto"><img
                         class="w-auto h-auto inline-block" src="{{ asset('imgs/clients/capmar-logo.png') }}"
@@ -159,7 +159,7 @@
             </div>
         </section>
 
-        <section class="mx-auto mb-12 md:mb-48 py-48 px-12 rounded-lg relative">
+        <section id="about" class="mx-auto mb-12 md:mb-48 py-48 px-12 rounded-lg relative">
             <div class="absolute w-full h-full transform skew-y-3 bg-gray-100 shadow-sm top-0 right-0 -z-10"></div>
             <div class="relative">
                 <h1
@@ -176,7 +176,7 @@
                 rápidas para sus problemas y nosotros estamos preparados para entregarlas.</p>
         </section>
 
-        <section class="container mx-auto my-12 md:my-48">
+        <section id="services" class="container mx-auto my-12 md:my-48">
             <div class="relative">
                 <h1
                     class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700">
@@ -240,7 +240,7 @@
             </div>
         </section>
 
-        <section class="mx-auto px-4 md:px-12 py-12 md:py-48 bg-gradient-to-l from-gray-700 to-gray-800">
+        <section id="contact" class="mx-auto px-4 md:px-12 py-12 md:py-48 bg-gradient-to-l from-gray-700 to-gray-800">
             <div class="relative">
                 <h1
                     class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700">
@@ -336,7 +336,8 @@
                     </div>
                 </div>
                 <hr class="border-gray-50 border-opacity-50 my-3">
-                <p class="text-center pt-4">Desarrollado por <a href="#" class="font-bold uppercase">Softmaking</a>© 2020</p>
+                <p class="text-center pt-4">Desarrollado por <a href="#" class="font-bold uppercase">Softmaking</a>©
+                    2020</p>
             </div>
         </footer>
 
