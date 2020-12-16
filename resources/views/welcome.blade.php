@@ -9,7 +9,8 @@
     <title>SOFTMAKING</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&family=Roboto&display=swap" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 </head>
@@ -96,7 +97,7 @@
                                 @endcan
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                                                                        document.getElementById('logout-form').submit();"
+                                                                                                                                document.getElementById('logout-form').submit();"
                                     class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
                                     role="menuitem">{{ __('Logout') }}</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -134,24 +135,25 @@
             <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
                 <img class="h-56 w-full object-cover hidden lg:block sm:h-72 md:h-96 lg:w-full lg:h-full"
                     src="https://images.unsplash.com/photo-1587613990174-1f14ba3be7cb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
-                    alt="Imagen de fondo del Hero Section"
-                    style="filter:brightness(0.5);">
+                    alt="Imagen de fondo del Hero Section" style="filter:brightness(0.5);">
             </div>
         </div>
 
         <section class="container mx-auto my-8 pt-8 pb-8 md:pb-24">
             <h1 class="text-4xl font-bold text-center text-blue-700 mb-6">Algunos de nuestros clientes</h1>
             <div class="grid md:grid-flow-col gap-2 w-full justify-center items-center px-16 md:px-4">
-                <a href="https://nuevacapmar.cl" target="_blank" class="mx-auto"><img class="w-auto h-auto inline-block"
-                        src="{{ asset('imgs/clients/capmar-logo.png') }}" alt="logo de Capmar"></a>
-                <a href="https://rk3.cl/" target="_blank" class="mx-auto"><img class="w-auto h-auto inline-block"
-                        src="{{ asset('imgs/clients/rk3-logo.png') }}" alt="logo de RK3"></a>
-                <a href="https://vyvingenieria.cl/" target="_blank" class="mx-auto"><img
+                <a href="https://nuevacapmar.cl" target="_blank" rel="noreferrer" class="mx-auto"><img
+                        class="w-auto h-auto inline-block" src="{{ asset('imgs/clients/capmar-logo.png') }}"
+                        alt="logo de Capmar"></a>
+                <a href="https://rk3.cl/" target="_blank" rel="noreferrer" class="mx-auto"><img
+                        class="w-auto h-auto inline-block" src="{{ asset('imgs/clients/rk3-logo.png') }}"
+                        alt="logo de RK3"></a>
+                <a href="https://vyvingenieria.cl/" target="_blank" rel="noreferrer" class="mx-auto"><img
                         class="w-auto h-auto inline-block" src="{{ asset('imgs/clients/v&v-logo.png') }}"
                         alt="logo de v&v" style="filter:contrast(0.9)"></a>
                 <a href="javascript:void(0)" class="mx-auto"><img class="w-auto h-auto inline-block md:w-11/12"
                         src="{{ asset('imgs/clients/jeit-logo.png') }}" alt="logo de JEIT"></a>
-                <a href="https://www.redcruzdelmar.cl" target="_blank" class="mx-auto"><img
+                <a href="https://www.redcruzdelmar.cl" target="_blank" rel="noreferrer" class="mx-auto"><img
                         class="w-auto h-auto inline-block" src="{{ asset('imgs/clients/ambcruzmar-logo.png') }}"
                         alt="logo de ambulancias Cruz del Mar"></a>
             </div>
@@ -160,29 +162,34 @@
         <section class="mx-auto mb-12 md:mb-48 py-48 px-12 rounded-lg relative">
             <div class="absolute w-full h-full transform skew-y-3 bg-gray-100 shadow-sm top-0 right-0 -z-10"></div>
             <div class="relative">
-                <h1 class="text-3xl md:text-5xl font-bold text-center text-blue-700 mb-6 z-10">¡Tenemos lo que
+                <h1
+                    class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700 z-10">
+                    ¡Tenemos lo que
                     necesitas!</h1>
                 <h1
                     class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-gray-100 absolute -z-10">
                     ¡Tenemos lo que necesitas!</h1>
             </div>
-            <p class="text-xl text-justify mx-4">En SoftMaking buscamos soluciones eficientes y durables para que las
+            <p class="text-xl text-center mx-4 md:mx-56">En SoftMaking buscamos soluciones eficientes y durables para
+                que las
                 necesidades de hoy sean las oportunidades del mañana. Nuestra sociedad actualmente demanda respuestas
                 rápidas para sus problemas y nosotros estamos preparados para entregarlas.</p>
         </section>
 
         <section class="container mx-auto my-12 md:my-48">
             <div class="relative">
-                <h1 class="text-3xl md:text-5xl font-bold text-center text-blue-700 mb-6">Actividades de la empresa</h1>
                 <h1
-                    class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-gray-100 absolute -z-10">
+                    class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700">
+                    Actividades de la empresa</h1>
+                <h1
+                    class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-indigo-100 absolute -z-10">
                     Actividades de la empresa</h1>
             </div>
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
                 <div class="p-2 sm:p-10 text-center cursor-pointer mx-auto">
                     <div
-                        class="py-16 max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-700 transition duration-500 bg-gray-800">
+                        class="py-16 max-w-sm rounded overflow-hidden shadow-lg transition duration-500 ease-in-out bg-gradient-to-b from-gray-700 to-gray-800 hover:bg-gradient-to-t hover:from-gray-800 hover:bg-gray-700 transform hover:scale-105">
                         <div class="space-y-10">
                             <div class="bg-white rounded-full w-16 h-16 mx-auto flex shadow-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-800 w-8 mx-auto" fill="none"
@@ -208,7 +215,7 @@
 
                 <div class="p-2 sm:p-10 text-center cursor-pointer mx-auto">
                     <div
-                        class="py-16 max-w-sm rounded overflow-hidden shadow-lg hover:bg-blue-600 transition duration-500 bg-blue-700">
+                        class="py-16 max-w-sm rounded overflow-hidden shadow-lg transition duration-500 ease-in-out bg-gradient-to-b from-blue-600 to-blue-700 hover:bg-gradient-to-t hover:from-blue-700 hover:bg-blue-600 transform hover:scale-105">
                         <div class="space-y-10">
                             <div class="bg-white rounded-full w-16 h-16 mx-auto flex shadow-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="text-blue-700 w-8 mx-auto" fill="none"
@@ -233,9 +240,11 @@
             </div>
         </section>
 
-        <section class="mx-auto px-4 md:px-12 py-12 md:py-48 bg-gray-800">
+        <section class="mx-auto px-4 md:px-12 py-12 md:py-48 bg-gradient-to-l from-gray-700 to-gray-800">
             <div class="relative">
-                <h1 class="text-3xl md:text-5xl font-bold text-center text-blue-700 mb-6">Mantengámonos en contacto</h1>
+                <h1
+                    class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700">
+                    Mantengámonos en contacto</h1>
                 <h1
                     class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-gray-100 absolute -z-10">
                     Mantengámonos en contacto</h1>
@@ -250,39 +259,93 @@
             </div>
         </section>
 
-        <section class="mx-auto px-4 md:px-12 py-12 md:py-48 bg-gray-300">
+        {{-- <section class="mx-auto px-4 md:px-12 py-12 md:py-48 bg-gray-300">
             <div class="relative">
                 <h1 class="text-3xl md:text-5xl font-bold text-center text-blue-700 mb-6">Equipo de trabajo</h1>
                 <h1
                     class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-gray-100 absolute -z-10">
                     Equipo de trabajo</h1>
-                    <div class="grid grid-flow-col gap-2 w-full justify-center items-center px-16 md:px-4">
-                        <div>Integrante 1</div>
-                        <div>Integrante 2</div>
-                        <div>Integrante 3</div>
-                    </div>
+                <div class="grid grid-flow-col gap-2 w-full justify-center items-center px-16 md:px-4">
+                    <div>Integrante 1</div>
+                    <div>Integrante 2</div>
+                    <div>Integrante 3</div>
+                </div>
             </div>
-        </section>
+        </section> --}}
 
-        <section class="mx-auto px-4 md:px-12 py-12 md:py-48 bg-gray-500">
+        <section class="mx-auto px-4 md:px-12 py-12 md:py-48 bg-gray-100">
             <div class="relative">
-                <h1 class="text-3xl md:text-5xl font-bold text-center text-blue-700 mb-6">Puedes seguirnos en nuestras redes sociales</h1>
+                <h1
+                    class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700">
+                    Puedes seguirnos en nuestras
+                    redes sociales</h1>
                 <h1
                     class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-gray-100 absolute -z-10">
                     Nuestras redes sociales</h1>
-                <div class="grid grid-flow-col gap-2 w-full justify-center items-center px-16 md:px-4">
-                    <a href="#">FB</a>
-                    <a href="#">TW</a>
-                    <a href="#">IG</a>
+                <div class="grid grid-flow-col gap-5 w-full justify-center items-center px-16 md:px-4">
+                    <a href="https://www.facebook.com/SoftMaking-229644924623946/" target="_blank" rel="noreferrer"
+                        class="border transform hover:scale-105 border-blue-800 text-blue-800 hover:text-blue-600 hover:border-blue-600 rounded-full w-12 h-12 flex justify-center items-center shadow-md"><svg
+                            aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f"
+                            class="svg-inline--fa fa-facebook-f fa-w-10 w-6 h-6" role="img"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            <path fill="currentColor"
+                                d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z">
+                            </path>
+                        </svg></a>
+                    <a href="https://twitter.com/SoftMakingSpA" target="_blank" rel="noreferrer"
+                        class="border transform hover:scale-105 border-blue-400 text-blue-400 hover:text-blue-500 hover:border-blue-500 rounded-full w-12 h-12 flex justify-center items-center shadow-md"><svg
+                            aria-hidden="true" focusable="false" data-prefix="fab" data-icon="twitter"
+                            class="svg-inline--fa fa-twitter fa-w-16 w-6 h-6" role="img"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="currentColor"
+                                d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z">
+                            </path>
+                        </svg></a>
+                    <a href="https://www.linkedin.com/company/softmaking" target="_blank" rel="noreferrer"
+                        class="border transform hover:scale-105 border-blue-500 text-blue-500 hover:text-blue-600 hover:border-blue-600 rounded-full w-12 h-12 flex justify-center items-center shadow-md"><svg
+                            aria-hidden="true" focusable="false" data-prefix="fab" data-icon="linkedin-in"
+                            class="svg-inline--fa fa-linkedin-in fa-w-14 w-6 h-6" role="img"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path fill="currentColor"
+                                d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z">
+                            </path>
+                        </svg></a>
                 </div>
             </div>
         </section>
+
+        <footer class="bg-gray-800 text-white">
+            <div class="container mx-auto py-4">
+                <div class="flex flex-col sm:flex-row mx-4">
+                    <div class="flex-1 my-2">
+                        <h1 class="font-bold uppercase text-xl mb-2">Servicios</h1>
+                        <ol class="ml-1">
+                            <li>Desarrollo Web</li>
+                            <li>Desarrollo de software</li>
+                            <li>Aplicaciones móviles</li>
+                            <li>Soporte técnico</li>
+                        </ol>
+                    </div>
+                    <div class="flex-1 my-2">
+                        <h1 class="font-bold uppercase text-xl mb-2">Softmaking</h1>
+                        <p class="ml-1">
+                            SoftMaking es una empresa que facilita, mejora y optimiza la gestión y los procesos de
+                            negocio de las pequeñas y medianas empresas además de las grandes empresas con soluciones y
+                            servicios informáticos de calidad. Aportamos identidad, calidad y beneficio a nuestros
+                            clientes, generando a su vez valor para los empleados y para el conjunto de la sociedad.</p>
+                    </div>
+                </div>
+                <hr class="border-gray-50 border-opacity-50 my-3">
+                <p class="text-center pt-4">Desarrollado por <a href="#" class="font-bold uppercase">Softmaking</a>© 2020</p>
+            </div>
+        </footer>
 
     </div>
     <script>
         function toggleElement(element) {
             document.getElementById(`${element}`).classList.toggle("hidden");
         }
+
     </script>
 </body>
 <script src="{{ mix('js/app.js') }}"></script>
