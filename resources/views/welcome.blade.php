@@ -30,7 +30,13 @@
                         <polygon points="50,0 100,0 50,100 0,100" />
                     </svg>
 
-                    <div class="relative py-5 pl-4">
+                    <div class="w-full h-screen absolute -z-10">
+                        <img class="object-cover w-full h-full lg:hidden"
+                            src="https://images.unsplash.com/photo-1587613990174-1f14ba3be7cb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+                            alt="Imagen de fondo del Hero Section" style="filter:brightness(0.3);">
+                    </div>
+
+                    <div class="relative py-5 pl-2">
                         <nav class="relative flex items-center justify-between sm:h-10 lg:justify-start">
                             <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                                 <div class="flex items-center justify-between w-full md:w-auto">
@@ -96,8 +102,7 @@
                                         role="menuitem">(Gestión de usuarios) User Management</a>
                                 @endcan
                                 <a href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                                                                                                    document.getElementById('logout-form').submit();"
+                                    onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                                     class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
                                     role="menuitem">{{ __('Logout') }}</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -110,13 +115,13 @@
                     <main class="mt-48 mx-auto max-w-screen-xl px-4 sm:px-6 md:px-8">
                         <div class="sm:text-center lg:text-left">
                             <h2
-                                class="text-4xl tracking-tight leading-10 font-bold text-gray-900 sm:text-3xl md:text-5xl sm:leading-none lg:text-6xl">
+                                class="text-4xl tracking-tight leading-10 font-bold text-gray-200 lg:text-gray-900 sm:text-3xl md:text-5xl sm:leading-none lg:text-6xl">
                                 Creando ideas
                                 <br class="xl:hidden">
                                 <span class="text-blue-700">entregando soluciones</span>
                             </h2>
                             <p
-                                class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                                class="mt-3 text-base text-gray-300 lg:text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                                 Somos una empresa emprendedora en el área de la informática conformada por profesionales
                                 titulados de la PUCV
                             </p>
@@ -133,7 +138,7 @@
                 </div>
             </div>
             <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                <img class="h-56 w-full object-cover hidden lg:block sm:h-72 md:h-96 lg:w-full lg:h-full"
+                <img class="h-56 w-full object-cover hidden lg:block sm:h-72 md:h-96 lg:w-full lg:h-full transition animate-zoominout"
                     src="https://images.unsplash.com/photo-1587613990174-1f14ba3be7cb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     alt="Imagen de fondo del Hero Section" style="filter:brightness(0.5);">
             </div>
