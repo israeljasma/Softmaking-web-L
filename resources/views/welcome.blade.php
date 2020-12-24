@@ -156,8 +156,9 @@
                 <a href="https://vyvingenieria.cl/" target="_blank" rel="noreferrer" class="mx-auto"><img
                         class="w-auto h-auto inline-block" src="{{ asset('imgs/clients/v&v-logo.png') }}"
                         alt="logo de v&v" style="filter:contrast(0.9)"></a>
-                <a href="javascript:void(0)" class="mx-auto"><img class="w-auto h-auto inline-block md:w-11/12"
-                        src="{{ asset('imgs/clients/jeit-logo.png') }}" alt="logo de JEIT"></a>
+                <a href="https://condimentosjeit.cl/" target="_blank" rel="noreferrer" class="mx-auto"><img 
+                        class="w-auto h-auto inline-block md:w-11/12" src="{{ asset('imgs/clients/jeit-logo.png') }}" 
+                        alt="logo de JEIT"></a>
                 <a href="https://www.redcruzdelmar.cl" target="_blank" rel="noreferrer" class="mx-auto"><img
                         class="w-auto h-auto inline-block" src="{{ asset('imgs/clients/ambcruzmar-logo.png') }}"
                         alt="logo de ambulancias Cruz del Mar"></a>
@@ -175,7 +176,7 @@
                     class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-gray-100 absolute -z-10">
                     ¡Tenemos lo que necesitas!</h1>
             </div>
-            <p class="text-xl text-center mx-4 md:mx-56">En SoftMaking buscamos soluciones eficientes y durables para
+            <p class="text-xl text-center mx-4 md:mx-56">En Softmaking buscamos soluciones eficientes y durables para
                 que las
                 necesidades de hoy sean las oportunidades del mañana. Nuestra sociedad actualmente demanda respuestas
                 rápidas para sus problemas y nosotros estamos preparados para entregarlas.</p>
@@ -334,7 +335,7 @@
                     <div class="flex-1 my-2">
                         <h1 class="font-bold uppercase text-xl mb-2">Softmaking</h1>
                         <p class="ml-1">
-                            SoftMaking es una empresa que facilita, mejora y optimiza la gestión y los procesos de
+                            Softmaking es una empresa que facilita, mejora y optimiza la gestión y los procesos de
                             negocio de las pequeñas y medianas empresas además de las grandes empresas con soluciones y
                             servicios informáticos de calidad. Aportamos identidad, calidad y beneficio a nuestros
                             clientes, generando a su vez valor para los empleados y para el conjunto de la sociedad.</p>
