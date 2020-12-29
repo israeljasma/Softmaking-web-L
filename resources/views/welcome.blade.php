@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway&family=Roboto&display=swap" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
 </head>
 
 <body>
@@ -36,17 +37,18 @@
                             alt="Imagen de fondo del Hero Section" style="filter:brightness(0.3);">
                     </div>
 
-                    <div class="relative py-5 pl-2">
-                        <nav class="relative flex items-center justify-between sm:h-10 lg:justify-start">
+                    <div id="navbar" class="fixed md:py-5 md:pl-2 w-full bg-gray-800 bg-opacity-75 md:bg-transparent">
+                        <nav class="relative flex items-center justify-between py-5 pl-2 sm:h-10 lg:justify-start">
                             <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                                 <div class="flex items-center justify-between w-full md:w-auto">
-                                    <a href="{{ url('/') }}" aria-label="Home">
+                                    <a href="{{ url('/') }}" aria-label="Home" class="flex flex-row items-center">
                                         <img class="block h-8 w-auto" src="{{ asset('imgs/logo-sm.png') }}"
                                             alt="logo SoftMaking">
+                                            <span class="md:hidden text-2xl uppercase font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-blue-300 via-blue-700 to-blue-900 ml-2">SoftMaking</span>
                                     </a>
                                     <div class="flex items-center md:hidden">
                                         <button type="button" onclick="toggleElement('nav-content')"
-                                            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                                            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-50 hover:bg-opacity-25 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
                                             id="main-menu" aria-label="Main menu" aria-haspopup="true">
                                             <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -66,59 +68,56 @@
                                     class="ml-6 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Servicios</a>
                                 <a href="#contact"
                                     class="ml-6 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Contacto</a>
-                                <a href="{{ route('login') }}"
+                                {{-- <a href="{{ route('login') }}"
                                     class="ml-6 font-bold text-blue-600 hover:text-blue-900 transition duration-150 ease-in-out">{{ __('Login') }}</a>
                                 <a href="{{ route('register') }}"
-                                    class="ml-6 font-bold text-blue-600 hover:text-blue-900 transition duration-150 ease-in-out">{{ __('Register') }}</a>
+                                    class="ml-6 font-bold text-blue-600 hover:text-blue-900 transition duration-150 ease-in-out">{{ __('Register') }}</a> --}}
                             </div>
                         </nav>
-                    </div>
 
-                    <!--
-            Mobile menu, toggle classes based on menu state.
-            Menu open: "block", Menu closed: "hidden"
-        -->
-                    <div id="nav-content" class="absolute w-full hidden">
-                        <div class="mx-2 px-2 pt-2 pb-3 rounded shadow-sm bg-blue-700">
-                            @guest
-                                <a class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-                                    href="#clientes">Clientes</a>
-                                <a class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-                                    href="#about">Acerca de</a>
-                                <a class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-                                    href="#services">Servicios</a>
-                                <a class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-                                    href="#contact">Contacto</a>
-                                <a class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white border border-gray-400 hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-                                    href="{{ route('login') }}">{{ __('Login') }}</a>
-                                @if (Route::has('register'))
-                                    <a class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white border border-gray-400 hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-                                        href="{{ route('register') }}">{{ __('Register') }}</a>
-                                @endif
-                            @else
-                                @can('manage-users')
-                                    <a href="{{ route('admin.users.index') }}"
+                        <div id="nav-content" class="absolute w-full hidden">
+                            <div class="px-2 pt-2 pb-3 rounded-b-lg shadow-sm bg-gray-800 bg-opacity-75">
+                                @guest
+                                    <a class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+                                        href="#clientes">Clientes</a>
+                                    <a class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+                                        href="#about">Acerca de</a>
+                                    <a class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+                                        href="#services">Servicios</a>
+                                    <a class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+                                        href="#contact">Contacto</a>
+                                    {{-- <a class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white border border-gray-400 hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+                                        href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    @if (Route::has('register'))
+                                        <a class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white border border-gray-400 hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+                                            href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    @endif --}}
+                                @else
+                                    @can('manage-users')
+                                        <a href="{{ route('admin.users.index') }}"
+                                            class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+                                            role="menuitem">(Gestión de usuarios) User Management</a>
+                                    @endcan
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                                         class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-                                        role="menuitem">(Gestión de usuarios) User Management</a>
-                                @endcan
-                                <a href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                                    class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-                                    role="menuitem">{{ __('Logout') }}</a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            @endguest
+                                        role="menuitem">{{ __('Logout') }}</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                @endguest
+                            </div>
                         </div>
+
                     </div>
 
-                    <main class="mt-48 mx-auto max-w-screen-xl px-4 sm:px-6 md:px-8">
+                    <main class="pt-64 mx-auto max-w-screen-xl px-4 sm:px-6 md:px-8">
                         <div class="sm:text-center lg:text-left">
                             <h2
                                 class="text-4xl tracking-tight leading-10 font-bold text-gray-200 lg:text-gray-900 sm:text-3xl md:text-5xl sm:leading-none lg:text-6xl">
                                 Creando ideas
                                 <br class="xl:hidden">
-                                <span class="text-blue-700">entregando soluciones</span>
+                                <span class="font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700">entregando soluciones</span>
                             </h2>
                             <p
                                 class="mt-3 text-base text-gray-300 lg:text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
@@ -156,8 +155,8 @@
                 <a href="https://vyvingenieria.cl/" target="_blank" rel="noreferrer" class="mx-auto"><img
                         class="w-auto h-auto inline-block" src="{{ asset('imgs/clients/v&v-logo.png') }}"
                         alt="logo de v&v" style="filter:contrast(0.9)"></a>
-                <a href="https://condimentosjeit.cl/" target="_blank" rel="noreferrer" class="mx-auto"><img 
-                        class="w-auto h-auto inline-block md:w-11/12" src="{{ asset('imgs/clients/jeit-logo.png') }}" 
+                <a href="https://condimentosjeit.cl/" target="_blank" rel="noreferrer" class="mx-auto"><img
+                        class="w-auto h-auto inline-block md:w-11/12" src="{{ asset('imgs/clients/jeit-logo.png') }}"
                         alt="logo de JEIT"></a>
                 <a href="https://www.redcruzdelmar.cl" target="_blank" rel="noreferrer" class="mx-auto"><img
                         class="w-auto h-auto inline-block" src="{{ asset('imgs/clients/ambcruzmar-logo.png') }}"
@@ -349,10 +348,26 @@
 
     </div>
     <script>
+
         function toggleElement(element) {
             document.getElementById(`${element}`).classList.toggle("hidden");
         }
 
+        let prevScrollpos = window.pageYOffset;
+        window.onscroll = function() {
+            let currentScrollPos = window.pageYOffset;
+            if (prevScrollpos > currentScrollPos) {
+                document.getElementById("navbar").style.top = "0";
+            } else {
+                document.getElementById("navbar").style.top = "-80px";
+                let navbar_content = document.getElementById('nav-content');
+
+                if(!navbar_content.classList.contains('hidden')) {
+                    toggleElement('nav-content')
+                }
+            }
+            prevScrollpos = currentScrollPos;
+        }
     </script>
 </body>
 <script src="{{ mix('js/app.js') }}"></script>
