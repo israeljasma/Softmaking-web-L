@@ -18,4 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('clients', 'Admin\ClientsController', ['except' => []]);
+Route::resource('clients', 'Admin\ClientsController', ['except' => ['create', 'edit']]);
