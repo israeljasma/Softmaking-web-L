@@ -91,7 +91,6 @@ class UsersController extends Controller
             $roles = Role::all();
 
             return response()->json([
-                'message' => 'Successfully updated user!',
                 'user' => $user->roles, 
                 'roles' => $roles
             ], 201);
