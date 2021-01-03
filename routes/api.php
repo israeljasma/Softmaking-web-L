@@ -27,5 +27,6 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
 
+    Route::resource('/users', 'Admin\UsersController', ['except' => ['create', 'store']]);
     Route::post('/logout', [AuthController::class, 'logout']);
 });

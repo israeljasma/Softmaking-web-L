@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Gate;
 use App\User;
 use App\Role;
-use Gate;
-
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -22,8 +22,16 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('admin.users.index')->with('users', $users);
+        // $users = User::all();
+        // return view('admin.users.index')->with('users', $users);
+        try {
+            $users = User::all();
+
+            return response()->json($users, 200);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'message' => 'Error: Users were not found.'], 412);
+        }
     }
 
     /**
@@ -50,73 +58,130 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        //
+        try {
+            $user = User::findOrFail($id);
+
+            return response()->json($user, 200);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'message' => 'Error: The user was not found.'], 412);
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        if(Gate::denies('edit-users')){
-            return redirect(route('admin.users.index'));
+        try{
+            if(Gate::denies('edit-users')){
+                return response()->json([
+                    'message' => "Access denied. You don't have permission to access"], 403);
+            }
+
+            $user = User::findOrFail($id);
+            $roles = Role::all();
+
+            return response()->json([
+                'message' => 'Successfully updated user!',
+                'user' => $user->roles, 
+                'roles' => $roles
+            ], 201);
+
+        }catch(\Exception $exception){
+            return response()->json(['message' => 'Error: The client was not found.'], 412);
         }
-
-        $role = Role::all();
-
-        return view('admin.users.edit')->with([
-            'user' => $user,
-            'roles' => $role,
-        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //sync si fuese un array(por si las moscas)
-        $user->roles()->sync($request->roles);
-        $user->name = $request->name;
-        $user->email = $request->email;
+        try{
+            if(Gate::denies('edit-users')){
+                return response()->json([
+                    'message' => "Access denied. You don't have permission to access"], 403);
+            }
 
-        if($user->save()){
-            $request->session()->flash('success',$user->name. ' has been update');
-        }else{
-            $request->session()->flash('error','There was an error updating the user');
+            $validator = Validator::make($request->all(), [
+                'name'          => 'required',
+                'email'         => 'required|email',
+                'roles'         => 'required|numeric'
+            ]);
+
+            if($validator->fails()) {
+                return response()->json($validator->errors(), 412);
+            }
+
+            $roles = Role::findOrFail($request->roles);
+            $user = User::findOrFail($id);
+
+            $user->roles()->sync($request->roles);
+            $user->name = $request->name;
+            $user->email = $request->email;
+
+            return response()->json([
+                'message' => 'Successfully updated user!',
+                'user' => $user->roles, 
+                'user_rol' => $roles
+            ], 201);
+
+        }catch(\Exception $exception){
+            return response()->json(['message' => 'Error: The user was not updated.'], 412);
         }
 
-        return redirect()->route('admin.users.index');
+        //sync si fuese un array(por si las moscas)
+        // $user->roles()->sync($request->roles);
+        // $user->name = $request->name;
+        // $user->email = $request->email;
+
+        // if($user->save()){
+        //     $request->session()->flash('success',$user->name. ' has been update');
+        // }else{
+        //     $request->session()->flash('error','There was an error updating the user');
+        // }
+
+        // return redirect()->route('admin.users.index');
         //dd($request);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        if(Gate::denies('delete-users')){
-            return redirect(route('admin.users.index'));
+        try {
+            if(Gate::denies('delete-users')){
+                return response()->json([
+                    'message' => "Access denied. You don't have permission to access"], 403);
+            }
+
+            $user = User::findOrFail($id);
+
+            $user->roles()->detach();
+            $user->delete();
+
+            return response()->json([
+                'message' => 'Successfully deleted user!'], 201);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'message' => 'Error: The user was not deleted.'], 412);
         }
-
-        $user->roles()->detach();
-        $user->delete();
-
-        return redirect()->route('admin.users.index');
     }
 }
