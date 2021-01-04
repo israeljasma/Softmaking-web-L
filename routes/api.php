@@ -25,6 +25,8 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::resource('/contact', 'ContactUsFormController', ['except' => ['show', 'edit', 'update','destroy']]);
+
 Route::group(['middleware' => ['auth:sanctum']], function(){
 
     Route::resource('/users', 'Admin\UsersController', ['except' => ['create', 'store']]);
