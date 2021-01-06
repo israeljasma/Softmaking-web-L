@@ -72,7 +72,8 @@ class AuthController extends Controller
 
             return response()->json([
                 'message' => 'Successfully access!',
-                'access_token' => $tokenResult], 200);
+                'access_token' => $tokenResult,
+                'rol' => $user->roles->first()->name ], 200);
         } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'Error: unauthorized access.'], 401);
