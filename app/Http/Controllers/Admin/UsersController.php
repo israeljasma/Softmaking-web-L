@@ -25,6 +25,11 @@ class UsersController extends Controller
         // $users = User::all();
         // return view('admin.users.index')->with('users', $users);
         try {
+            if(Gate::denies('generic-administration')){
+                return response()->json([
+                    'message' => "Access denied. You don't have permission to access"], 403);
+            }
+
             $users = User::all();
 
             return response()->json($users, 200);
@@ -64,6 +69,11 @@ class UsersController extends Controller
     public function show($id)
     {
         try {
+            if(Gate::denies('generic-administration')){
+                return response()->json([
+                    'message' => "Access denied. You don't have permission to access"], 403);
+            }
+            
             $user = User::findOrFail($id);
 
             return response()->json($user, 200);
