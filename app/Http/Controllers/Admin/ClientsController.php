@@ -84,7 +84,7 @@ class ClientsController extends Controller
 
             }catch(\Exception $exception){
                 return response()->json(['message' => 'Error: The client was not created.'], 412);
-            }
+        }
     }
 
     /**
