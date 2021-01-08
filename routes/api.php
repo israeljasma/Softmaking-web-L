@@ -19,8 +19,6 @@ use App\Http\Controllers\AuthController;
 //     return $request->user();
 // });
 
-Route::resource('users/{user}/invoices', 'Admin\invoicesDocumentController', ['except' => []]);
-
 //Routes without auth
 Route::resource('clients', 'Admin\ClientsController', ['except' => ['create', 'edit']]);
 
@@ -34,6 +32,8 @@ Route::resource('contact', 'ContactUsFormController', ['except' => ['show', 'edi
 Route::group(['middleware' => ['auth:sanctum']], function(){
 
     Route::resource('users', 'Admin\UsersController', ['except' => ['create', 'store']]);
+    Route::resource('users/{user}/invoices', 'Admin\invoicesDocumentController', ['except' => []]);
     Route::resource('contact', 'ContactUsFormController', ['except' => []]);
+    Route::resource('tickets', 'TicketsController', ['except' => []]);
     Route::post('logout', [AuthController::class, 'logout']);
 });
