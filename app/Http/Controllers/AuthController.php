@@ -39,7 +39,7 @@ class AuthController extends Controller
                 'message' => 'Successfully created user!'], 201);
         } catch (\Exception $exception) {
             return response()->json([
-                'message' => 'Error: the user was not created.'], 412);
+                'message' => 'Error: the user was not created. The email already exists.'], 412);
         }
     }
 
