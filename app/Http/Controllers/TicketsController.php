@@ -119,12 +119,11 @@ class TicketsController extends Controller
                 // Verifica que sea el usuario logueado el solicitante si este no es admin
                 $tickets = Ticket::where('user_id', Auth::id())->get();
                 $comments = $ticket->comments;
-                error_log($tickets);
                 return response()->json([
                     'ticket'    => $ticket,
                     'category'  => $ticket->category,
                     'comments' => $comments
-                ], 201);
+                ], 200);
             }
         } catch (\Exception $exception) {
             return response()->json([
