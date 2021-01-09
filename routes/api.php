@@ -35,5 +35,6 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::resource('users/{user}/invoices', 'Admin\invoicesDocumentController', ['except' => []]);
     Route::resource('contact', 'ContactUsFormController', ['except' => []]);
     Route::resource('tickets', 'TicketsController', ['except' => []]);
+    Route::resource('tickets/comment', 'CommentsController', ['except' => []]);
     Route::post('logout', [AuthController::class, 'logout']);
 });
