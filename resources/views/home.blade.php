@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="w-full bg-white shadow-sm">
+    <div id="app" class="w-full bg-white shadow-sm">
         <div class="card-header">{{ __('Dashboard') }}</div>
 
         <div class="card-body">
