@@ -22913,6 +22913,10 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+.router-link-active {
+  color: #3182ce;
+}
+
 [style*="--aspect-ratio"] > :first-child {
   width: 100%;
 }
