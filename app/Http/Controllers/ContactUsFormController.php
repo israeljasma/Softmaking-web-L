@@ -44,7 +44,7 @@ class ContactUsFormController extends Controller {
             $validator = Validator::make($request->all(), [
                 'name'      => 'required',
                 'email'     => 'required|email',
-                'phone'     => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+                'phone'     => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
                 'subject'   => 'required',
                 'message'   => 'required'
             ]);
@@ -71,7 +71,7 @@ class ContactUsFormController extends Controller {
             return response()->json(['message' => 'Muchas gracias por contar con nosotros. Trataremos de comunicarnos con usted a la brevedad después de analizar su petición u otro caso.'], 201);
 
             }catch(\Exception $exception){
-                return response()->json(['message' => 'Error: The message was not created.'], 412);
+                return response()->json(['message' => $exception->getMessage()], 412);
             }
     }
 
@@ -105,7 +105,7 @@ class ContactUsFormController extends Controller {
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email',
-            'phone' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'subject'=>'required',
             'message' => 'required'
          ]);

@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <div id="app" class="bg-gray-100 h-screen">
+    <div class="bg-gray-100 h-screen">
         <!--
             Navbar custom SoftMaking
         -->
