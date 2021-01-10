@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Gate;
 use App\User;
 use App\Ticket;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class TicketsController extends Controller
 {
@@ -18,8 +20,20 @@ class TicketsController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::where('user_id', Auth::id())->get();
-        return view('tickets.index', compact('tickets'));
+        try {
+            if(Gate::allows('generic-administration')){
+                
+                $tickets = Ticket::all();
+                return response()->json($tickets, 200);
+            }else{
+                
+                $tickets = Ticket::where('user_id', Auth::id())->get();
+                return response()->json($tickets, 200);
+            }
+        } catch (\Exception $exception) {
+            return response()->json([
+                'message' => 'Error: ticket were not found.'], 412);
+        }
     }
 
     /**
@@ -29,9 +43,15 @@ class TicketsController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-
-        return view('tickets.create', compact('categories'));
+        try {
+            
+            $categories = Category::all();
+            return response()->json($categories, 200);
+            
+        } catch (\Exception $exception) {
+            return response()->json([
+                'message' => 'Error: categories were not found.'], 412);
+        }
     }
 
     /**
@@ -42,29 +62,38 @@ class TicketsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'title'     => 'required',
-            'category'  => 'required',
-            'priority'  => 'required',
-            'message'   => 'required'
-        ]);
+        try{
+            $validator = Validator::make($request->all(), [
+                'title'     => 'required',
+                'category'  => 'required|numeric',
+                'priority'  => 'required',
+                'message'   => 'required'
+            ]);
 
-        $ticket = new Ticket([
-            'title'     => $request->input('title'),
-            'user_id'   => Auth::user()->id,
-            'ticket_id' => strtoupper(Str::random(10)),
-            'category_id'   => $request->input('category'),
-            'priority'  => $request->input('priority'),
-            'message'   => $request->input('message'),
-            'status'    => "Abierto"
-        ]);
+            if($validator->fails()) {
+                return response()->json($validator->errors(), 412);
+            }
 
-        $ticket->save();
+            $ticket = new Ticket([
+                'title'     => $request->input('title'),
+                'user_id'   => Auth::user()->id,
+                'ticket_id' => strtoupper(Str::random(10)),
+                'category_id'   => $request->input('category'),
+                'priority'  => $request->input('priority'),
+                'message'   => $request->input('message'),
+                'status'    => "Abierto"
+            ]);
 
-        //$mailer->sendTicketInformation(Auth::user(), $ticket);
-        $tickets = Ticket::where('user_id', Auth::id())->get();
-    
-        return redirect()->route('ticket.index');
+            $ticket->save();
+
+            return response()->json([
+                'message' => 'Successfully created ticket!',
+                // 'ticket' => $ticket
+            ], 200);
+
+            }catch(\Exception $exception){
+                return response()->json(['message' => 'Error: The client was not created.'], 412);
+        }
     }
 
     /**
@@ -75,6 +104,32 @@ class TicketsController extends Controller
      */
     public function show(Ticket $ticket)
     {
+        try {
+            // cualquier usuario admin
+            if(Gate::allows('generic-administration')){
+                
+                $ticket = Ticket::find($ticket->id);
+                $comments = $ticket->comments;
+                return response()->json([
+                    'ticket'    => $ticket,
+                    'category'  => $ticket->category,
+                    'comments' => $comments
+                ], 200);
+            }else{
+                // Verifica que sea el usuario logueado el solicitante si este no es admin
+                $tickets = Ticket::where('user_id', Auth::id())->get();
+                $comments = $ticket->comments;
+                return response()->json([
+                    'ticket'    => $ticket,
+                    'category'  => $ticket->category,
+                    'comments' => $comments
+                ], 200);
+            }
+        } catch (\Exception $exception) {
+            return response()->json([
+                'message' => 'Error: ticket were not found.'], 412);
+        }
+
         $ticket = Ticket::find($ticket->id);
         
         $comments = $ticket->comments;
