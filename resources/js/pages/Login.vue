@@ -115,7 +115,7 @@ export default {
           password: this.password,
         })
         .then((response) => {
-          this.$router.push({ name: "dashboard" });
+          this.$router.push({ path: "dashboard" });
         })
         .catch((error) => {
           const { message } = error.response.data;

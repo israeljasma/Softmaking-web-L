@@ -61,12 +61,6 @@
         </tr>
       </tbody>
     </table>
-
-    <!-- <ul v-if="users.length > 0">
-      <li v-for="user in users" :key="user.id">
-        <pre>{{ user }}</pre>
-      </li>
-    </ul> -->
   </div>
 </template>
 <script>
@@ -80,13 +74,9 @@ export default {
   methods: {
     getUsers: function () {
       axios
-        .get("api/users", {
-          //   headers: {
-          //     Authorization: "Bearer " + localStorage.getItem('access_token')
-          //   },
-        })
+        .get("api/users")
         .then((response) => {
-          console.log(response);
+        //   console.log(response);
           this.users = response.data;
         })
         .catch((error) => {

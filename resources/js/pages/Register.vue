@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <div class="md:h-screen flex justify-center items-center px-6 my-24 md:my-0">
+    <div
+      class="md:h-screen flex justify-center items-center px-6 my-24 md:my-0"
+    >
       <div class="w-full xl:w-3/4 lg:w-11/12 flex">
         <div
           class="w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg"
@@ -84,11 +86,20 @@
             </div>
 
             <div
-              v-if="error"
-              class="bg-red-100 border-t border-b border-red-500 text-dark-700 px-4 py-3"
+              v-if="errorMsg"
+              class="bg-red-100 border-t border-b border-red-500 text-dark-700 px-4 py-3 mb-5"
               role="alert"
             >
-              <p class="text-sm">{{ error }}</p>
+              <h1 class="text-md font-bold mb-2">
+                Corrija los siguientes errores:
+              </h1>
+              <p
+                v-for="(err, index) in errorMsg"
+                :key="'err-' + index"
+                class="text-sm ml-1"
+              >
+                - {{ err.join(", ") }}
+              </p>
             </div>
 
             <div class="mb-6 text-center">
@@ -116,7 +127,7 @@ export default {
         password: null,
         password_confirmation: null,
       },
-      error: null,
+      errorMsg: null,
     };
   },
   methods: {
@@ -127,8 +138,8 @@ export default {
           this.$router.push({ name: "login" });
         })
         .catch((error) => {
-          const { message } = error.response.data;
-          this.error = message;
+          const { data } = error.response;
+          this.errorMsg = data;
         });
     },
   },

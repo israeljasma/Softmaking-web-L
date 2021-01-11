@@ -13,7 +13,7 @@ import PageDashboard from "./pages/Dashboard";
 import PageUsers from "./pages/Users";
 import PageInvoices from "./pages/Invoices";
 import PageTickets from "./pages/Tickets";
-import { roles } from "../roles";
+import { roles } from "./roles";
 import store from "./store";
 
 const router = new VueRouter( {
@@ -72,7 +72,10 @@ const router = new VueRouter( {
         {
             path: "/login",
             name: "login",
-            component: PageLogin
+            component: PageLogin,
+            meta: {
+                requiresVisitor: true
+            }
         },
         {
             path: "/register",
@@ -105,21 +108,32 @@ const router = new VueRouter( {
 } );
 
 router.beforeEach( ( to, from, next ) => {
+    // console.log( to, from, next )
+    const lastPath = localStorage.getItem('last_path') || 'dashboard'
     if ( to.matched.some( record => record.meta.requiresAuth ) ) {
         if ( store.getters.isLoggedIn ) {
-            // console.log(store.state.userRole)
             if ( to.matched.some( record => record.meta.userRoles.includes( store.state.userRole ) ) ) {
-                next()
+                next();
             } else {
                 next( '/' );
             }
         } else {
-            next( 'login' );
+            next( { name: 'login' } )
         }
-
+    } else if ( to.matched.some( record => record.meta.requiresVisitor ) ) {
+        if ( store.getters.isLoggedIn ) {
+            next( { path: lastPath } )
+        } else {
+            next()
+        }
     } else {
-        next();
+        next()
     }
 } )
+
+router.afterEach( to => {
+    // console.log(to)
+    localStorage.setItem( "last_path", to.path );
+} );
 
 export default router;
