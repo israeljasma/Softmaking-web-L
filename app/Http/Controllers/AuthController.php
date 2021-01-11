@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+
 
 class AuthController extends Controller
 {
@@ -77,6 +79,7 @@ class AuthController extends Controller
             return response()->json([
                 'message' => 'Successfully access!',
                 'access_token' => $tokenResult,
+                'user' => $user,
                 'rol' => $user->roles->first()->name ], 200);
         } catch (\Exception $exception) {
             return response()->json([
