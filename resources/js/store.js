@@ -8,11 +8,12 @@ const store = new Vuex.Store( {
         status: '',
         token: localStorage.getItem( 'access_token' ) || '',
         userRole: localStorage.getItem( 'user_role' ) || '',
-        user: {}
+        user: localStorage.getItem( 'user' ) ? JSON.parse(localStorage.getItem( 'user' )) : '',
     },
     getters: {
         isLoggedIn: state => !!state.token,
         authStatus: state => state.status,
+        userData: state => state.user,
     },
     mutations: {
         retrieveToken ( state, token ) {
@@ -28,14 +29,15 @@ const store = new Vuex.Store( {
             state.status = data.status
             state.token = data.token
             state.userRole = data.user_role
-            // state.user = user
+            state.user = data.user
         },
         auth_error ( state ) {
             state.status = 'error'
         },
         logout ( state ) {
-            state.status = ''
-            state.token = ''
+            state.status = null
+            state.token = null
+            state.user = null
         },
     },
     actions: {
@@ -48,17 +50,19 @@ const store = new Vuex.Store( {
                         password: credentials.password,
                     } )
                         .then( response => {
-                            //console.log(response)
-                            const token = response.data.access_token
+                            // console.log(response)
+                            const user = response.data.user
                             const userRol = response.data.rol
+                            const token = response.data.access_token
                             const message = response.data.message
 
+                            localStorage.setItem( 'user', JSON.stringify(user) )
                             localStorage.setItem( 'user_role', userRol )
                             localStorage.setItem( 'access_token', token )
 
                             axios.defaults.headers.common[ 'Authorization' ] = 'Bearer ' + token;
 
-                            context.commit( 'auth_success', { status: message, token, user_role: userRol } )
+                            context.commit( 'auth_success', { status: message, token, user_role: userRol, user } )
                             context.commit( 'retrieveToken', token )
 
                             resolve( response )
@@ -66,6 +70,7 @@ const store = new Vuex.Store( {
                         .catch( error => {
                             // console.log(error)
                             localStorage.removeItem( 'access_token' );
+                            localStorage.removeItem( 'user' );
                             localStorage.removeItem( 'user_role' );
                             reject( error )
                         } )
@@ -82,16 +87,19 @@ const store = new Vuex.Store( {
                     } )
                         .then( response => {
                             localStorage.removeItem( 'access_token' )
+                            localStorage.removeItem( 'user' );
                             localStorage.removeItem( 'user_role' );
                             delete axios.defaults.headers.common[ 'Authorization' ];
 
                             context.commit( 'destroyToken' )
+                            context.commit( 'logout' )
 
                             resolve( response )
                         } )
                         .catch( error => {
                             // console.log( error )
                             localStorage.removeItem( 'access_token' )
+                            localStorage.removeItem( 'user' );
                             localStorage.removeItem( 'user_role' );
                             delete axios.defaults.headers.common[ 'Authorization' ];
 

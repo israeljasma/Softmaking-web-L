@@ -2,7 +2,10 @@
   <div
     id="navbar"
     class="fixed md:py-5 md:pl-2 w-full bg-gray-800 bg-opacity-75 md:bg-transparent z-50"
-    :class="{ 'navbar--hidden': !showNavbar, 'md:bg-gray-800 bg-opacity-75': isLoggedIn }"
+    :class="{
+      'navbar--hidden': !showNavbar,
+      'md:bg-gray-800 bg-opacity-75': isLoggedIn,
+    }"
   >
     <nav
       class="relative flex items-center justify-between py-5 pl-2 sm:h-10 lg:justify-start"
@@ -46,7 +49,7 @@
           </div>
         </div>
       </div>
-      <div class="hidden md:block md:ml-4 md:pr-2">
+      <div class="hidden md:flex md:items-center md:ml-4 md:pr-2">
         <router-link
           v-if="!isLoggedIn"
           class="ml-2 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
@@ -99,7 +102,7 @@
         <router-link
           v-if="isLoggedIn"
           class="ml-4 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-          :to="{ name: 'invoices', params: { id: 1 }}"
+          :to="{ name: 'invoices', params: { id: 1 } }"
           >Facturas</router-link
         >
         <router-link
@@ -115,14 +118,63 @@
           to="/login"
           >Iniciar Sesión</router-link
         >
-
-        <span
-          v-else
-          class="ml-4 font-bold text-blue-600 hover:text-blue-900 transition duration-150 ease-in-out"
-          @click="logout"
-          >Cerrar Sesión</span
+      </div>
+      <div v-if="user" class="relative hidden md:inline-block ml-auto mr-4">
+        <button
+          type="button"
+          class="flex items-center font-bold text-blue-600 hover:text-white transition duration-150 ease-in-out"
+          @click="isOpenDropdown = !isOpenDropdown"
         >
-        <!-- <router-link v-if="isLoggedIn" to="/logout">Cerrar Sesión</router-link> -->
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="user-circle"
+            class="h-8 w-8 rounded-full svg-inline--fa fa-user-circle fa-w-16 mr-1"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 496 512"
+          >
+            <path
+              fill="currentColor"
+              d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"
+            ></path>
+          </svg>
+          <span>{{ user.name }}</span>
+        </button>
+
+        <div
+          v-if="isOpenDropdown"
+          class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="options-menu"
+        >
+          <!-- <div class="py-1">
+            <a
+              href="#"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              role="menuitem"
+              >Edit</a
+            >
+            <a
+              href="#"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              role="menuitem"
+              >Duplicate</a
+            >
+          </div> -->
+          <div class="py-1">
+            <a
+              href="#"
+              v-if="isLoggedIn"
+              role="menuitem"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 ease-in-out"
+              @click="logout"
+              >Cerrar Sesión</a
+            >
+          </div>
+        </div>
       </div>
     </nav>
 
@@ -131,52 +183,80 @@
         class="px-2 pt-2 pb-3 rounded-b-lg shadow-sm bg-gray-800 bg-opacity-75"
       >
         <router-link
+          v-if="!isLoggedIn"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="/"
           >Inicio</router-link
         >
         <router-link
+          v-if="!isLoggedIn"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="#clientes"
           >Clientes</router-link
         >
         <router-link
+          v-if="!isLoggedIn"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="#about"
           >Acerca de</router-link
         >
         <router-link
+          v-if="!isLoggedIn"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="#services"
           >Servicios</router-link
         >
         <router-link
+          v-if="!isLoggedIn"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="#contact"
           >Contacto</router-link
         >
         <router-link
+          v-if="isLoggedIn"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="/dashboard"
           >Dashboard</router-link
         >
         <router-link
+          v-if="isLoggedIn"
+          class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+          to="/users"
+          >Usuarios</router-link
+        >
+        <router-link
+          v-if="isLoggedIn"
+          class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+          :to="{ name: 'invoices', params: { id: 1 } }"
+          >Facturas</router-link
+        >
+        <router-link
+          v-if="isLoggedIn"
+          class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+          to="/tickets"
+          >Tickets</router-link
+        >
+        <router-link
+          v-if="!isLoggedIn"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white border border-gray-400 hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="/login"
           >Iniciar Sesión</router-link
         >
         <router-link
+          v-if="!isLoggedIn"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white border border-gray-400 hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="/register"
           >Registrarse</router-link
         >
         <a
+          v-if="isLoggedIn"
           href="#"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           role="menuitem"
           >(Gestión de usuarios) User Management</a
         >
         <router-link
+          v-if="isLoggedIn"
           to="/logout"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           role="menuitem"
@@ -195,16 +275,23 @@ export default {
       isOpen: false,
       showNavbar: true,
       lastScrollPosition: 0,
+      isOpenDropdown: false,
+      //   user: this.$store.state.user,
     };
   },
   computed: {
     isLoggedIn: function () {
       return this.$store.getters.isLoggedIn;
     },
+    user: function () {
+      return this.$store.getters.userData;
+    },
   },
   methods: {
     logout: function () {
       this.$store.dispatch("destroyToken").then((response) => {
+        this.isOpen = false;
+        this.isOpenDropdown = false;
         this.$router.push({ name: "login" });
       });
     },
@@ -225,6 +312,8 @@ export default {
     },
   },
   mounted() {
+    // console.log(this.$store.state.user);
+    // this.user = this.$store.state.user;
     window.addEventListener("scroll", this.onScroll);
   },
   beforeDestroy() {
