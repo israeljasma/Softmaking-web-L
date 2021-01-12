@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Gate;
 use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class CategoriesController extends Controller
                 return response()->json([
                     'message' => "Access denied. You don't have permission to access"], 403);
             }
-            
+
             $category = Category::all();
 
             return response()->json($category, 200);
