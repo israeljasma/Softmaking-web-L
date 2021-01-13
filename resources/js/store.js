@@ -14,6 +14,7 @@ const store = new Vuex.Store( {
         isLoggedIn: state => !!state.token,
         authStatus: state => state.status,
         userData: state => state.user,
+        userRole: state => state.userRole,
     },
     mutations: {
         retrieveToken ( state, token ) {

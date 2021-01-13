@@ -20,24 +20,20 @@ export default {
     getInvoices: function () {
       if (this.user) {
         axios
-          .get(`/api/users/${this.user}/invoices`, {
-            //   headers: {
-            //     Authorization: "Bearer " + localStorage.getItem('access_token')
-            //   },
-          })
+          .get(`/api/users/${this.user}/invoices`)
           .then((response) => {
-            console.log(response);
+            // console.log(response);
             this.invoices = response.data;
           })
           .catch((error) => {
-            console.log(error);
+            // console.log(error);
           });
       }
     },
   },
   computed: {},
   mounted() {
-    console.log(this.user);
+    // console.log(this.user);
     this.getInvoices();
   },
 };
