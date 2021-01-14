@@ -8,12 +8,15 @@
 # development server
 - php artisan serve
 
-# comandos esenciales
+# essential commands
 - composer install
 - npm i
 - php artisan storage:link
 - php artisan key:generate
 - php artisan migrate --seed
+
+# production commands
+- npm run production
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
