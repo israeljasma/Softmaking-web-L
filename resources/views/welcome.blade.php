@@ -12,7 +12,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Raleway&family=Roboto&display=swap" rel="stylesheet">
 
-    <link href="css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 </head>
 
