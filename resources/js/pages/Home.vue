@@ -24,7 +24,7 @@
           </div>
 
           <main class="pt-64 mx-auto max-w-screen-xl px-4 sm:px-6 md:px-8">
-            <div class="sm:text-center lg:text-left">
+            <div class="sm:text-center lg:text-left box">
               <h2
                 class="text-4xl tracking-tight leading-10 font-bold text-gray-200 lg:text-gray-900 sm:text-3xl md:text-5xl sm:leading-none lg:text-6xl"
               >
@@ -44,10 +44,10 @@
               <div
                 class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start"
               >
-                <div class="rounded-md shadow">
+                <div class="rounded-md">
                   <a
                     href="#clients"
-                    class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-700 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
+                    class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium shadow rounded-md text-white bg-blue-700 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
                   >
                     Saber más
                   </a>
@@ -57,7 +57,7 @@
           </main>
         </div>
       </div>
-      <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+      <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 box-img">
         <img
           class="h-56 w-full object-cover hidden lg:block sm:h-72 md:h-96 lg:w-full lg:h-full transition animate-zoominout"
           src="imgs/login-bg.jpg"
@@ -139,17 +139,17 @@
       ></div>
       <div class="relative">
         <h1
-          class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700 z-10"
+          class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700 z-10 fade-horizontal"
         >
           ¡Tenemos lo que necesitas!
         </h1>
         <h1
-          class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-gray-100 absolute -z-10"
+          class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-gray-100 absolute -z-10 fade-horizontal"
         >
           ¡Tenemos lo que necesitas!
         </h1>
       </div>
-      <p class="text-xl text-center mx-4 md:mx-56">
+      <p class="text-xl text-center mx-4 md:mx-56 fade-horizontal">
         En Softmaking buscamos soluciones eficientes y durables para que las
         necesidades de hoy sean las oportunidades del mañana. Nuestra sociedad
         actualmente demanda respuestas rápidas para sus problemas y nosotros
@@ -160,18 +160,20 @@
     <section id="services" class="container mx-auto my-12 md:my-48">
       <div class="relative">
         <h1
-          class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700"
+          class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700 fade-vertical"
         >
           Actividades de la empresa
         </h1>
         <h1
-          class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-indigo-100 absolute -z-10"
+          class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-indigo-100 absolute -z-10 fade-vertical"
         >
           Actividades de la empresa
         </h1>
       </div>
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div class="p-2 sm:p-10 text-center cursor-pointer mx-auto">
+        <div
+          class="p-2 sm:p-10 text-center cursor-pointer mx-auto card fade-vertical"
+        >
           <div
             class="py-16 max-w-sm rounded overflow-hidden shadow-lg transition duration-500 ease-in-out bg-gradient-to-b from-gray-700 to-gray-800 hover:bg-gradient-to-t hover:from-gray-800 hover:bg-gray-700 transform hover:scale-105"
           >
@@ -210,7 +212,9 @@
           </div>
         </div>
 
-        <div class="p-2 sm:p-10 text-center cursor-pointer mx-auto">
+        <div
+          class="p-2 sm:p-10 text-center cursor-pointer mx-auto card fade-vertical"
+        >
           <div
             class="py-16 max-w-sm rounded overflow-hidden shadow-lg transition duration-500 ease-in-out bg-gradient-to-b from-blue-600 to-blue-700 hover:bg-gradient-to-t hover:from-blue-700 hover:bg-blue-600 transform hover:scale-105"
           >
@@ -253,19 +257,19 @@
       id="contact"
       class="mx-auto px-4 md:px-12 py-12 md:py-48 bg-gradient-to-l from-gray-700 to-gray-800"
     >
-      <div class="relative">
+      <div class="relative fade-horizontal">
         <h1
-          class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700"
+          class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700 fade-horizontal"
         >
           Mantengámonos en contacto
         </h1>
-        <h1
-          class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-gray-100 absolute -z-10"
+        <!-- <h1
+          class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-gray-100 absolute -z-10 fade-horizontal"
         >
           Mantengámonos en contacto
-        </h1>
+        </h1> -->
       </div>
-      <div class="grid md:grid-cols-2 gap-2">
+      <div class="grid md:grid-cols-2 gap-2 fade-horizontal">
         <p class="text-xl text-gray-100 text-justify px-8 pt-6 mb-4">
           ¿Listo para comenzar tu próximo proyecto con nosotros? ¡Eso es genial!
           ¡Llámenos o envíenos un correo electrónico y nos pondremos en contacto
@@ -297,15 +301,15 @@
       </div>
     </section> -->
 
-    <section class="mx-auto px-4 md:px-12 py-12 md:py-48 bg-gray-100">
+    <section id="rrss" class="mx-auto px-4 md:px-12 py-12 md:py-48 bg-gray-100">
       <div class="relative">
         <h1
-          class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700"
+          class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700 fade-vertical"
         >
           Puedes seguirnos en nuestras redes sociales
         </h1>
         <h1
-          class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-gray-100 absolute -z-10"
+          class="w-full hidden md:block inset-x-0 -top-24 text-6xl font-medium leading-none text-center text-gray-100 absolute -z-10 fade-vertical"
         >
           Nuestras redes sociales
         </h1>
@@ -316,7 +320,7 @@
             href="https://www.facebook.com/SoftMaking-229644924623946/"
             target="_blank"
             rel="noreferrer"
-            class="border transform hover:scale-105 border-blue-800 text-blue-800 hover:text-blue-600 hover:border-blue-600 rounded-full w-12 h-12 flex justify-center items-center shadow-md"
+            class="border transform hover:scale-105 border-blue-800 text-blue-800 hover:text-blue-600 hover:border-blue-600 rounded-full w-12 h-12 flex justify-center items-center shadow-md fade-vertical"
             ><svg
               aria-hidden="true"
               focusable="false"
@@ -336,7 +340,7 @@
             href="https://twitter.com/SoftMakingSpA"
             target="_blank"
             rel="noreferrer"
-            class="border transform hover:scale-105 border-blue-400 text-blue-400 hover:text-blue-500 hover:border-blue-500 rounded-full w-12 h-12 flex justify-center items-center shadow-md"
+            class="border transform hover:scale-105 border-blue-400 text-blue-400 hover:text-blue-500 hover:border-blue-500 rounded-full w-12 h-12 flex justify-center items-center shadow-md fade-vertical"
             ><svg
               aria-hidden="true"
               focusable="false"
@@ -356,7 +360,7 @@
             href="https://www.linkedin.com/company/softmaking"
             target="_blank"
             rel="noreferrer"
-            class="border transform hover:scale-105 border-blue-500 text-blue-500 hover:text-blue-600 hover:border-blue-600 rounded-full w-12 h-12 flex justify-center items-center shadow-md"
+            class="border transform hover:scale-105 border-blue-500 text-blue-500 hover:text-blue-600 hover:border-blue-600 rounded-full w-12 h-12 flex justify-center items-center shadow-md fade-vertical"
             ><svg
               aria-hidden="true"
               focusable="false"
@@ -410,7 +414,9 @@
   </div>
 </template>
 <script>
+import { gsap, Back, TweenLite } from "gsap";
 import FormContact from "../components/FormContact";
+
 export default {
   name: "Home",
   components: {
@@ -419,8 +425,87 @@ export default {
   data() {
     return {};
   },
-  mounted() {},
+  mounted() {
+    // console.log(gsap);
+    this.StartAnimation();
+  },
+  methods: {
+    StartAnimation() {
+      const elements = [
+          "nav",
+        ".box",
+          ".box-img",
+        ".box h2",
+        ".box p",
+        ".box a",
+      ];
+
+      TweenLite.staggerFrom(
+        elements,
+        0.6,
+        {
+          opacity: 0,
+          y: "+=50",
+          ease: Back.easeInOut,
+        },
+        0.3
+      );
+
+      gsap.from("#clients a", {
+        scrollTrigger: {
+          trigger: "#clients",
+          toggleActions: "play pause resume reset",
+        },
+        y: "+=50",
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+      });
+
+      gsap.from("#about .fade-horizontal", {
+        scrollTrigger: {
+          trigger: "#about h1",
+          toggleActions: "play pause resume reset",
+        },
+        x: "-=100",
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+      });
+
+      gsap.from("#services .fade-vertical", {
+        scrollTrigger: {
+          trigger: "#services h1",
+          toggleActions: "play pause resume reset",
+        },
+        y: "+=50",
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+      });
+
+      gsap.from("#contact .fade-horizontal", {
+        scrollTrigger: {
+          trigger: "#contact h1",
+          toggleActions: "play pause resume reset",
+        },
+        x: "-=100",
+        opacity: 0,
+        duration: 1,
+        stagger: 0.3,
+      });
+
+      gsap.from("#rrss .fade-vertical", {
+        scrollTrigger: {
+          trigger: "#rrss h1",
+          toggleActions: "play pause resume reset",
+        },
+        y: "+=100",
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+      });
+    },
+  },
 };
 </script>
-<style>
-</style>

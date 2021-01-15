@@ -108,7 +108,6 @@ const router = new VueRouter( {
 } );
 
 router.beforeEach( ( to, from, next ) => {
-    // console.log( to, from, next )
     const lastPath = localStorage.getItem('last_path') || 'dashboard'
     if ( to.matched.some( record => record.meta.requiresAuth ) ) {
         if ( store.getters.isLoggedIn ) {

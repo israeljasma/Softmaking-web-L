@@ -52,7 +52,7 @@
       <div class="hidden md:flex md:items-center md:ml-4 md:pr-2">
         <router-link
           v-if="!isLoggedIn"
-          class="ml-2 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+          class="ml-2 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           to="/"
           exact
           >Inicio</router-link
@@ -60,25 +60,25 @@
         <router-link
           v-if="!isLoggedIn"
           to="#clients"
-          class="ml-5 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+          class="ml-5 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           >Clientes</router-link
         >
         <router-link
           v-if="!isLoggedIn"
           to="#about"
-          class="ml-5 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+          class="ml-5 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           >Acerca de</router-link
         >
         <router-link
           v-if="!isLoggedIn"
           to="#services"
-          class="ml-5 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+          class="ml-5 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           >Servicios</router-link
         >
         <router-link
           to="#contact"
           v-if="!isLoggedIn"
-          class="ml-5 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+          class="ml-5 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           >Contacto</router-link
         >
         <router-link
@@ -88,26 +88,28 @@
           >Registrarse</router-link
         >
         <router-link
-          v-if="isLoggedIn"
-          class="ml-4 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+          v-if="
+            isLoggedIn
+          "
+          class="ml-4 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           to="/dashboard"
           >Dashboard</router-link
         >
         <router-link
-          v-if="isLoggedIn"
-          class="ml-4 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+          v-if="isLoggedIn && (userRole === roles.superadmin || userRole === roles.admin)"
+          class="ml-4 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           to="/users"
           >Usuarios</router-link
         >
         <router-link
-          v-if="isLoggedIn"
-          class="ml-4 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+          v-if="isLoggedIn && (userRole === roles.superadmin || userRole === roles.admin)"
+          class="ml-4 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           :to="{ name: 'invoices', params: { id: 1 } }"
           >Facturas</router-link
         >
         <router-link
-          v-if="isLoggedIn"
-          class="ml-4 font-bold text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+          v-if="isLoggedIn && (userRole === roles.superadmin || userRole === roles.admin)"
+          class="ml-4 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           to="/tickets"
           >Tickets</router-link
         >
@@ -153,13 +155,13 @@
           <!-- <div class="py-1">
             <a
               href="#"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-400"
               role="menuitem"
               >Edit</a
             >
             <a
               href="#"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-400"
               role="menuitem"
               >Duplicate</a
             >
@@ -219,19 +221,19 @@
           >Dashboard</router-link
         >
         <router-link
-          v-if="isLoggedIn"
+          v-if="isLoggedIn && (userRole === roles.superadmin || userRole === roles.admin)"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="/users"
           >Usuarios</router-link
         >
         <router-link
-          v-if="isLoggedIn"
+          v-if="isLoggedIn && (userRole === roles.superadmin || userRole === roles.admin)"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           :to="{ name: 'invoices', params: { id: 1 } }"
           >Facturas</router-link
         >
         <router-link
-          v-if="isLoggedIn"
+          v-if="isLoggedIn && (userRole === roles.superadmin || userRole === roles.admin)"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="/tickets"
           >Tickets</router-link
@@ -249,7 +251,7 @@
           >Registrarse</router-link
         >
         <a
-          v-if="isLoggedIn"
+          v-if="isLoggedIn && (userRole === roles.superadmin || userRole === roles.admin)"
           href="#"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           role="menuitem"
@@ -268,6 +270,8 @@
   </div>
 </template>
 <script>
+import { roles } from "../roles";
+
 export default {
   name: "Navbar",
   data() {
@@ -276,7 +280,7 @@ export default {
       showNavbar: true,
       lastScrollPosition: 0,
       isOpenDropdown: false,
-      //   user: this.$store.state.user,
+      roles: roles
     };
   },
   computed: {
@@ -285,6 +289,9 @@ export default {
     },
     user: function () {
       return this.$store.getters.userData;
+    },
+    userRole: function () {
+      return this.$store.getters.userRole;
     },
   },
   methods: {
@@ -301,8 +308,6 @@ export default {
       if (currentScrollPosition < 0) {
         return;
       }
-      // Stop executing this function if the difference between
-      // current scroll position and last scroll position is less than some offset
       if (Math.abs(currentScrollPosition - this.lastScrollPosition) < 50) {
         if (this.isOpen) this.isOpen = !this.isOpen;
         return;
@@ -313,7 +318,6 @@ export default {
   },
   mounted() {
     // console.log(this.$store.state.user);
-    // this.user = this.$store.state.user;
     window.addEventListener("scroll", this.onScroll);
   },
   beforeDestroy() {
