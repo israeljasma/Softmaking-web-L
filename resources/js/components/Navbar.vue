@@ -1,25 +1,61 @@
 <template>
   <div
     id="navbar"
-    class="fixed md:py-5 md:pl-2 w-full bg-gray-800 bg-opacity-75 md:bg-transparent z-50"
+    class="fixed md:py-5 md:px-6 w-full bg-gray-800 bg-opacity-75 md:bg-transparent z-50"
     :class="{
       'navbar--hidden': !showNavbar,
       'md:bg-gray-800 bg-opacity-75': isLoggedIn,
     }"
   >
     <nav
-      class="relative flex items-center justify-between py-5 pl-2 sm:h-10 lg:justify-start"
+      class="relative flex items-center justify-between py-5 pl-2 sm:h-10 xl:justify-around"
     >
       <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
         <div class="flex items-center justify-between w-full md:w-auto">
           <a href="/" aria-label="Home" class="flex flex-row items-center">
-            <img
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
               class="block h-8 w-auto"
-              src="imgs/logo-sm.png"
-              alt="logo SoftMaking"
-            />
+              viewBox="0 0 135.978 141.949"
+            >
+              <defs>
+                <linearGradient
+                  id="a"
+                  x1="0.5"
+                  x2="0.5"
+                  y2="1"
+                  gradientUnits="objectBoundingBox"
+                >
+                  <stop offset="0" stop-color="#48a5d7" />
+                  <stop offset="1" stop-color="#4480c1" />
+                </linearGradient>
+                <linearGradient
+                  id="b"
+                  x1="0.5"
+                  x2="0.5"
+                  y2="1"
+                  gradientUnits="objectBoundingBox"
+                >
+                  <stop offset="0" stop-color="#185095" />
+                  <stop offset="1" stop-color="#203169" />
+                </linearGradient>
+              </defs>
+              <g transform="translate(-509.731 -564.032)">
+                <path
+                  d="M-344.349,100.374a12.793,12.793,0,0,1-.075-18.212l2.288-2.309a10.506,10.506,0,0,0,.782-4.358,12.507,12.507,0,0,0-1.223-4.164l-50-50,.05-.05L-407.269,7.576V3.1l36.282.01a10.557,10.557,0,0,1,2.089,0h.428l-.048.045a10.453,10.453,0,0,1,6,2.978L-305.952,62.7a12.5,12.5,0,0,1,0,17.678L-319.74,94.166l-.024-.024-3.284,3.261a21.181,21.181,0,0,1-13.92,5.6A10.19,10.19,0,0,1-344.349,100.374Z"
+                  transform="translate(948 560.975)"
+                  fill="url(#a)"
+                />
+                <path
+                  d="M-344.349,100.374a12.793,12.793,0,0,1-.075-18.212l2.288-2.309a10.506,10.506,0,0,0,.782-4.358,12.507,12.507,0,0,0-1.223-4.164l-50-50,.05-.05L-407.269,7.576V3.1l36.282.01a10.557,10.557,0,0,1,2.089,0h.428l-.048.045a10.453,10.453,0,0,1,6,2.978L-305.952,62.7a12.5,12.5,0,0,1,0,17.678L-319.74,94.166l-.024-.024-3.284,3.261a21.181,21.181,0,0,1-13.92,5.6A10.19,10.19,0,0,1-344.349,100.374Z"
+                  transform="translate(207.44 709.037) rotate(180)"
+                  fill="url(#b)"
+                />
+              </g>
+            </svg>
             <span
-              class="md:hidden text-2xl uppercase font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-blue-300 via-blue-700 to-blue-900 ml-2"
+              class="md:hidden lg:block text-2xl uppercase font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-blue-300 via-blue-700 to-blue-900 ml-2"
               >SoftMaking</span
             >
           </a>
@@ -88,27 +124,35 @@
           >Registrarse</router-link
         >
         <router-link
-          v-if="
-            isLoggedIn
-          "
+          v-if="isLoggedIn"
           class="ml-4 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           to="/dashboard"
           >Dashboard</router-link
         >
         <router-link
-          v-if="isLoggedIn && (userRole === roles.superadmin || userRole === roles.admin)"
+          v-if="
+            isLoggedIn &&
+            (userRole === roles.superadmin || userRole === roles.admin)
+          "
           class="ml-4 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           to="/users"
+          exact
           >Usuarios</router-link
         >
-        <router-link
-          v-if="isLoggedIn && (userRole === roles.superadmin || userRole === roles.admin)"
+        <!-- <router-link
+          v-if="
+            isLoggedIn &&
+            (userRole === roles.superadmin || userRole === roles.admin)
+          "
           class="ml-4 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
-          :to="{ name: 'invoices', params: { id: 1 } }"
+          :to="{ name: 'invoices', params: { userId: 1 } }"
           >Facturas</router-link
-        >
+        > -->
         <router-link
-          v-if="isLoggedIn && (userRole === roles.superadmin || userRole === roles.admin)"
+          v-if="
+            isLoggedIn &&
+            (userRole === roles.superadmin || userRole === roles.admin)
+          "
           class="ml-4 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           to="/tickets"
           >Tickets</router-link
@@ -221,19 +265,28 @@
           >Dashboard</router-link
         >
         <router-link
-          v-if="isLoggedIn && (userRole === roles.superadmin || userRole === roles.admin)"
+          v-if="
+            isLoggedIn &&
+            (userRole === roles.superadmin || userRole === roles.admin)
+          "
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="/users"
           >Usuarios</router-link
         >
-        <router-link
-          v-if="isLoggedIn && (userRole === roles.superadmin || userRole === roles.admin)"
+        <!-- <router-link
+          v-if="
+            isLoggedIn &&
+            (userRole === roles.superadmin || userRole === roles.admin)
+          "
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-          :to="{ name: 'invoices', params: { id: 1 } }"
+          :to="{ name: 'invoices', params: { userId: 1 } }"
           >Facturas</router-link
-        >
+        > -->
         <router-link
-          v-if="isLoggedIn && (userRole === roles.superadmin || userRole === roles.admin)"
+          v-if="
+            isLoggedIn &&
+            (userRole === roles.superadmin || userRole === roles.admin)
+          "
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="/tickets"
           >Tickets</router-link
@@ -251,7 +304,10 @@
           >Registrarse</router-link
         >
         <a
-          v-if="isLoggedIn && (userRole === roles.superadmin || userRole === roles.admin)"
+          v-if="
+            isLoggedIn &&
+            (userRole === roles.superadmin || userRole === roles.admin)
+          "
           href="#"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           role="menuitem"
@@ -280,7 +336,7 @@ export default {
       showNavbar: true,
       lastScrollPosition: 0,
       isOpenDropdown: false,
-      roles: roles
+      roles: roles,
     };
   },
   computed: {
