@@ -64,7 +64,7 @@ export default {
   props: ["invoiceElem"],
   data() {
     return {
-      invoice: this.invoiceElem || {},
+      invoice: this.invoiceElem || null,
       userId: this.$route.params.userId || null,
       invoiceId: this.$route.params.invoiceId || null,
     };

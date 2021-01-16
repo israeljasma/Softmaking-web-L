@@ -74,7 +74,7 @@ export default {
   props: ["ticketElem"],
   data() {
     return {
-      ticket: this.ticketElem || {},
+      ticket: this.ticketElem || null,
       ticketId: this.$route.params.ticketId || null,
     };
   },

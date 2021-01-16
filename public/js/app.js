@@ -3331,7 +3331,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ["invoiceElem"],
   data: function data() {
     return {
-      invoice: this.invoiceElem || {},
+      invoice: this.invoiceElem || null,
       userId: this.$route.params.userId || null,
       invoiceId: this.$route.params.invoiceId || null
     };
@@ -3905,7 +3905,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ["ticketElem"],
   data: function data() {
     return {
-      ticket: this.ticketElem || {},
+      ticket: this.ticketElem || null,
       ticketId: this.$route.params.ticketId || null
     };
   },
