@@ -112,6 +112,7 @@ class TicketsController extends Controller
                 $comments = $ticket->comments;
                 return response()->json([
                     'ticket'    => $ticket,
+                    'user'      => $ticket->user,
                     'category'  => $ticket->category,
                     'comments' => $comments
                 ], 200);
@@ -121,6 +122,7 @@ class TicketsController extends Controller
                 $comments = $ticket->comments;
                 return response()->json([
                     'ticket'    => $ticket,
+                    'user'      => $ticket->user,
                     'category'  => $ticket->category,
                     'comments' => $comments
                 ], 200);
