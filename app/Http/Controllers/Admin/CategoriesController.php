@@ -3,18 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use Gate;
-use App\User;
-use App\Role;
-use Illuminate\Http\Request;
+use App\Category;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class UsersController extends Controller
+class CategoriesController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
     /**
      * Display a listing of the resource.
      *
@@ -22,20 +17,18 @@ class UsersController extends Controller
      */
     public function index()
     {
-        // $users = User::all();
-        // return view('admin.users.index')->with('users', $users);
         try {
             if(Gate::denies('generic-administration')){
                 return response()->json([
                     'message' => "Access denied. You don't have permission to access"], 403);
             }
 
-            $users = User::all();
+            $category = Category::all();
 
-            return response()->json($users, 200);
+            return response()->json($category, 200);
         } catch (\Exception $exception) {
             return response()->json([
-                'message' => 'Error: Users were not found.'], 412);
+                'message' => 'Error: Cateories were not found.'], 412);
         }
     }
 
@@ -57,7 +50,31 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            if(Gate::denies('generic-administration')){
+                return response()->json([
+                    'message' => "Access denied. You don't have permission to access"], 403);
+            }
+
+            $validator = Validator::make($request->all(), [
+                'name'          => 'required|string|min:4'
+            ]);
+
+            if($validator->fails()) {
+                return response()->json($validator->errors(), 412);
+            }
+
+            $category = new Category([
+                'name' => $request->name,
+            ]);
+
+            $category->save();
+
+            return response()->json(['message' => 'Successfully created category!'], 201);
+
+            }catch(\Exception $exception){
+                return response()->json(['message' => 'Error: The category was not created.'], 412);
+        }
     }
 
     /**
@@ -73,13 +90,13 @@ class UsersController extends Controller
                 return response()->json([
                     'message' => "Access denied. You don't have permission to access"], 403);
             }
-            
-            $user = User::findOrFail($id);
 
-            return response()->json($user, 200);
+            $category = Category::findOrFail($id);
+
+            return response()->json($category, 200);
         } catch (\Exception $exception) {
             return response()->json([
-                'message' => 'Error: The user was not found.'], 412);
+                'message' => 'Error: The category was not found.'], 412);
         }
     }
 
@@ -91,23 +108,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        try{
-            if(Gate::denies('edit-users')){
-                return response()->json([
-                    'message' => "Access denied. You don't have permission to access"], 403);
-            }
-
-            $user = User::findOrFail($id);
-            $roles = Role::all();
-
-            return response()->json([
-                'user' => $user->roles, 
-                'roles' => $roles
-            ], 201);
-
-        }catch(\Exception $exception){
-            return response()->json(['message' => 'Error: The client was not found.'], 412);
-        }
+        //
     }
 
     /**
@@ -120,51 +121,32 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         try{
-            if(Gate::denies('edit-users')){
+            if(Gate::denies('manage-superadmin')){
                 return response()->json([
                     'message' => "Access denied. You don't have permission to access"], 403);
             }
 
             $validator = Validator::make($request->all(), [
-                'name'          => 'required',
-                'email'         => 'required|email',
-                'roles'         => 'required|numeric'
+                'name'          => 'required|string|min:4'
             ]);
 
             if($validator->fails()) {
                 return response()->json($validator->errors(), 412);
             }
 
-            $roles = Role::findOrFail($request->roles);
-            $user = User::findOrFail($id);
+            $category = Category::findOrFail($id);
 
-            $user->roles()->sync($request->roles);
-            $user->name = $request->name;
-            $user->email = $request->email;
+            $category->fill([
+                'name' => $request->name
+            ]);
 
-            return response()->json([
-                'message' => 'Successfully updated user!',
-                'user' => $user->roles, 
-                'user_rol' => $roles
-            ], 201);
+            $category->save();
+
+            return response()->json(['message' => 'Successfully updated category!'], 201);
 
         }catch(\Exception $exception){
-            return response()->json(['message' => 'Error: The user was not updated.'], 412);
+            return response()->json(['message' => 'Error: The category was not updated.'], 412);
         }
-
-        //sync si fuese un array(por si las moscas)
-        // $user->roles()->sync($request->roles);
-        // $user->name = $request->name;
-        // $user->email = $request->email;
-
-        // if($user->save()){
-        //     $request->session()->flash('success',$user->name. ' has been update');
-        // }else{
-        //     $request->session()->flash('error','There was an error updating the user');
-        // }
-
-        // return redirect()->route('admin.users.index');
-        //dd($request);
     }
 
     /**
@@ -176,21 +158,19 @@ class UsersController extends Controller
     public function destroy($id)
     {
         try {
-            if(Gate::denies('delete-users')){
+            if(Gate::denies('manage-superadmin')){
                 return response()->json([
                     'message' => "Access denied. You don't have permission to access"], 403);
             }
 
-            $user = User::findOrFail($id);
-
-            $user->roles()->detach();
-            $user->delete();
-
-            return response()->json([
-                'message' => 'Successfully deleted user!'], 201);
+            $category = Category::findOrFail($id);
+            if($category->delete()){
+                return response()->json([
+                    'message' => 'Successfully deleted category!'], 201);
+            }
         } catch (\Exception $exception) {
             return response()->json([
-                'message' => 'Error: The user was not deleted.'], 412);
+                'message' => 'Error: The category was not deleted.'], 412);
         }
     }
 }

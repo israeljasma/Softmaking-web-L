@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/{vue}', function () {
+    return view('welcome');
+})->where('vue', '.*');
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,24 +27,25 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Admin route users
-Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function () {
     Route::resource('/users', 'UsersController', ['except' => ['show', 'store']]);
 });
 
 // Admin route invoices
-Route::namespace('Admin')->prefix('admin/users/{user}')->name('admin.')->middleware('can:manage-invoices')->group(function($user){
+Route::namespace('Admin')->prefix('admin/users/{user}')->name('admin.')->middleware('can:manage-invoices')->group(function ($user) {
     Route::resource('/invoices', 'invoicesDocumentController', ['except' => []]);
 });
 
 // User route invoices
-Route::namespace('Admin')->prefix('home')->name('user.')->group(function(){
+Route::namespace('Admin')->prefix('home')->name('user.')->group(function () {
     Route::get('/invoices', 'invoicesDocumentController@indexUser')->name('invoices.index');
-    Route::get('/invoices/{invoice}', 'invoicesDocumentController@showUser', function ($invoice){})->name('invoices.show');
-    Route::resource('/invoices', 'invoicesDocumentController',['except' => ['index','store', 'create', 'show', 'edit', 'update', 'destroy']]);
+    Route::get('/invoices/{invoice}', 'invoicesDocumentController@showUser', function ($invoice) {
+    })->name('invoices.show');
+    Route::resource('/invoices', 'invoicesDocumentController', ['except' => ['index', 'store', 'create', 'show', 'edit', 'update', 'destroy']]);
 });
 
 // User route tickets & comments
-Route::resource('/home/ticket', 'TicketsController',['except' => []]);
+Route::resource('/home/ticket', 'TicketsController', ['except' => []]);
 Route::resource('/home/ticket/comment', 'CommentsController', ['except' => []]);
 
 // Render in view
