@@ -105,36 +105,21 @@ class TicketsController extends Controller
     public function show(Ticket $ticket)
     {
         try {
-            // cualquier usuario admin
             if(Gate::allows('generic-administration')){
                 
-                $ticket = Ticket::find($ticket->id);
-                $comments = $ticket->comments;
-                return response()->json([
-                    'ticket'    => $ticket,
-                    'category'  => $ticket->category,
-                    'comments' => $comments
-                ], 200);
+                // cualquier usuario admin
+                $ticket = Ticket::with('user','Comments','category')->find($ticket->id);
+                return response()->json(['ticket' => $ticket], 200);
             }else{
+
                 // Verifica que sea el usuario logueado el solicitante si este no es admin
-                $tickets = Ticket::where('user_id', Auth::id())->get();
-                $comments = $ticket->comments;
-                return response()->json([
-                    'ticket'    => $ticket,
-                    'category'  => $ticket->category,
-                    'comments' => $comments
-                ], 200);
+                $ticket = Ticket::with('user','Comments','category')->where('id', $ticket->id)->where('user_id', Auth::id())->get();
+                return response()->json(['ticket' => $ticket], 200);
             }
         } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'Error: ticket were not found.'], 412);
         }
-
-        $ticket = Ticket::find($ticket->id);
-        
-        $comments = $ticket->comments;
-
-        return view('tickets.show', compact('ticket', 'comments'));
     }
 
     /**
