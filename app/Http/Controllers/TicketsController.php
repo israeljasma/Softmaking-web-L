@@ -108,12 +108,12 @@ class TicketsController extends Controller
             if(Gate::allows('generic-administration')){
                 
                 // cualquier usuario admin
-                $ticket = Ticket::with('user','Comments','category')->find($ticket->id);
+                $ticket = Ticket::with('user', 'Comments', 'Comments.user', 'category')->find($ticket->id);
                 return response()->json(['ticket' => $ticket], 200);
             }else{
 
                 // Verifica que sea el usuario logueado el solicitante si este no es admin
-                $ticket = Ticket::with('user','Comments','category')->where('id', $ticket->id)->where('user_id', Auth::id())->get();
+                $ticket = Ticket::with('user', 'Comments', 'Comments.user', 'category')->where('id', $ticket->id)->where('user_id', Auth::id())->get();
                 return response()->json(['ticket' => $ticket], 200);
             }
         } catch (\Exception $exception) {
