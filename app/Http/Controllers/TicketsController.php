@@ -23,11 +23,11 @@ class TicketsController extends Controller
         try {
             if(Gate::allows('generic-administration')){
                 
-                $tickets = Ticket::all();
+                $tickets = Ticket::with('category')->get();
                 return response()->json($tickets, 200);
             }else{
                 
-                $tickets = Ticket::where('user_id', Auth::id())->get();
+                $tickets = Ticket::with('category')->where('user_id', Auth::id())->get();
                 return response()->json($tickets, 200);
             }
         } catch (\Exception $exception) {
