@@ -20,18 +20,26 @@ class invoicesDocumentController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user)
+    public function index($id)
     {
         try {
-            if(!$user){
-                return response()->json(['message' => 'Error: Users were not found.'], 412);
+            $user = User::find($id);
+            if(empty($user)){
+                return response()->json(['message' => 'Error: User were not found.'], 412);
             }
 
-            $invoices = InvoiceDocument::where('user_id', $user->getKey())->get();
-
-            return response()->json(['user' => $user, 'invoices' => $invoices], 200);
+            if(Gate::allows('generic-administration')){
+                
+                $invoices = InvoiceDocument::where('user_id', $user->getKey())->get();
+                return response()->json(['invoices' => $invoices], 200);
+            }else{
+                
+                $invoices = InvoiceDocument::where('user_id', Auth::id())->get();
+                return response()->json(['invoices' => $invoices], 200);
+            }    
         } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'Error: invoice were not found.'], 412);
