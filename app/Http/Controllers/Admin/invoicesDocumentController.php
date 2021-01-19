@@ -102,7 +102,7 @@ class invoicesDocumentController extends Controller
 
             $invoice->save();
 
-            return response()->json('Successfully created invoice!', 201);
+            return response()->json(['message' => 'Successfully created invoice!'], 201);
 
             }catch(\Exception $exception){
                 return response()->json(['message' => 'Error: The invoice was not created.'], 412);
