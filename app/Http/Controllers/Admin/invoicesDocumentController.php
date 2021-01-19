@@ -94,16 +94,15 @@ class invoicesDocumentController extends Controller
                 $random = Str::random(40);
                 $fileName = $random.'.'.$file->getClientOriginalExtension();
                 $request->file('file')->storeAs('public',$fileName);
-                $invoice->file = $fileName;       
+                $invoice->file = $fileName;
             }else{
                 return response()->json(['message' => 'Error: The invoice was not created.'], 412);
             }
+            $invoice->user_id = $user->id;
 
             $invoice->save();
 
-            $invoices = InvoiceDocument::where('user_id', $user->getKey())->get();
-
-            return response()->json(['user' => $user, 'invoices' => $invoices], 200);
+            return response()->json('Successfully created invoice!', 201);
 
             }catch(\Exception $exception){
                 return response()->json(['message' => 'Error: The invoice was not created.'], 412);
