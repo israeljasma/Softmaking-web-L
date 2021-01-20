@@ -222,7 +222,7 @@ class invoicesDocumentController extends Controller
                 'name'          => 'required',
                 'description'   => 'required',
                 'date'          => 'required',
-                'file'          => 'required|mimes:pdf'
+                // 'file'          => 'required|mimes:pdf'
             ]);
 
             if($validator->fails()) {
@@ -249,9 +249,9 @@ class invoicesDocumentController extends Controller
 
             $invoice->save();
 
-            $invoices = InvoiceDocument::with('user')->where('user_id', $user->getKey())->get();
+            // $invoices = InvoiceDocument::with('user')->where('user_id', $user->getKey())->get();
 
-            return response()->json(['invoices' => $invoices], 200);
+            return response()->json(['message' => 'Successfully updated client!'], 200);
 
             }catch(\Exception $exception){
                 return response()->json(['message' => 'Error: The invoice was not created.'], 412);
