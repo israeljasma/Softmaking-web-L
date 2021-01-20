@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Gate;
-use Illuminate\Support\Facades\Validator;
 
 class invoicesDocumentController extends Controller
 {
@@ -21,26 +20,18 @@ class invoicesDocumentController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index(User $user)
     {
         try {
-            $user = User::find($id);
-            if(empty($user)){
-                return response()->json(['message' => 'Error: User were not found.'], 412);
+            if(!$user){
+                return response()->json(['message' => 'Error: Users were not found.'], 412);
             }
 
-            if(Gate::allows('generic-administration')){
-                
-                $invoices = InvoiceDocument::where('user_id', $user->getKey())->get();
-                return response()->json(['invoices' => $invoices], 200);
-            }else{
-                
-                $invoices = InvoiceDocument::where('user_id', Auth::id())->get();
-                return response()->json(['invoices' => $invoices], 200);
-            }    
+            $invoices = InvoiceDocument::where('user_id', $user->getKey())->get();
+
+            return response()->json(['user' => $user, 'invoices' => $invoices], 200);
         } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'Error: invoice were not found.'], 412);
@@ -54,7 +45,7 @@ class invoicesDocumentController extends Controller
      */
     public function create(User $user)
     {
-        // return view('admin.invoices.create')->with('user', $user);
+        return view('admin.invoices.create')->with('user', $user);
     }
 
     /**
@@ -94,15 +85,16 @@ class invoicesDocumentController extends Controller
                 $random = Str::random(40);
                 $fileName = $random.'.'.$file->getClientOriginalExtension();
                 $request->file('file')->storeAs('public',$fileName);
-                $invoice->file = $fileName;
+                $invoice->file = $fileName;       
             }else{
                 return response()->json(['message' => 'Error: The invoice was not created.'], 412);
             }
-            $invoice->user_id = $user->id;
 
             $invoice->save();
 
-            return response()->json(['message' => 'Successfully created invoice!'], 201);
+            $invoices = InvoiceDocument::where('user_id', $user->getKey())->get();
+
+            return response()->json(['user' => $user, 'invoices' => $invoices], 200);
 
             }catch(\Exception $exception){
                 return response()->json(['message' => 'Error: The invoice was not created.'], 412);
@@ -150,21 +142,14 @@ class invoicesDocumentController extends Controller
             if(!User::findOrFail($user->id)){
                 return response()->json(['message' => 'Error: Users were not found.'], 412);
             }
+            
+            $invoice = InvoiceDocument::where('id', $invoice->id)->where('user_id', $user->id)->get();
+            
+            if(!$invoice){
+                return response()->json(['message' => 'Error: Users were not found.'], 412);
+            }
 
-            if(Gate::allows('generic-administration')){
-                
-                $invoice = InvoiceDocument::with('user')->where('id', $invoice->id)->where('user_id', $user->id)->get();
-                return response()->json(['invoice' => $invoice], 200);
-            }else{
-                
-                // $invoices = InvoiceDocument::where('user_id', Auth::id())->get();
-                // return response()->json(['invoices' => $invoices], 200);
-                $invoice = InvoiceDocument::with('user')->where('id', $invoice->id)->where('user_id', Auth::id())->get();
-                return response()->json(['invoice' => $invoice], 200);
-            }            
-            // if(empty($invoice)){
-            //     return response()->json(['message' => 'Error: Users were not found.'], 412);
-            // }
+            return response()->json(['user' => $user, 'invoices' => $invoice], 200);
         } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'Error: The client was not found.'], 412);
@@ -181,15 +166,11 @@ class invoicesDocumentController extends Controller
     public function edit(User $user, InvoiceDocument $invoice)
     {
         try {
-            if(Gate::denies('generic-administration')){
-                return response()->json([
-                    'message' => "Access denied. You don't have permission to access"], 403);
-            }
             if(!User::findOrFail($user->id)){
                 return response()->json(['message' => 'Error: Users were not found.'], 412);
             }
             
-            $invoice = InvoiceDocument::with('user')->where('id', $invoice->id)->where('user_id', $user->id)->get();
+            $invoice = InvoiceDocument::where('id', $invoice->id)->where('user_id', $user->id)->get();
             
             if(!$invoice){
                 return response()->json(['message' => 'Error: Users were not found.'], 412);
@@ -213,10 +194,10 @@ class invoicesDocumentController extends Controller
     public function update(Request $request, User $user, InvoiceDocument $invoice)
     {
         try{
-            if(Gate::denies('generic-administration')){
-                return response()->json([
-                    'message' => "Access denied. You don't have permission to access"], 403);
-            }
+            // if(Gate::denies('generic-administration')){
+            //     return response()->json([
+            //         'message' => "Access denied. You don't have permission to access"], 403);
+            // }
 
             $validator = Validator::make($request->all(), [
                 'name'          => 'required',
@@ -249,9 +230,9 @@ class invoicesDocumentController extends Controller
 
             $invoice->save();
 
-            $invoices = InvoiceDocument::with('user')->where('user_id', $user->getKey())->get();
+            $invoices = InvoiceDocument::where('user_id', $user->getKey())->get();
 
-            return response()->json(['invoices' => $invoices], 200);
+            return response()->json(['user' => $user, 'invoices' => $invoices], 200);
 
             }catch(\Exception $exception){
                 return response()->json(['message' => 'Error: The invoice was not created.'], 412);
@@ -342,17 +323,17 @@ class invoicesDocumentController extends Controller
         //   }
     }
 
-    // public function indexUser(){
+    public function indexUser(){
 
-    //     $invoices = InvoiceDocument::where('user_id', Auth::id())->get();
-    //     return view('user.invoices.index', compact('invoices'));
-    // }
+        $invoices = InvoiceDocument::where('user_id', Auth::id())->get();
+        return view('user.invoices.index', compact('invoices'));
+    }
 
-    // public function showUser(InvoiceDocument $invoice)
-    // {
-    //     $invoiceUser = InvoiceDocument::find($invoice->id);
-    //     return view('user.invoices.show', compact('invoiceUser'));
-    // }
+    public function showUser(InvoiceDocument $invoice)
+    {
+        $invoiceUser = InvoiceDocument::find($invoice->id);
+        return view('user.invoices.show', compact('invoiceUser'));
+    }
 
 
     // public function downloaddd(User $user, InvoiceDocument $invoice)
