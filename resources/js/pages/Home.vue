@@ -269,13 +269,15 @@
           Mantengámonos en contacto
         </h1> -->
       </div>
-      <div class="grid md:grid-cols-2 gap-2 fade-horizontal">
-        <p class="text-xl text-gray-100 text-justify px-8 pt-6 mb-4">
+      <div class="grid md:grid-cols-2 gap-2">
+        <p
+          class="text-xl text-gray-100 text-justify px-8 pt-6 mb-4 fade-horizontal"
+        >
           ¿Listo para comenzar tu próximo proyecto con nosotros? ¡Eso es genial!
           ¡Llámenos o envíenos un correo electrónico y nos pondremos en contacto
           con usted lo antes posible!
         </p>
-        <FormContact />
+        <FormContact class="fade-horizontal" />
       </div>
     </section>
 
@@ -432,9 +434,9 @@ export default {
   methods: {
     StartAnimation() {
       const elements = [
-          "nav",
         ".box",
-          ".box-img",
+        "#navbar nav",
+        ".box-img",
         ".box h2",
         ".box p",
         ".box a",

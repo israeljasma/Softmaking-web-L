@@ -1,9 +1,11 @@
 <template>
-  <div class="w-full h-screen bg-white">
+  <div class="w-full mx-auto h-screen bg-white">
     <Navbar />
     <main class="flex items-start justify-center w-full h-screen">
       <transition name="fade" mode="out-in">
-        <router-view></router-view>
+        <keep-alive :exclude="['invoices', 'invoice', 'tickets', 'ticket']">
+          <router-view></router-view>
+        </keep-alive>
       </transition>
     </main>
   </div>

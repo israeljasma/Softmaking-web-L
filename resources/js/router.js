@@ -12,12 +12,15 @@ import PageNotFound from "./pages/NotFound";
 import PageDashboard from "./pages/Dashboard";
 import PageUsers from "./pages/Users";
 import PageInvoices from "./pages/Invoices";
+import PageInvoice from "./pages/Invoice";
 import PageTickets from "./pages/Tickets";
+import PageTicket from "./pages/Ticket";
 import { roles } from "./roles";
 import store from "./store";
 
 const router = new VueRouter( {
     mode: "history",
+    base: process.env.BASE_URL,
     linkExactActiveClass: 'is-active',
     scrollBehavior: function ( to, from, savedPosition ) {
         if ( to.hash ) {
@@ -48,22 +51,41 @@ const router = new VueRouter( {
             meta: {
                 requiresAuth: true,
                 userRoles: [ roles.admin, roles.superadmin ]
-            }
+            },
         },
         {
-            path: "/invoices/:id",
+            path: "/users/:userId/invoices",
             name: "invoices",
-            props: true,
             component: PageInvoices,
+            meta: {
+                requiresAuth: true,
+                userRoles: [ roles.admin, roles.superadmin ]
+            },
+        },
+        {
+            path: "/users/:userId/invoices/:invoiceId",
+            name: "invoice",
+            props: true,
+            component: PageInvoice,
+            meta: {
+                requiresAuth: true,
+                userRoles: [ roles.admin, roles.superadmin ]
+            },
+        },
+        {
+            path: "/tickets",
+            name: "tickets",
+            component: PageTickets,
             meta: {
                 requiresAuth: true,
                 userRoles: [ roles.admin, roles.superadmin ]
             }
         },
         {
-            path: "/tickets",
-            name: "tickets",
-            component: PageTickets,
+            path: "/tickets/:ticketId",
+            name: "ticket",
+            component: PageTicket,
+            props: true,
             meta: {
                 requiresAuth: true,
                 userRoles: [ roles.admin, roles.superadmin ]
@@ -108,7 +130,7 @@ const router = new VueRouter( {
 } );
 
 router.beforeEach( ( to, from, next ) => {
-    const lastPath = localStorage.getItem('last_path') || 'dashboard'
+    const lastPath = localStorage.getItem( 'last_path' ) || 'dashboard'
     if ( to.matched.some( record => record.meta.requiresAuth ) ) {
         if ( store.getters.isLoggedIn ) {
             if ( to.matched.some( record => record.meta.userRoles.includes( store.state.userRole ) ) ) {

@@ -6,11 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class InvoiceDocument extends Model
 {
-    protected $fillable = [
-        'name', 'description', 'date', 'file'
-    ];
-    
-    public function user(){
+    public function users(){
         return $this->belongsTo('App\User');
     }
 }

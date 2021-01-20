@@ -4,9 +4,9 @@ module.exports = {
         // purgeLayersByDefault: true,
     },
     purge: [
-        './src/**/*.html',
-        './src/**/*.vue',
-        './src/**/*.jsx',
+        './resources/**/*.blade.php',
+        './resources/**/*.js',
+        './resources/**/*.vue',
     ],
     theme: {
         extend: {
