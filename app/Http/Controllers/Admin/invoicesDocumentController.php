@@ -202,8 +202,7 @@ class invoicesDocumentController extends Controller
             $validator = Validator::make($request->all(), [
                 'name'          => 'required',
                 'description'   => 'required',
-                'date'          => 'required',
-                'file'          => 'required|mimes:pdf'
+                'date'          => 'required'
             ]);
 
             if($validator->fails()) {
@@ -218,21 +217,32 @@ class invoicesDocumentController extends Controller
                 'date' => $request->date,
             ]);
 
+            //error_log($request->file);
             if($request->hasfile('file')){
                 $file=$request->file('file');
                 $random = Str::random(40);
                 $fileName = $random.'.'.$file->getClientOriginalExtension();
                 $request->file('file')->storeAs('public',$fileName);
-                $invoice->file = $fileName;       
-            }else{
-                return response()->json(['message' => 'Error: The invoice was not created.'], 412);
+                Storage::delete('public/'.$invoice->file);
+                $invoice->file = $fileName;
             }
+            //if($request->file('file')){
+              //  error_log("llega aqui???????");
+                //$file=$request->file('file');
+                //$random = Str::random(40);
+                //$fileName = $random.'.'.$file->getClientOriginalExtension();
+                //$request->file('file')->storeAs('public',$fileName);
+                //$invoice->file = $fileName;       
+            //}else{
+                //return response()->json(['message' => 'Error: The invoice was not created.'], 412);
+            //}
 
+            //error_log("Se paso el if!!!!!!!!");
             $invoice->save();
 
-            $invoices = InvoiceDocument::where('user_id', $user->getKey())->get();
+            // $invoices = InvoiceDocument::with('user')->where('user_id', $user->getKey())->get();
 
-            return response()->json(['user' => $user, 'invoices' => $invoices], 200);
+            return response()->json(['message' => 'Successfully updated invoice!'], 200);
 
             }catch(\Exception $exception){
                 return response()->json(['message' => 'Error: The invoice was not created.'], 412);
