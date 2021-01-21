@@ -251,7 +251,7 @@ class invoicesDocumentController extends Controller
 
             // $invoices = InvoiceDocument::with('user')->where('user_id', $user->getKey())->get();
 
-            return response()->json(['message' => 'Successfully updated client!'], 200);
+            return response()->json(['message' => 'Successfully updated invoice!'], 200);
 
             }catch(\Exception $exception){
                 return response()->json(['message' => 'Error: The invoice was not created.'], 412);
