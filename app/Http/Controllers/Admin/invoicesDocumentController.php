@@ -236,7 +236,7 @@ class invoicesDocumentController extends Controller
                 'date' => $request->date,
             ]);
 
-            //error_log('antes del if!!!!!');
+            //error_log($request->file);
             if($request->hasfile('file')){
                 $file=$request->file('file');
                 $random = Str::random(40);
@@ -257,7 +257,7 @@ class invoicesDocumentController extends Controller
             //}
 
             //error_log("Se paso el if!!!!!!!!");
-            //$invoice->save();
+            $invoice->save();
 
             // $invoices = InvoiceDocument::with('user')->where('user_id', $user->getKey())->get();
 
