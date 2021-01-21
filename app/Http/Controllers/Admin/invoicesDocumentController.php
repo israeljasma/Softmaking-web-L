@@ -221,8 +221,7 @@ class invoicesDocumentController extends Controller
             $validator = Validator::make($request->all(), [
                 'name'          => 'required',
                 'description'   => 'required',
-                'date'          => 'required',
-                // 'file'          => 'required|mimes:pdf'
+                'date'          => 'required'
             ]);
 
             if($validator->fails()) {
@@ -237,17 +236,28 @@ class invoicesDocumentController extends Controller
                 'date' => $request->date,
             ]);
 
+            //error_log('antes del if!!!!!');
             if($request->hasfile('file')){
                 $file=$request->file('file');
                 $random = Str::random(40);
                 $fileName = $random.'.'.$file->getClientOriginalExtension();
                 $request->file('file')->storeAs('public',$fileName);
-                $invoice->file = $fileName;       
-            }else{
-                return response()->json(['message' => 'Error: The invoice was not created.'], 412);
+                Storage::delete('public/'.$invoice->file);
+                $invoice->file = $fileName;
             }
+            //if($request->file('file')){
+              //  error_log("llega aqui???????");
+                //$file=$request->file('file');
+                //$random = Str::random(40);
+                //$fileName = $random.'.'.$file->getClientOriginalExtension();
+                //$request->file('file')->storeAs('public',$fileName);
+                //$invoice->file = $fileName;       
+            //}else{
+                //return response()->json(['message' => 'Error: The invoice was not created.'], 412);
+            //}
 
-            $invoice->save();
+            //error_log("Se paso el if!!!!!!!!");
+            //$invoice->save();
 
             // $invoices = InvoiceDocument::with('user')->where('user_id', $user->getKey())->get();
 
