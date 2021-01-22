@@ -2,6 +2,9 @@ import router from "./router";
 import store from './store';
 import App from "./components/App";
 
+import moment from 'moment';
+import Toasted from 'vue-toasted';
+
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TweenLite } from "gsap/gsap-core";
@@ -16,6 +19,21 @@ const accessToken = localStorage.getItem( 'access_token' );
 if ( accessToken ) {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
 }
+
+moment.locale('es');
+Vue.filter('formatDate', function(val) {
+    if (val) {
+        // return moment(String(val)).format('MM/DD/YYYY hh:mm')
+        return moment(String(val)).format('LLLL')
+    }
+});
+
+Vue.use(Toasted, {
+    theme: "toasted-primary",
+    position: "top-right",
+    fitToScreen: true,
+    duration : 3500
+})
 
 const app = new Vue( {
     el: '#app',
