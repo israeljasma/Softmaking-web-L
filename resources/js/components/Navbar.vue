@@ -1,10 +1,10 @@
 <template>
   <div
     id="navbar"
-    class="fixed md:py-5 md:px-6 w-full bg-gray-800 bg-opacity-75 md:bg-transparent z-50"
+    class="fixed md:py-5 md:px-6 w-full bg-gray-800 bg-opacity-75 md:bg-transparent z-50 shadow-sm"
     :class="{
       'navbar--hidden': !showNavbar,
-      'md:bg-gray-800 bg-opacity-75': isLoggedIn,
+      'md:bg-gray-800 bg-opacity-75': isLoggedIn && $route.name !== 'home',
     }"
   >
     <nav
@@ -90,7 +90,6 @@
           v-if="!isLoggedIn"
           class="ml-2 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           to="/"
-          exact
           >Inicio</router-link
         >
         <router-link
@@ -139,6 +138,16 @@
           exact
           >Usuarios</router-link
         >
+        <router-link
+          v-if="
+            isLoggedIn &&
+            (userRole === roles.superadmin || userRole === roles.admin)
+          "
+          class="ml-4 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
+          to="/clients"
+          exact
+          >Clientes</router-link
+        >
         <!-- <router-link
           v-if="
             isLoggedIn &&
@@ -156,6 +165,15 @@
           class="ml-4 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           to="/tickets"
           >Tickets</router-link
+        >
+        <router-link
+          v-if="
+            isLoggedIn &&
+            (userRole === roles.superadmin || userRole === roles.admin)
+          "
+          class="ml-4 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
+          to="/messages"
+          >Correos</router-link
         >
 
         <router-link
@@ -273,6 +291,15 @@
           to="/users"
           >Usuarios</router-link
         >
+        <router-link
+          v-if="
+            isLoggedIn &&
+            (userRole === roles.superadmin || userRole === roles.admin)
+          "
+          class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+          to="/clients"
+          >Clientes</router-link
+        >
         <!-- <router-link
           v-if="
             isLoggedIn &&
@@ -290,6 +317,15 @@
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="/tickets"
           >Tickets</router-link
+        >
+        <router-link
+          v-if="
+            isLoggedIn &&
+            (userRole === roles.superadmin || userRole === roles.admin)
+          "
+          class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+          to="/messages"
+          >Correos</router-link
         >
         <router-link
           v-if="!isLoggedIn"
@@ -373,7 +409,6 @@ export default {
     },
   },
   mounted() {
-    // console.log(this.$store.state.user);
     window.addEventListener("scroll", this.onScroll);
   },
   beforeDestroy() {

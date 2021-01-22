@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="invoice"
-    class="container mx-auto bg-white px-6 p-4 my-24 shadow-lg rounded-sm"
+    class="container mx-auto bg-white my-24 shadow-md md:border md:border-blue-600 rounded-md"
   >
     <div class="px-4 py-5 sm:px-6">
       <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -43,7 +43,7 @@
             width="1600"
             height="900"
             class="w-full h-auto relative"
-            :src="'storage/' + invoice.file"
+            :src="'/storage/' + invoice.file"
             frameborder="0"
           ></iframe>
         </div>
@@ -51,10 +51,10 @@
     </div>
   </div>
   <div v-else class="container mx-auto px-6 p-4 my-24">
-    <div class="p-4 md:p-12 text-center bg-white shadow-lg rounded-sm">
-      <p class="text-xl">
-        No existe esta factura en este usuario
-      </p>
+    <div
+      class="p-4 md:p-12 text-center bg-white shadow-md rounded-md md:border md:border-blue-600"
+    >
+      <p class="text-xl">No existe esta factura en este usuario</p>
     </div>
   </div>
 </template>
@@ -71,21 +71,20 @@ export default {
   },
   methods: {
     getInvoice: function () {
-      if (this.userId && this.invoiceId) {
+      if (this.userId && this.invoiceId && !this.invoice) {
         axios
           .get(`/api/users/${this.userId}/invoices/${this.invoiceId}`)
           .then((response) => {
-            this.invoice = response.data.invoices[0];
+            this.invoice = response.data.invoice[0];
           })
           .catch((error) => {
-            console.log(error);
+            // console.log(error);
           });
       }
     },
   },
   computed: {},
   mounted() {
-    // console.log(this.invoiceId);
     this.getInvoice();
   },
 };

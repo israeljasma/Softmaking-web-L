@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto bg-white px-6 p-4 my-24 shadow-lg rounded-sm">
+  <div class="container mx-auto bg-white px-6 p-4 my-24 shadow-sm border border-blue-600 rounded-sm">
     <h2 class="text-3xl text-blue-700 font-bold mb-3">Dashboard</h2>
 
     <p>

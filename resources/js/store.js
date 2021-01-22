@@ -53,17 +53,17 @@ const store = new Vuex.Store( {
                         .then( response => {
                             // console.log(response)
                             const user = response.data.user
-                            const userRol = response.data.rol
+                            const userRole = response.data.rol
                             const token = response.data.access_token
                             const message = response.data.message
 
                             localStorage.setItem( 'user', JSON.stringify(user) )
-                            localStorage.setItem( 'user_role', userRol )
+                            localStorage.setItem( 'user_role', userRole )
                             localStorage.setItem( 'access_token', token )
 
                             axios.defaults.headers.common[ 'Authorization' ] = 'Bearer ' + token;
 
-                            context.commit( 'auth_success', { status: message, token, user_role: userRol, user } )
+                            context.commit( 'auth_success', { status: message, token, user_role: userRole, user } )
                             context.commit( 'retrieveToken', token )
 
                             resolve( response )

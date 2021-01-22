@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="ticket"
-    class="container mx-auto bg-white px-6 p-4 my-24 shadow-lg rounded-sm"
+    class="container mx-auto bg-white px-6 p-4 my-24 shadow-md rounded-md md:border md:border-blue-600"
   >
     <div class="px-4 py-5 sm:px-6">
       <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -53,17 +53,19 @@
           class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
         >
           <dt class="text-sm font-medium text-gray-500">Comentarios</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <p class="py-3" v-for="comment in ticket.comments" :key="comment.id">
-                {{ comment.comment }}
-            </p>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 space-y-3 p-3 border border-gray-200 rounded">
+            <div v-for="comment in ticket.comments" :key="comment.id" class="p-3 border border-gray-200 rounded">
+                <span class="text-gray-600 uppercase tracking-wider">{{ comment.user.name }}</span>
+                <p class="mb-2">{{ comment.comment }}</p>
+                <span class="text-xs text-gray-400">{{ comment.created_at | formatDate }}</span>
+            </div>
           </dd>
         </div>
       </dl>
     </div>
   </div>
   <div v-else class="container mx-auto px-6 p-4 my-24">
-    <div class="p-4 md:p-12 text-center bg-white shadow-lg rounded-sm">
+    <div class="p-4 md:p-12 text-center bg-white md:border md:border-blue-600 shadow-sm rounded-md">
       <p class="text-xl">No existe este ticket</p>
     </div>
   </div>
@@ -88,14 +90,13 @@ export default {
             this.ticket = response.data.ticket;
           })
           .catch((error) => {
-            console.log(error);
+            // console.log(error);
           });
       }
     },
   },
   computed: {},
   mounted() {
-    // console.log(this.ticketId);
     this.getTicket();
   },
 };

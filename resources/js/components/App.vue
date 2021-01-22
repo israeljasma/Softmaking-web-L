@@ -3,7 +3,7 @@
     <Navbar />
     <main class="flex items-start justify-center w-full h-screen">
       <transition name="fade" mode="out-in">
-        <keep-alive :exclude="['invoices', 'invoice', 'tickets', 'ticket']">
+        <keep-alive :exclude="exclude">
           <router-view></router-view>
         </keep-alive>
       </transition>
@@ -17,6 +17,17 @@ export default {
   name: "App",
   components: {
     Navbar,
+  },
+  data() {
+    return {
+      exclude: [
+        "invoices",
+        "invoice",
+        "ticket",
+        "CreateEditInvoice",
+        "CreateEditClient",
+      ],
+    };
   },
 };
 </script>
