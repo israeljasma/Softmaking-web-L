@@ -194,10 +194,10 @@ class invoicesDocumentController extends Controller
     public function update(Request $request, User $user, InvoiceDocument $invoice)
     {
         try{
-            // if(Gate::denies('generic-administration')){
-            //     return response()->json([
-            //         'message' => "Access denied. You don't have permission to access"], 403);
-            // }
+            if(Gate::denies('generic-administration')){
+                return response()->json([
+                    'message' => "Access denied. You don't have permission to access"], 403);
+            }
 
             $validator = Validator::make($request->all(), [
                 'name'          => 'required',
