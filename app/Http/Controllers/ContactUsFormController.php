@@ -65,7 +65,7 @@ class ContactUsFormController extends Controller {
                 'user_query' => $request->get('message'),
             ), function($message) use ($request){
                 $message->from($request->email);
-                $message->to('contacto@softmaking.cl', 'contacto')->subject($request->get('subject'));
+                $message->to(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))->subject($request->get('subject'));
             });
 
             return response()->json(['message' => 'Muchas gracias por contar con nosotros. Trataremos de comunicarnos con usted a la brevedad después de analizar su petición u otro caso.'], 201);

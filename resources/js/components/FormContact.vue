@@ -1,20 +1,13 @@
 <template>
-  <div>
+  <div class="relative">
     <div
-      class="fixed z-10 inset-0 overflow-y-auto"
+      class="fixed z-10 inset-0 overflow bg-gray-800 bg-opacity-75"
       id="modal-contact"
       v-if="showModal"
     >
       <div
         class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
       >
-        <div class="fixed inset-0 transition-opacity">
-          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-        </div>
-
-        <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span
-        >&#8203;
-
         <div
           class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
           role="dialog"
@@ -173,12 +166,34 @@
         </p>
       </div>
 
-      <input
+      <button
         type="submit"
         name="send"
-        value="Enviar"
         class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-full shadow-xl text-white bg-blue-700 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out"
-      />
+      >
+        <svg
+          v-if="sending"
+          class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+        Enviar
+      </button>
     </form>
   </div>
 </template>
@@ -189,15 +204,16 @@ export default {
   data() {
     return {
       contact: {
-        name: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: "",
+        name: "test",
+        email: "test@domain.com",
+        phone: "56998765432",
+        subject: "test",
+        message: "test message",
       },
       errorMsg: "",
       msg: "",
       showModal: false,
+      sending: false,
     };
   },
   methods: {
@@ -218,16 +234,20 @@ export default {
       this.resetData();
     },
     submitForm: function () {
+      this.sending = true;
       axios
         .post("api/contact", this.contact)
         .then((response) => {
-        //   console.log(response);
+          //   console.log(response);
           this.showModal = true;
           this.msg = response.data.message;
         })
         .catch((err) => {
-        //   console.log(err.response.data);
+          //   console.log(err.response.data);
           this.errorMsg = err.response.data || [];
+        })
+        .finally(() => {
+          this.sending = false;
         });
     },
   },
