@@ -32,7 +32,7 @@ class AuthController extends Controller
             $user = new User([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => bcrypt($request->url_site)
+                'password' => bcrypt($request->password)
             ]);
 
             $user->save();
