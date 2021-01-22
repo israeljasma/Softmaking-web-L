@@ -51,7 +51,7 @@ class ClientsController extends Controller
             $validator = Validator::make($request->all(), [
                 'name'          => 'required',
                 'description'   => 'required',
-                'url_logo'          => 'required',
+                'url_logo'          => 'required|file',
                 'url_site'          => 'required'
             ]);
 
@@ -77,10 +77,7 @@ class ClientsController extends Controller
 
             $client->save();
 
-            return response()->json([
-                'message' => 'Successfully created client!',
-                'data' => $client->toArray()
-            ], 201);
+            return response()->json(['message' => 'Successfully created client!'], 201);
 
             }catch(\Exception $exception){
                 return response()->json(['message' => 'Error: The client was not created.'], 412);
@@ -174,10 +171,7 @@ class ClientsController extends Controller
 
             $client->save();
 
-            return response()->json([
-                'message' => 'Successfully updated client!',
-                'data' => $client->toArray()
-            ], 201);
+            return response()->json(['message' => 'Successfully updated client!'], 201);
 
         }catch(\Exception $exception){
             return response()->json(['message' => 'Error: The client was not updated.'], 412);
