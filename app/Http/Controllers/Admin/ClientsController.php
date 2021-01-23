@@ -70,7 +70,7 @@ class ClientsController extends Controller
                 $random = Str::random(40);
                 $fileName = $random.'.'.$file->getClientOriginalExtension();
                 $request->file('url_logo')->storeAs('public',$fileName);
-                $client->url_logo = $fileName;       
+                $client->url_logo = $fileName;
             }else{
                 return response()->json(['message' => 'Error: The client was not created.'], 412);
             }
@@ -146,8 +146,8 @@ class ClientsController extends Controller
                 $random = Str::random(40);
                 $fileName = $random.'.'.$file->getClientOriginalExtension();
                 $request->file('url_logo')->storeAs('public',$fileName);
-                Storage::delete('public/'.$client->file);
-                $client->file = $fileName;
+                Storage::delete('public/'.$client->url_logo);
+                $client->url_logo = $fileName;
             }
 
             // if($request->file){
@@ -167,7 +167,7 @@ class ClientsController extends Controller
             // }else{
             //     return response()->json(['message' => 'Todo se jodio','data' => $client->toArray()], 412);
             // }
-            
+
 
             $client->save();
 
