@@ -22,7 +22,7 @@ class ContactUsFormController extends Controller {
                     'message' => "Access denied. You don't have permission to access"], 403);
             }
 
-            $contacts = Contact::all();
+            $contacts = Contact::orderByDesc('id')->get();
 
             return response()->json($contacts, 200);
         } catch (\Exception $exception) {

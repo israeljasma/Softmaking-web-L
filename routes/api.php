@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,11 +21,16 @@ use App\Http\Controllers\AuthController;
 // });
 
 //Routes without auth
-Route::resource('clients', 'Admin\ClientsController', ['except' => ['create', 'edit']]);
 
 Route::post('register', [AuthController::class, 'register']);
 
 Route::post('login', [AuthController::class, 'login']);
+
+Route::post('password/email', [ForgotPasswordController::class, 'forgot']);
+
+Route::post('password/reset', [ForgotPasswordController::class, 'reset']);
+
+Route::resource('clients', 'Admin\ClientsController', ['except' => ['create', 'edit']]);
 
 Route::resource('contact', 'ContactUsFormController', ['except' => ['create', 'show', 'edit', 'update','destroy']]);
 
