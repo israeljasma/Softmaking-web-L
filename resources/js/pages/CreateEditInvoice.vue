@@ -28,7 +28,7 @@
           />
         </div>
         <div class="mb-2">
-          <label for="name" class="block text-sm font-medium text-gray-700"
+          <label for="description" class="block text-sm font-medium text-gray-700"
             >Descripción</label
           >
           <textarea
@@ -43,7 +43,7 @@
           />
         </div>
         <div class="mb-2">
-          <label for="name" class="block text-sm font-medium text-gray-700"
+          <label for="date" class="block text-sm font-medium text-gray-700"
             >Fecha</label
           >
           <input

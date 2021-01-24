@@ -8,6 +8,7 @@ import PageLogin from "./pages/Login";
 import PageLogout from "./pages/Logout";
 import PageRegister from "./pages/Register";
 import PageForgotPassword from "./pages/ForgotPassword";
+import PageResetPassword from "./pages/ResetPassword";
 import PageNotFound from "./pages/NotFound";
 import PageDashboard from "./pages/Dashboard";
 import PageUsers from "./pages/Users";
@@ -170,6 +171,12 @@ const router = new VueRouter( {
             path: "/forgot-password",
             name: "forgotpassword",
             component: PageForgotPassword
+        },
+
+        {
+            path: '/password/reset/:token',
+            name: 'reset-password-form',
+            component: PageResetPassword,
         },
         {
             path: "/logout",
