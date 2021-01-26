@@ -8,10 +8,15 @@ import PageLogin from "./pages/Login";
 import PageLogout from "./pages/Logout";
 import PageRegister from "./pages/Register";
 import PageForgotPassword from "./pages/ForgotPassword";
+import PageResetPassword from "./pages/ResetPassword";
 import PageNotFound from "./pages/NotFound";
 import PageDashboard from "./pages/Dashboard";
 import PageUsers from "./pages/Users";
+import PageClients from "./pages/Clients";
+import PageMessages from "./pages/Messages";
 import PageInvoices from "./pages/Invoices";
+import PageCreateEditInvoice from "./pages/CreateEditInvoice";
+import PageCreateEditClient from "./pages/CreateEditClient";
 import PageInvoice from "./pages/Invoice";
 import PageTickets from "./pages/Tickets";
 import PageTicket from "./pages/Ticket";
@@ -54,6 +59,35 @@ const router = new VueRouter( {
             },
         },
         {
+            path: "/clients",
+            name: "clients",
+            component: PageClients,
+            meta: {
+                requiresAuth: true,
+                userRoles: [ roles.admin, roles.superadmin ]
+            },
+        },
+        {
+            path: "/client",
+            component: PageCreateEditClient,
+            name: "createClient",
+            props: true,
+            meta: {
+                requiresAuth: true,
+                userRoles: [ roles.admin, roles.superadmin ]
+            },
+        },
+        {
+            path: "/client/:clientId",
+            component: PageCreateEditClient,
+            name: "editClient",
+            props: true,
+            meta: {
+                requiresAuth: true,
+                userRoles: [ roles.admin, roles.superadmin ]
+            },
+        },
+        {
             path: "/users/:userId/invoices",
             name: "invoices",
             component: PageInvoices,
@@ -67,6 +101,26 @@ const router = new VueRouter( {
             name: "invoice",
             props: true,
             component: PageInvoice,
+            meta: {
+                requiresAuth: true,
+                userRoles: [ roles.admin, roles.superadmin ]
+            },
+        },
+        {
+            path: "/users/:userId/invoice",
+            component: PageCreateEditInvoice,
+            name: "createInvoice",
+            props: true,
+            meta: {
+                requiresAuth: true,
+                userRoles: [ roles.admin, roles.superadmin ]
+            },
+        },
+        {
+            path: "/users/:userId/invoice/:invoiceId",
+            component: PageCreateEditInvoice,
+            name: "editInvoice",
+            props: true,
             meta: {
                 requiresAuth: true,
                 userRoles: [ roles.admin, roles.superadmin ]
@@ -92,6 +146,15 @@ const router = new VueRouter( {
             }
         },
         {
+            path: "/messages",
+            name: "messages",
+            component: PageMessages,
+            meta: {
+                requiresAuth: true,
+                userRoles: [ roles.admin, roles.superadmin ]
+            },
+        },
+        {
             path: "/login",
             name: "login",
             component: PageLogin,
@@ -108,6 +171,12 @@ const router = new VueRouter( {
             path: "/forgot-password",
             name: "forgotpassword",
             component: PageForgotPassword
+        },
+
+        {
+            path: '/password/reset/:token',
+            name: 'reset-password-form',
+            component: PageResetPassword,
         },
         {
             path: "/logout",

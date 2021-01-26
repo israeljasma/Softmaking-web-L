@@ -45,7 +45,7 @@
             {{ ticket.status }}
           </td>
           <td class="border-grey-light border hover:bg-gray-100 p-2 h-12">
-            {{ ticket.updated_at }}
+            {{ ticket.updated_at | formatDate}}
           </td>
           <td
             class="border-grey-light border hover:bg-gray-100 p-2 h-12 text-left md:text-center"
@@ -62,7 +62,7 @@
         </tr>
       </tbody>
     </table>
-    <div v-else class="p-4 md:p-12 text-center bg-white shadow-lg rounded-sm">
+    <div v-else class="container mx-auto px-6 md:p-12 text-center bg-white md:border md:border-blue-600 shadow-sm rounded-md">
       <p class="text-xl">
         No se encontraron tickets creados
       </p>
@@ -86,7 +86,7 @@ export default {
             this.tickets = response.data;
           })
           .catch((error) => {
-            console.log(error);
+            // console.log(error);
           });
       }
   },

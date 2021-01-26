@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,20 +21,25 @@ use App\Http\Controllers\AuthController;
 // });
 
 //Routes without auth
-Route::resource('clients', 'Admin\ClientsController', ['except' => ['create', 'edit']]);
 
 Route::post('register', [AuthController::class, 'register']);
 
 Route::post('login', [AuthController::class, 'login']);
 
-Route::resource('contact', 'ContactUsFormController', ['except' => ['show', 'edit', 'update','destroy']]);
+Route::post('password/email', [ForgotPasswordController::class, 'forgot']);
+
+Route::post('password/reset', [ForgotPasswordController::class, 'reset']);
+
+Route::resource('clients', 'Admin\ClientsController', ['except' => ['create', 'edit']]);
+
+Route::resource('contact', 'ContactUsFormController', ['except' => ['create', 'show', 'edit', 'update','destroy']]);
 
 //Routes with auth
 Route::group(['middleware' => ['auth:sanctum']], function(){
 
     Route::resource('users', 'Admin\UsersController', ['except' => ['create', 'store']]);
     Route::resource('users/{user}/invoices', 'Admin\invoicesDocumentController', ['except' => []]);
-    Route::resource('contact', 'ContactUsFormController', ['except' => []]);
+    Route::resource('contactadmin', 'ContactUsFormController', ['except' => ['create', 'edit']]);
     Route::resource('tickets', 'TicketsController', ['except' => []]);
     Route::resource('tickets/comment', 'CommentsController', ['except' => []]);
     Route::resource('categories', 'Admin\CategoriesController', ['except' => ['create', 'edit']]);

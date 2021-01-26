@@ -23,11 +23,11 @@ class TicketsController extends Controller
         try {
             if(Gate::allows('generic-administration')){
                 
-                $tickets = Ticket::all();
+                $tickets = Ticket::with('category')->get();
                 return response()->json($tickets, 200);
             }else{
                 
-                $tickets = Ticket::where('user_id', Auth::id())->get();
+                $tickets = Ticket::with('category')->where('user_id', Auth::id())->get();
                 return response()->json($tickets, 200);
             }
         } catch (\Exception $exception) {
@@ -105,38 +105,21 @@ class TicketsController extends Controller
     public function show(Ticket $ticket)
     {
         try {
-            // cualquier usuario admin
             if(Gate::allows('generic-administration')){
                 
-                $ticket = Ticket::find($ticket->id);
-                $comments = $ticket->comments;
-                return response()->json([
-                    'ticket'    => $ticket,
-                    'user'      => $ticket->user,
-                    'category'  => $ticket->category,
-                    'comments' => $comments
-                ], 200);
+                // cualquier usuario admin
+                $ticket = Ticket::with('user', 'Comments', 'Comments.user', 'category')->find($ticket->id);
+                return response()->json(['ticket' => $ticket], 200);
             }else{
+
                 // Verifica que sea el usuario logueado el solicitante si este no es admin
-                $tickets = Ticket::where('user_id', Auth::id())->get();
-                $comments = $ticket->comments;
-                return response()->json([
-                    'ticket'    => $ticket,
-                    'user'      => $ticket->user,
-                    'category'  => $ticket->category,
-                    'comments' => $comments
-                ], 200);
+                $ticket = Ticket::with('user', 'Comments', 'Comments.user', 'category')->where('id', $ticket->id)->where('user_id', Auth::id())->get();
+                return response()->json(['ticket' => $ticket], 200);
             }
         } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'Error: ticket were not found.'], 412);
         }
-
-        $ticket = Ticket::find($ticket->id);
-        
-        $comments = $ticket->comments;
-
-        return view('tickets.show', compact('ticket', 'comments'));
     }
 
     /**

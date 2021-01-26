@@ -1,109 +1,105 @@
 <template>
   <div class="container mx-auto px-6 p-4 my-24">
-    <h2 class="text-3xl text-blue-700 font-bold mb-3">Usuarios</h2>
+    <div class="flex justify-between mb-3">
+      <h2 class="text-3xl text-blue-700 font-bold">Clientes</h2>
+      <router-link
+        :to="{ name: 'createClient' }"
+        class="px-8 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-700 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
+        >Crear</router-link
+      >
+    </div>
 
     <table
-      v-if="users.length > 0"
+      v-if="clients.length > 0"
       class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-md overflow-hidden sm:shadow-sm my-5"
     >
       <thead class="text-white">
         <tr
-          v-for="(user, index) in users"
+          v-for="(client, index) in clients"
           :key="'header-' + index"
           class="bg-blue-700 flex flex-col flex-no wrap sm:table-row rounded-l-md sm:rounded-none mb-2 sm:mb-0"
         >
           <th class="p-3 text-left h-12" scope="col">#</th>
           <th class="p-3 text-left h-12" scope="col">Nombre</th>
-          <th class="p-3 text-left h-12" scope="col">Correo</th>
-          <th class="p-3 text-left h-12" scope="col">Facturas</th>
+          <th class="p-3 text-left h-12" scope="col">Descripción</th>
+          <th class="p-3 text-left h-12" scope="col">URL logo</th>
+          <th class="p-3 text-left h-12" scope="col">URL Sitio</th>
+          <!-- <th class="p-3 text-left h-12" scope="col">Creado el</th> -->
           <th class="p-3 text-left h-12" scope="col">Acciones</th>
         </tr>
       </thead>
       <tbody class="flex-1 sm:flex-none">
         <tr
-          v-for="user in users"
-          :key="user.id"
+          v-for="client in clients"
+          :key="client.id"
           class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0"
         >
           <td
             class="border-gray-200 border hover:bg-gray-100 p-2 h-12 md:text-center"
             scope="row"
           >
-            {{ user.id }}
+            {{ client.id }}
           </td>
           <td class="border-gray-200 border hover:bg-gray-100 p-2 h-12">
-            {{ user.name }}
+            {{ client.name }}
           </td>
           <td class="border-gray-200 border hover:bg-gray-100 p-2 h-12">
-            {{ user.email }}
+            {{ client.description }}
+          </td>
+          <td class="border-gray-200 border hover:bg-gray-100 p-2 h-12">
+            {{ client.url_logo }}
           </td>
           <td
-            class="border-gray-200 border hover:bg-gray-100 p-2 h-12 text-left md:text-center"
+            class="border-gray-200 border hover:bg-gray-100 p-2 h-12 overflow-auto"
           >
-            <router-link
-              class="px-3 md:py-1 mr-2 border border-transparent text-base rounded text-white bg-gray-400 hover:bg-gray-500 focus:outline-none focus:border-gray-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
-              :to="{ name: 'invoices', params: { userId: user.id } }"
-              >Ver</router-link
-            >
+            {{ client.url_site }}
           </td>
+          <!-- <td
+            class="border-gray-200 border hover:bg-gray-100 p-2 h-12 overflow-auto leading-4"
+          >
+            {{ client.created_at | formatDate }}
+          </td> -->
           <td class="border-gray-200 border hover:bg-gray-100 p-2 h-12">
             <router-link
               class="px-3 md:py-1 mr-2 border border-transparent text-base rounded text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:border-yellow-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
-              :to="{ name: 'invoices', params: { userId: user.id } }"
+              :to="{ name: 'editClient', params: { clientId: client.id, clientElem: client } }"
               >Editar</router-link
             >
-            <router-link
+            <!-- <router-link
               class="px-3 md:py-1 border border-transparent text-base rounded text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:border-red-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
-              :to="{ name: 'invoices', params: { userId: user.id } }"
+              :to="{ name: 'client', params: { clientId: client.id } }"
               >Eliminar</router-link
-            >
+            > -->
           </td>
-          <user-profile-modal
-            :show="showModal(user.id)"
-            @close="toggleModal(user.id)"
-          />
         </tr>
       </tbody>
     </table>
   </div>
 </template>
 <script>
-import UserProfileModal from "../components/EditUserModal";
 export default {
-  name: "users",
-  components: { UserProfileModal },
+  name: "clients",
+  components: {},
   data() {
     return {
-      activeModal: 0,
-      users: [],
+      clients: [],
     };
   },
   methods: {
-    getUsers: function () {
+    getClients: function () {
       axios
-        .get("api/users")
+        .get("api/clients")
         .then((response) => {
-        //   console.log(response);
-          this.users = response.data;
+          this.clients = response.data;
         })
         .catch((error) => {
         //   console.log(error);
         });
     },
-    showModal: function (id) {
-      return this.activeModal === id;
-    },
-    toggleModal: function (id) {
-      if (this.activeModal !== 0) {
-        this.activeModal = 0;
-        return false;
-      }
-      this.activeModal = id;
-    },
   },
   computed: {},
   mounted() {
-    this.getUsers();
+    this.getClients();
   },
 };
 </script>
