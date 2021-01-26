@@ -204,11 +204,11 @@ export default {
   data() {
     return {
       contact: {
-        name: "test",
-        email: "test@domain.com",
-        phone: "56998765432",
-        subject: "test",
-        message: "test message",
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
       },
       errorMsg: "",
       msg: "",

@@ -30,7 +30,7 @@
         </div>
 
         <div class="mb-2">
-          <label for="name" class="block text-sm font-medium text-gray-700"
+          <label for="description" class="block text-sm font-medium text-gray-700"
             >Descripción</label
           >
           <textarea
@@ -46,7 +46,7 @@
         </div>
 
         <div class="mb-2">
-          <label for="name" class="block text-sm font-medium text-gray-700"
+          <label for="url_site" class="block text-sm font-medium text-gray-700"
             >Enlace del sitio web</label
           >
           <input

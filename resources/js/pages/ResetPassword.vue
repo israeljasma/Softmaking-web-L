@@ -2,12 +2,11 @@
   <div
     class="container mx-auto bg-white px-6 p-4 my-24 shadow-sm md:border md:border-blue-600 rounded-md"
   >
-    <h2 class="text-3xl text-center text-blue-700 font-bold mb-3">
-      Restablecer contraseña
-    </h2>
+    <h2 class="text-3xl text-blue-700 font-bold mb-3">Nueva contraseña</h2>
+
     <form
       autocomplete="off"
-      @submit.prevent="requestResetPassword"
+      @submit.prevent="resetPassword"
       method="post"
       class="flex flex-col"
     >
@@ -22,6 +21,37 @@
             name="email"
             id="email"
             placeholder="user@example.com"
+            disabled
+            required
+            autofocus
+            class="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('name') is-invalid @enderror"
+          />
+        </div>
+        <div class="mb-2">
+          <label for="password" class="block text-sm font-medium text-gray-700"
+            >Contraseña</label
+          >
+          <input
+            v-model="password"
+            type="password"
+            name="password"
+            id="password"
+            required
+            autofocus
+            class="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('name') is-invalid @enderror"
+          />
+        </div>
+        <div class="mb-2">
+          <label
+            for="password_confirmation"
+            class="block text-sm font-medium text-gray-700"
+            >Confirmar contraseña</label
+          >
+          <input
+            v-model="password_confirmation"
+            type="password"
+            name="password_confirmation"
+            id="password_confirmation"
             required
             autofocus
             class="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('name') is-invalid @enderror"
@@ -52,7 +82,7 @@
                 fill="currentColor"
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
               ></path></svg
-            >Enviar enlace de recuperación de contraseña
+            >Actualizar contraseña
           </span>
         </button>
       </div>
@@ -64,25 +94,29 @@
 export default {
   data() {
     return {
-      email: null,
+      token: null,
+      email: this.$route.query.email || null,
+      password: null,
+      password_confirmation: null,
       has_error: false,
       sending: false,
     };
   },
   methods: {
-    requestResetPassword() {
-      this.sending = true;
+    resetPassword() {
       axios
-        .post("api/password/email", { email: this.email })
+        .post("/api/password/reset", {
+          token: this.$route.params.token,
+          email: this.email,
+          password: this.password,
+          password_confirmation: this.password_confirmation,
+        })
         .then((res) => {
-          this.$toasted.success(
-            "Enlace para restablecer la contraseña enviado a su correo electrónico"
-          );
+          this.$toasted.success("La contraseña ha sido cambiada con éxito");
+          this.$router.push({ name: "login" });
         })
         .catch((err) => {
-          this.$toasted.error(
-            "Ha ocurrido un error al intentar enviar en enlace para restablecer la contraseña"
-          );
+          this.$toasted.error("El token proporcionado no es válido");
         })
         .finally(() => {
           this.sending = false;

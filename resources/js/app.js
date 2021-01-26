@@ -32,7 +32,7 @@ Vue.use(Toasted, {
     theme: "toasted-primary",
     position: "top-right",
     fitToScreen: true,
-    duration : 3500
+    duration : 5000
 })
 
 const app = new Vue( {

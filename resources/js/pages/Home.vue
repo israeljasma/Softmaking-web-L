@@ -135,7 +135,7 @@
       class="mx-auto mb-12 md:mb-48 py-48 px-12 rounded-lg relative"
     >
       <div
-        class="absolute w-full h-full transform skew-y-3 bg-gray-100 shadow-sm top-0 right-0 -z-10"
+        class="absolute w-full h-full transform skew-y-3 bg-indigo-100 bg-opacity-50 shadow-sm top-0 right-0 -z-10"
       ></div>
       <div class="relative">
         <h1

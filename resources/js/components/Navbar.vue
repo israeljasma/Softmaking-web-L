@@ -93,26 +93,26 @@
           >Inicio</router-link
         >
         <router-link
-          v-if="!isLoggedIn"
+          v-if="!isLoggedIn && $route.name === 'home'"
           to="#clients"
           class="ml-5 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           >Clientes</router-link
         >
         <router-link
-          v-if="!isLoggedIn"
+          v-if="!isLoggedIn && $route.name === 'home'"
           to="#about"
           class="ml-5 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           >Acerca de</router-link
         >
         <router-link
-          v-if="!isLoggedIn"
+          v-if="!isLoggedIn && $route.name === 'home'"
           to="#services"
           class="ml-5 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           >Servicios</router-link
         >
         <router-link
           to="#contact"
-          v-if="!isLoggedIn"
+          v-if="!isLoggedIn && $route.name === 'home'"
           class="ml-5 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           >Contacto</router-link
         >
@@ -148,15 +148,15 @@
           exact
           >Clientes</router-link
         >
-        <!-- <router-link
+        <router-link
           v-if="
             isLoggedIn &&
             (userRole === roles.superadmin || userRole === roles.admin)
           "
           class="ml-4 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
-          :to="{ name: 'invoices', params: { userId: 1 } }"
-          >Facturas</router-link
-        > -->
+          :to="{ name: 'invoices', params: { userId: user.id } }"
+          >Mis Facturas</router-link
+        >
         <router-link
           v-if="
             isLoggedIn &&
@@ -241,8 +241,7 @@
         </div>
       </div>
     </nav>
-
-    <div v-if="isOpen" id="nav-content" class="absolute w-full">
+    <div v-show="isOpen" @click="isOpen = false" id="nav-content" class="absolute w-full">
       <div
         class="px-2 pt-2 pb-3 rounded-b-lg shadow-sm bg-gray-800 bg-opacity-75"
       >
@@ -253,25 +252,25 @@
           >Inicio</router-link
         >
         <router-link
-          v-if="!isLoggedIn"
+          v-if="!isLoggedIn && $route.name === 'home'"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="#clientes"
           >Clientes</router-link
         >
         <router-link
-          v-if="!isLoggedIn"
+          v-if="!isLoggedIn && $route.name === 'home'"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="#about"
           >Acerca de</router-link
         >
         <router-link
-          v-if="!isLoggedIn"
+          v-if="!isLoggedIn && $route.name === 'home'"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="#services"
           >Servicios</router-link
         >
         <router-link
-          v-if="!isLoggedIn"
+          v-if="!isLoggedIn && $route.name === 'home'"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="#contact"
           >Contacto</router-link
@@ -300,15 +299,15 @@
           to="/clients"
           >Clientes</router-link
         >
-        <!-- <router-link
+        <router-link
           v-if="
             isLoggedIn &&
             (userRole === roles.superadmin || userRole === roles.admin)
           "
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-          :to="{ name: 'invoices', params: { userId: 1 } }"
-          >Facturas</router-link
-        > -->
+          :to="{ name: 'invoices', params: { userId: user.id } }"
+          >Mis facturas</router-link
+        >
         <router-link
           v-if="
             isLoggedIn &&
@@ -339,7 +338,7 @@
           to="/register"
           >Registrarse</router-link
         >
-        <a
+        <!-- <a
           v-if="
             isLoggedIn &&
             (userRole === roles.superadmin || userRole === roles.admin)
@@ -348,14 +347,14 @@
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           role="menuitem"
           >(Gestión de usuarios) User Management</a
-        >
-        <router-link
+        > -->
+        <a
+          href="#"
           v-if="isLoggedIn"
-          to="/logout"
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           role="menuitem"
           @click="logout"
-          >Cerrar sesión</router-link
+          >Cerrar sesión</a
         >
       </div>
     </div>
