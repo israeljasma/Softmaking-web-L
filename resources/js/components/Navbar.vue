@@ -241,8 +241,7 @@
         </div>
       </div>
     </nav>
-
-    <div v-if="isOpen" id="nav-content" class="absolute w-full">
+    <div v-show="isOpen" @click="isOpen = false" id="nav-content" class="absolute w-full">
       <div
         class="px-2 pt-2 pb-3 rounded-b-lg shadow-sm bg-gray-800 bg-opacity-75"
       >

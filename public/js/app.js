@@ -2653,7 +2653,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Navbar",
@@ -4543,6 +4542,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -53392,207 +53392,221 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.isOpen
-        ? _c(
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.isOpen,
+              expression: "isOpen"
+            }
+          ],
+          staticClass: "absolute w-full",
+          attrs: { id: "nav-content" },
+          on: {
+            click: function($event) {
+              _vm.isOpen = false
+            }
+          }
+        },
+        [
+          _c(
             "div",
-            { staticClass: "absolute w-full", attrs: { id: "nav-content" } },
+            {
+              staticClass:
+                "px-2 pt-2 pb-3 rounded-b-lg shadow-sm bg-gray-800 bg-opacity-75"
+            },
             [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "px-2 pt-2 pb-3 rounded-b-lg shadow-sm bg-gray-800 bg-opacity-75"
-                },
-                [
-                  !_vm.isLoggedIn
-                    ? _c(
-                        "router-link",
-                        {
-                          staticClass:
-                            "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
-                          attrs: { to: "/" }
-                        },
-                        [_vm._v("Inicio")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  !_vm.isLoggedIn && _vm.$route.name === "home"
-                    ? _c(
-                        "router-link",
-                        {
-                          staticClass:
-                            "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
-                          attrs: { to: "#clientes" }
-                        },
-                        [_vm._v("Clientes")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  !_vm.isLoggedIn && _vm.$route.name === "home"
-                    ? _c(
-                        "router-link",
-                        {
-                          staticClass:
-                            "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
-                          attrs: { to: "#about" }
-                        },
-                        [_vm._v("Acerca de")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  !_vm.isLoggedIn && _vm.$route.name === "home"
-                    ? _c(
-                        "router-link",
-                        {
-                          staticClass:
-                            "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
-                          attrs: { to: "#services" }
-                        },
-                        [_vm._v("Servicios")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  !_vm.isLoggedIn && _vm.$route.name === "home"
-                    ? _c(
-                        "router-link",
-                        {
-                          staticClass:
-                            "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
-                          attrs: { to: "#contact" }
-                        },
-                        [_vm._v("Contacto")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.isLoggedIn
-                    ? _c(
-                        "router-link",
-                        {
-                          staticClass:
-                            "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
-                          attrs: { to: "/dashboard" }
-                        },
-                        [_vm._v("Dashboard")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.isLoggedIn &&
-                  (_vm.userRole === _vm.roles.superadmin ||
-                    _vm.userRole === _vm.roles.admin)
-                    ? _c(
-                        "router-link",
-                        {
-                          staticClass:
-                            "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
-                          attrs: { to: "/users" }
-                        },
-                        [_vm._v("Usuarios")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.isLoggedIn &&
-                  (_vm.userRole === _vm.roles.superadmin ||
-                    _vm.userRole === _vm.roles.admin)
-                    ? _c(
-                        "router-link",
-                        {
-                          staticClass:
-                            "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
-                          attrs: { to: "/clients" }
-                        },
-                        [_vm._v("Clientes")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.isLoggedIn &&
-                  (_vm.userRole === _vm.roles.superadmin ||
-                    _vm.userRole === _vm.roles.admin)
-                    ? _c(
-                        "router-link",
-                        {
-                          staticClass:
-                            "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
-                          attrs: {
-                            to: {
-                              name: "invoices",
-                              params: { userId: _vm.user.id }
-                            }
-                          }
-                        },
-                        [_vm._v("Mis facturas")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.isLoggedIn &&
-                  (_vm.userRole === _vm.roles.superadmin ||
-                    _vm.userRole === _vm.roles.admin)
-                    ? _c(
-                        "router-link",
-                        {
-                          staticClass:
-                            "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
-                          attrs: { to: "/tickets" }
-                        },
-                        [_vm._v("Tickets")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.isLoggedIn &&
-                  (_vm.userRole === _vm.roles.superadmin ||
-                    _vm.userRole === _vm.roles.admin)
-                    ? _c(
-                        "router-link",
-                        {
-                          staticClass:
-                            "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
-                          attrs: { to: "/messages" }
-                        },
-                        [_vm._v("Correos")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  !_vm.isLoggedIn
-                    ? _c(
-                        "router-link",
-                        {
-                          staticClass:
-                            "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white border border-gray-400 hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
-                          attrs: { to: "/login" }
-                        },
-                        [_vm._v("Iniciar Sesión")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  !_vm.isLoggedIn
-                    ? _c(
-                        "router-link",
-                        {
-                          staticClass:
-                            "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white border border-gray-400 hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
-                          attrs: { to: "/register" }
-                        },
-                        [_vm._v("Registrarse")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.isLoggedIn
-                    ? _c(
-                        "a",
-                        {
-                          staticClass:
-                            "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
-                          attrs: { href: "#", role: "menuitem" },
-                          on: { click: _vm.logout }
-                        },
-                        [_vm._v("Cerrar sesión")]
-                      )
-                    : _vm._e()
-                ],
-                1
-              )
-            ]
+              !_vm.isLoggedIn
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass:
+                        "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                      attrs: { to: "/" }
+                    },
+                    [_vm._v("Inicio")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isLoggedIn && _vm.$route.name === "home"
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass:
+                        "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                      attrs: { to: "#clientes" }
+                    },
+                    [_vm._v("Clientes")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isLoggedIn && _vm.$route.name === "home"
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass:
+                        "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                      attrs: { to: "#about" }
+                    },
+                    [_vm._v("Acerca de")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isLoggedIn && _vm.$route.name === "home"
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass:
+                        "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                      attrs: { to: "#services" }
+                    },
+                    [_vm._v("Servicios")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isLoggedIn && _vm.$route.name === "home"
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass:
+                        "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                      attrs: { to: "#contact" }
+                    },
+                    [_vm._v("Contacto")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isLoggedIn
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass:
+                        "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                      attrs: { to: "/dashboard" }
+                    },
+                    [_vm._v("Dashboard")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isLoggedIn &&
+              (_vm.userRole === _vm.roles.superadmin ||
+                _vm.userRole === _vm.roles.admin)
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass:
+                        "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                      attrs: { to: "/users" }
+                    },
+                    [_vm._v("Usuarios")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isLoggedIn &&
+              (_vm.userRole === _vm.roles.superadmin ||
+                _vm.userRole === _vm.roles.admin)
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass:
+                        "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                      attrs: { to: "/clients" }
+                    },
+                    [_vm._v("Clientes")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isLoggedIn &&
+              (_vm.userRole === _vm.roles.superadmin ||
+                _vm.userRole === _vm.roles.admin)
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass:
+                        "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                      attrs: {
+                        to: {
+                          name: "invoices",
+                          params: { userId: _vm.user.id }
+                        }
+                      }
+                    },
+                    [_vm._v("Mis facturas")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isLoggedIn &&
+              (_vm.userRole === _vm.roles.superadmin ||
+                _vm.userRole === _vm.roles.admin)
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass:
+                        "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                      attrs: { to: "/tickets" }
+                    },
+                    [_vm._v("Tickets")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isLoggedIn &&
+              (_vm.userRole === _vm.roles.superadmin ||
+                _vm.userRole === _vm.roles.admin)
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass:
+                        "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                      attrs: { to: "/messages" }
+                    },
+                    [_vm._v("Correos")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isLoggedIn
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass:
+                        "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white border border-gray-400 hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                      attrs: { to: "/login" }
+                    },
+                    [_vm._v("Iniciar Sesión")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isLoggedIn
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass:
+                        "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white border border-gray-400 hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                      attrs: { to: "/register" }
+                    },
+                    [_vm._v("Registrarse")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isLoggedIn
+                ? _c(
+                    "a",
+                    {
+                      staticClass:
+                        "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
+                      attrs: { href: "#", role: "menuitem" },
+                      on: { click: _vm.logout }
+                    },
+                    [_vm._v("Cerrar sesión")]
+                  )
+                : _vm._e()
+            ],
+            1
           )
-        : _vm._e()
+        ]
+      )
     ]
   )
 }
@@ -56609,14 +56623,16 @@ var staticRenderFns = [
       "div",
       {
         staticClass:
-          "container bg-blue-400 h-full w-full mx-auto flex flex-col items-center justify-center"
+          "bg-gradient-to-r from-blue-500 to-blue-700 h-full w-full mx-auto flex flex-col items-center justify-center text-white text-center"
       },
       [
-        _c("h1", { staticClass: "title text-3xl font-bold" }, [
+        _c("h1", { staticClass: "text-4xl font-bold" }, [
           _vm._v("Página no encontrada")
         ]),
         _vm._v(" "),
-        _c("p", [
+        _c("span", { staticClass: "text-6xl font-bold" }, [_vm._v("404")]),
+        _vm._v(" "),
+        _c("p", { staticClass: "tracking-wider uppercase text-xl" }, [
           _vm._v(
             "¡Woops! Parece que la página que solicitó no puede ser encontrada."
           )
