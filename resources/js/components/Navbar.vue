@@ -187,8 +187,9 @@
         <button
           type="button"
           class="flex items-center font-bold text-blue-600 hover:text-white transition duration-150 ease-in-out"
-          @click="isOpenDropdown = !isOpenDropdown"
+          @mouseover="isOpenDropdown = true"
         >
+          <!-- @click="isOpenDropdown = !isOpenDropdown" -->
           <svg
             aria-hidden="true"
             focusable="false"
@@ -208,26 +209,28 @@
         </button>
 
         <div
-          v-if="isOpenDropdown"
+          v-show="isOpenDropdown"
+          @mouseleave="isOpenDropdown = false"
           class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="options-menu"
         >
-          <!-- <div class="py-1">
-            <a
-              href="#"
+          <div class="py-1">
+            <router-link
+              :to="{ name: 'profile', params: { userId: user.id } }"
+              v-if="isLoggedIn"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-400"
               role="menuitem"
-              >Edit</a
+              >Mi Perfil</router-link
             >
-            <a
+            <!-- <a
               href="#"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-400"
               role="menuitem"
               >Duplicate</a
-            >
-          </div> -->
+            > -->
+          </div>
           <div class="py-1">
             <a
               href="#"
@@ -241,7 +244,12 @@
         </div>
       </div>
     </nav>
-    <div v-show="isOpen" @click="isOpen = false" id="nav-content" class="absolute w-full">
+    <div
+      v-show="isOpen"
+      @click="isOpen = false"
+      id="nav-content"
+      class="absolute w-full"
+    >
       <div
         class="px-2 pt-2 pb-3 rounded-b-lg shadow-sm bg-gray-800 bg-opacity-75"
       >
@@ -337,6 +345,12 @@
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white border border-gray-400 hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="/register"
           >Registrarse</router-link
+        >
+        <router-link
+          v-if="isLoggedIn"
+          class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+          :to="{ name: 'profile', params: { userId: user.id } }"
+          >Mi Perfil</router-link
         >
         <!-- <a
           v-if="

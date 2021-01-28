@@ -11,6 +11,7 @@ import PageForgotPassword from "./pages/ForgotPassword";
 import PageResetPassword from "./pages/ResetPassword";
 import PageNotFound from "./pages/NotFound";
 import PageDashboard from "./pages/Dashboard";
+import PageProfile from "./pages/Profile";
 import PageUsers from "./pages/Users";
 import PageClients from "./pages/Clients";
 import PageMessages from "./pages/Messages";
@@ -44,6 +45,16 @@ const router = new VueRouter( {
             path: "/dashboard",
             name: "dashboard",
             component: PageDashboard,
+            meta: {
+                requiresAuth: true,
+                userRoles: [ roles.admin, roles.superadmin, roles.cliente ]
+            }
+        },
+        {
+            path: "/profile",
+            name: "profile",
+            component: PageProfile,
+            props: true,
             meta: {
                 requiresAuth: true,
                 userRoles: [ roles.admin, roles.superadmin, roles.cliente ]
