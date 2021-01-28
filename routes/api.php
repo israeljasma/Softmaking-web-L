@@ -32,7 +32,7 @@ Route::post('password/reset', [ForgotPasswordController::class, 'reset']);
 
 Route::resource('clients', 'Admin\ClientsController', ['except' => ['create', 'edit']]);
 
-Route::resource('contact', 'ContactUsFormController', ['except' => ['create', 'show', 'edit', 'update','destroy']]);
+Route::resource('contact', 'ContactUsFormController', ['except' => ['index', 'create', 'show', 'edit', 'update','destroy']]);
 
 //Routes with auth
 Route::group(['middleware' => ['auth:sanctum']], function(){
@@ -43,5 +43,12 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::resource('tickets', 'TicketsController', ['except' => []]);
     Route::resource('tickets/comment', 'CommentsController', ['except' => []]);
     Route::resource('categories', 'Admin\CategoriesController', ['except' => ['create', 'edit']]);
+
+    Route::group(['prefix' => 'profile'], function(){
+        Route::get('', 'Admin\UsersController@profile')->name('profile');
+        Route::patch('update', 'Admin\UsersController@profileUpdate')->name('profile.update');
+        Route::put('password', 'Admin\UsersController@passwordUpdate')->name('profile.password');
+    });
+
     Route::post('logout', [AuthController::class, 'logout']);
 });
