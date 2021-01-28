@@ -7,6 +7,7 @@ use App\User;
 use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
@@ -191,6 +192,82 @@ class UsersController extends Controller
         } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'Error: The user was not deleted.'], 412);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function profile()
+    {
+        try {
+            $user = User::findOrFail(Auth::id());
+
+            return response()->json($user, 200);
+        } catch (\Exception $exception) {
+            return response()->json(['message' => 'Error: The user was not found.'], 412);
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function profileUpdate(Request $request)
+    {
+        try{
+            $validator = Validator::make($request->all(), [
+                'name'          => 'required',
+                //'email'         => 'required|string|email|max:255|unique:users'
+            ]);
+
+            if($validator->fails()) {
+                return response()->json($validator->errors(), 412);
+            }
+
+            $user = User::findOrFail(Auth::id());
+
+            $user->name = $request->name;
+            //$user->email = $request->email;
+            $user->save();
+
+            return response()->json(['message' => 'Successfully updated user profile!'], 201);
+
+        }catch(\Exception $exception){
+            return response()->json(['message' => 'Error: The user profile was not updated.'], 412);
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function passwordUpdate(Request $request)
+    {
+        try{
+            $validator = Validator::make($request->all(), [
+                'password'      => 'required|string|min:8|confirmed'
+            ]);
+
+            if($validator->fails()) {
+                return response()->json($validator->errors(), 412);
+            }
+
+            $user = User::findOrFail(Auth::id());
+
+            $user->password = bcrypt($request->password);
+            $user->save();
+
+            return response()->json(['message' => 'Successfully updated password!'], 201);
+
+        }catch(\Exception $exception){
+            return response()->json(['message' => 'Error: The password was not updated.'], 412);
         }
     }
 }
