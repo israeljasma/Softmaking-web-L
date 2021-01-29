@@ -74,6 +74,9 @@
         </tr>
       </tbody>
     </table>
+    <div v-else class="p-4 md:p-12 text-center bg-white shadow-sm md:border md:border-blue-600 rounded-md">
+      <p class="text-xl">No se encontraron clientes</p>
+    </div>
   </div>
 </template>
 <script>

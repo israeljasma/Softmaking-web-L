@@ -21,6 +21,7 @@ export default {
   data() {
     return {
       exclude: [
+        "profile",
         "invoices",
         "invoice",
         "ticket",
