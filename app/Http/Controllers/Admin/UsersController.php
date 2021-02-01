@@ -222,7 +222,7 @@ class UsersController extends Controller
         try{
             $validator = Validator::make($request->all(), [
                 'name'          => 'required',
-                //'email'         => 'required|string|email|max:255|unique:users'
+                'email'         => 'required|string|email|max:255|unique:users'
             ]);
 
             if($validator->fails()) {
@@ -232,7 +232,7 @@ class UsersController extends Controller
             $user = User::findOrFail(Auth::id());
 
             $user->name = $request->name;
-            //$user->email = $request->email;
+            $user->email = $request->email;
             $user->save();
 
             return response()->json(['message' => 'Successfully updated user profile!'], 201);
