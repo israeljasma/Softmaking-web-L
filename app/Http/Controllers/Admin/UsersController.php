@@ -58,7 +58,43 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            if(Gate::denies('create-users')){
+                return response()->json([
+                    'message' => "Access denied. You don't have permission to access"], 403);
+            }
+
+            $validator = Validator::make($request->all(), [
+                'name'          => 'required|string|max:255',
+                'lastname'      => 'required|string|max:255',
+                'email'         => 'required|string|email|max:255|unique:users',
+                'password'      => 'required|string|min:8|confirmed'
+            ]);
+
+            if($validator->fails()) {
+                return response()->json($validator->errors(), 412);
+            }
+
+            $user = new User([
+                'name'      => $request->name,
+                'lastname'  => $request->lastname,
+                'email'     => $request->email,
+                'password'  => bcrypt($request->password),
+                'active'    => True
+            ]);
+
+            $user->save();
+
+            $role = Role::select('id')->where('name', 'Cliente')->first();
+
+            $user->roles()->attach($role);
+
+            return response()->json([
+                'message' => 'Successfully created user!'], 200);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'message' => 'Error: Users were not found.'], 412);
+        }
     }
 
     /**
