@@ -67,6 +67,7 @@ class UsersController extends Controller
             $validator = Validator::make($request->all(), [
                 'name'          => 'required|string|max:255',
                 'lastname'      => 'required|string|max:255',
+                'phone'         => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:9',
                 'email'         => 'required|string|email|max:255|unique:users',
                 'password'      => 'required|string|min:8|confirmed'
             ]);
@@ -78,6 +79,7 @@ class UsersController extends Controller
             $user = new User([
                 'name'      => $request->name,
                 'lastname'  => $request->lastname,
+                'phone'     => $request->phone,
                 'email'     => $request->email,
                 'password'  => bcrypt($request->password),
                 'active'    => True
@@ -164,6 +166,8 @@ class UsersController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'name'          => 'required',
+                'lastname'      => 'required|string|max:255',
+                'phone'         => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:9',
                 'email'         => 'required|email',
                 'roles'         => 'required|numeric'
             ]);
@@ -258,7 +262,9 @@ class UsersController extends Controller
         try{
             $validator = Validator::make($request->all(), [
                 'name'          => 'required',
-                //'email'         => 'required|string|email|max:255|unique:users'
+                'lastname'      => 'required|string|max:255',
+                'phone'         => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+                'email'         => 'required|string|email|max:255|unique:users'
             ]);
 
             if($validator->fails()) {
@@ -268,7 +274,7 @@ class UsersController extends Controller
             $user = User::findOrFail(Auth::id());
 
             $user->name = $request->name;
-            //$user->email = $request->email;
+            $user->email = $request->email;
             $user->save();
 
             return response()->json(['message' => 'Successfully updated user profile!'], 201);
