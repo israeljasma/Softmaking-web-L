@@ -63,5 +63,22 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('delete-invoices', function($user){
             return $user->hasRole('SuperAdmin');
         });
+
+        // Business
+        Gate::define('create-business', function($user){
+            return $user->hasAnyRoles(['Admin', 'SuperAdmin']);
+        });
+
+        Gate::define('manage-business', function($user){
+            return $user->hasAnyRoles(['Admin', 'SuperAdmin']);
+        });
+
+        Gate::define('update-business', function($user){
+            return $user->hasAnyRoles(['Admin', 'SuperAdmin']);
+        });
+
+        Gate::define('delete-business', function($user){
+            return $user->hasRole('SuperAdmin');
+        });
     }
 }

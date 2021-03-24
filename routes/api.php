@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
 
     Route::resource('users', 'Admin\UsersController', ['except' => ['create']]);
     Route::resource('users/{user}/invoices', 'Admin\invoicesDocumentController', ['except' => []]);
+    Route::resource('users/{user}/business', 'BusinessesController', ['except' => []]);
     Route::resource('contactadmin', 'ContactUsFormController', ['except' => ['create', 'edit']]);
     Route::resource('tickets', 'TicketsController', ['except' => []]);
     Route::resource('tickets/comment', 'CommentsController', ['except' => []]);

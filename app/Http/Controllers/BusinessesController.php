@@ -27,14 +27,14 @@ class BusinessesController extends Controller
 
             if(Gate::allows('generic-administration')){
                 $business = Business::where('user_id', $user->getKey())->get();
-                return response()->json(['business' => $business], 200);
+                return response()->json(['Business' => $business], 200);
             }else{
                 $business = Business::where('user_id', Auth::id())->get();
-                return response()->json(['business' => $business], 200);
+                return response()->json(['Business' => $business], 200);
             }
         } catch (\Exception $exception) {
             return response()->json([
-                'message' => 'Error: business were not found.'], 412);
+                'message' => 'Error: Business were not found.'], 412);
         }
     }
 
@@ -82,10 +82,10 @@ class BusinessesController extends Controller
 
             $business->save();
 
-            return response()->json(['message' => 'Successfully created business!'], 201);
+            return response()->json(['message' => 'Successfully created Business!'], 201);
 
         }catch(\Exception $exception){
-            return response()->json(['message' => 'Error: The business was not created.'], 412);
+            return response()->json(['message' => 'Error: The Business was not created.'], 412);
         }
     }
 
@@ -106,14 +106,14 @@ class BusinessesController extends Controller
 
             if(Gate::allows('generic-administration')){
                 $business = Business::where('id', $business_id)->where('user_id', $user_id)->get();
-                return response()->json(['business' => $business], 200);
+                return response()->json(['Business' => $business], 200);
             }else{
                 $business = Business::where('id', $business_id)->where('user_id', Auth::id())->get();
-                return response()->json(['business' => $business], 200);
+                return response()->json(['Business' => $business], 200);
             }
         } catch (\Exception $exception) {
             return response()->json([
-                'message' => 'Error: The business was not found.'], 412);
+                'message' => 'Error: The Business was not found.'], 412);
         }
     }
 
@@ -135,7 +135,7 @@ class BusinessesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user_id, $business_id)
     {
         try {
             $user = User::find($user_id);
@@ -143,13 +143,40 @@ class BusinessesController extends Controller
                 return response()->json(['message' => 'Error: User were not found.'], 412);
             }
 
-            if(Gate::allows('delete-business')){
-                return response()->json(['message' => 'Successfully updated business!'], 200);
+            $business = Business::find($business_id);
+            if(empty($business)){
+                return response()->json(['message' => 'Error: Business were not found.'], 412);
+            }
+
+            if(Gate::allows('update-business')){
+                $validator = Validator::make($request->all(), [
+                    'business_name'     => 'required|string|max:255',
+                    'rut'               => 'required',  //Validar
+                    'adress'            => 'required|string|max:255',
+                    'phone'             => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9',
+                    'email'             => 'required|string|email|max:255',
+                    'user_id'           => 'required'
+                ]);
+    
+                if($validator->fails()) {
+                    return response()->json($validator->errors(), 412);
+                }
+    
+                $business->fill([
+                    'business_name' => $request->business_name,
+                    'rut'           => $request->rut,
+                    'adress'        => $request->adress,
+                    'phone'         => $request->phone,
+                    'email'         => $request->email,
+                    'user_id'       => $request->email
+                ]);
+
+                return response()->json(['message' => 'Successfully updated Business!'], 201);
             }else{
-                return response()->json(['message' => 'Successfully updated business!'], 200);
+                return response()->json(['message' => 'Successfully updated Business!'], 201);
             }
         } catch (\Exception $exception) {
-            return response()->json(['message' => 'Error: The business was not update.'], 412);
+            return response()->json(['message' => 'Error: The Business was not update.'], 412);
         };
     }
 
@@ -163,20 +190,31 @@ class BusinessesController extends Controller
     public function destroy($user_id, $business_id)
     {
         try {
-            $user = User::find($user_id);
-            if(empty($user)){
-                return response()->json(['message' => 'Error: User were not found.'], 412);
-            }
+            // $user = User::find($user_id);
+            // if(empty($user)){
+            //     return response()->json(['message' => 'Error: User were not found.'], 412);
+            // }
+
+            // $business_ = Business::find($business_id);
+            // if(empty($business_)){
+            //     return response()->json(['message' => 'Error: User were not found.'], 412);
+            // }
 
             if(Gate::allows('delete-business')){
                 $business = Business::where('id', $business_id)->where('user_id', $user_id)->get();
-                return response()->json(['message' => 'Successfully deleted business!'], 200);
+                $business->delete();
+                    return response()->json(['message' => 'Successfully deleted Business!'], 201);
+                
+                return response()->json(['message' => 'Successfully deleted Business!'], 201);
             }else{
                 $business = Business::where('id', $business_id)->where('user_id', Auth::id())->get();
-                return response()->json(['message' => 'Successfully deleted business!'], 200);
+                error_log($business);
+                $business->delete();
+                    return response()->json(['message' => 'Successfully deleted Business!'], 201);
+                
             }
         } catch (\Exception $exception) {
-            return response()->json(['message' => 'Error: The business was not found.'], 412);
+            return response()->json(['message' => 'Error: The Business was not found.'], 412);
         };
     }
 }
