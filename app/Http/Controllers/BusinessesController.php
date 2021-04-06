@@ -60,7 +60,7 @@ class BusinessesController extends Controller
         try{
             $validator = Validator::make($request->all(), [
                 'business_name'     => 'required|string|max:255',
-                'rut'               => 'required',  //Validar
+                'rut'               => 'required|cl_rut',
                 'adress'            => 'required|string|max:255',
                 'phone'             => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9',
                 'email'             => 'required|string|email|max:255',
@@ -151,7 +151,7 @@ class BusinessesController extends Controller
             if(Gate::allows('update-business')){
                 $validator = Validator::make($request->all(), [
                     'business_name'     => 'required|string|max:255',
-                    'rut'               => 'required',  //Validar
+                    'rut'               => 'required|cl_rut',
                     'adress'            => 'required|string|max:255',
                     'phone'             => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9',
                     'email'             => 'required|string|email|max:255',
@@ -177,7 +177,7 @@ class BusinessesController extends Controller
             }else{
                 $validator = Validator::make($request->all(), [
                     'business_name'     => 'required|string|max:255',
-                    'rut'               => 'required',  //Validar
+                    'rut'               => 'required|cl_rut',
                     'adress'            => 'required|string|max:255',
                     'phone'             => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9',
                     'email'             => 'required|string|email|max:255',
