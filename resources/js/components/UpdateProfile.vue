@@ -2,11 +2,11 @@
   <div
     class="bg-white px-6 p-4 mb-4 shadow-sm border border-blue-600 rounded-md"
   >
-    <h1 class="text-2xl text-blue-700 font-bold mb-2">Mis datos de perfil</h1>
+    <h1 class="text-2xl text-blue-600 font-bold mb-2">Mis datos de perfil</h1>
     <form v-if="user" class="flex flex-col" @submit.prevent="saveChanges">
       <div class="mb-3">
         <label for="name" class="block text-sm font-medium text-gray-700"
-          >Nombre</label
+          >Nombres</label
         >
         <input
           v-model="user.name"
@@ -19,6 +19,34 @@
         />
       </div>
       <div class="mb-3">
+        <label for="lastname" class="block text-sm font-medium text-gray-700"
+          >Apellidos</label
+        >
+        <input
+          v-model="user.lastname"
+          type="text"
+          name="lastname"
+          id="lastname"
+          required
+          autofocus
+          class="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('lastname') is-invalid @enderror"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="block text-sm font-medium text-gray-700"
+          >Teléfono</label
+        >
+          <input
+            v-model="user.phone"
+            type="text"
+            name="phone"
+            id="phone"
+            required
+            autofocus
+            class="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('phone') is-invalid @enderror"
+          />
+      </div>
+      <div class="mb-3">
         <label for="email" class="block text-sm font-medium text-gray-700"
           >Correo</label
         >
@@ -29,7 +57,7 @@
           id="email"
           disabled
           autofocus
-          class="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('name') is-invalid @enderror"
+          class="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('email') is-invalid @enderror"
         />
       </div>
       <div class="mb-3">
@@ -43,7 +71,7 @@
             name="created_at"
             id="created_at"
             disabled
-            class="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('name') is-invalid @enderror"
+            class="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('created_at') is-invalid @enderror"
           />
         </p>
       </div>
@@ -108,6 +136,8 @@ export default {
     saveChanges: function () {
       let editedProfile = new FormData();
       editedProfile.append("name", this.user.name);
+      editedProfile.append("lastname", this.user.lastname);
+      editedProfile.append("phone", this.user.phone);
       //   editedProfile.append("email", this.user.email);
       editedProfile.append("_method", "PATCH");
 

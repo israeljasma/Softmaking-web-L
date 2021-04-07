@@ -2962,6 +2962,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "updateprofile",
   data: function data() {
@@ -2990,7 +3018,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var editedProfile = new FormData();
-      editedProfile.append("name", this.user.name); //   editedProfile.append("email", this.user.email);
+      editedProfile.append("name", this.user.name);
+      editedProfile.append("lastname", this.user.lastname);
+      editedProfile.append("phone", this.user.phone); //   editedProfile.append("email", this.user.email);
 
       editedProfile.append("_method", "PATCH");
       this.savingProfile = false;
@@ -54229,7 +54259,7 @@ var render = function() {
         "bg-white px-6 p-4 mb-4 shadow-sm border border-blue-600 rounded-md"
     },
     [
-      _c("h1", { staticClass: "text-2xl text-blue-700 font-bold mb-2" }, [
+      _c("h1", { staticClass: "text-2xl text-blue-600 font-bold mb-2" }, [
         _vm._v("Mis datos de perfil")
       ]),
       _vm._v(" "),
@@ -54253,7 +54283,7 @@ var render = function() {
                     staticClass: "block text-sm font-medium text-gray-700",
                     attrs: { for: "name" }
                   },
-                  [_vm._v("Nombre")]
+                  [_vm._v("Nombres")]
                 ),
                 _vm._v(" "),
                 _c("input", {
@@ -54291,6 +54321,86 @@ var render = function() {
                   "label",
                   {
                     staticClass: "block text-sm font-medium text-gray-700",
+                    attrs: { for: "lastname" }
+                  },
+                  [_vm._v("Apellidos")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.user.lastname,
+                      expression: "user.lastname"
+                    }
+                  ],
+                  staticClass:
+                    "mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('lastname') is-invalid @enderror",
+                  attrs: {
+                    type: "text",
+                    name: "lastname",
+                    id: "lastname",
+                    required: "",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.user.lastname },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.user, "lastname", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mb-3" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "block text-sm font-medium text-gray-700",
+                    attrs: { for: "phone" }
+                  },
+                  [_vm._v("Teléfono")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.user.phone,
+                      expression: "user.phone"
+                    }
+                  ],
+                  staticClass:
+                    "mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('phone') is-invalid @enderror",
+                  attrs: {
+                    type: "text",
+                    name: "phone",
+                    id: "phone",
+                    required: "",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.user.phone },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.user, "phone", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mb-3" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "block text-sm font-medium text-gray-700",
                     attrs: { for: "email" }
                   },
                   [_vm._v("Correo")]
@@ -54306,7 +54416,7 @@ var render = function() {
                     }
                   ],
                   staticClass:
-                    "mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('name') is-invalid @enderror",
+                    "mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('email') is-invalid @enderror",
                   attrs: {
                     type: "email",
                     name: "email",
@@ -54350,7 +54460,7 @@ var render = function() {
                         }
                       ],
                       staticClass:
-                        "mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('name') is-invalid @enderror",
+                        "mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('created_at') is-invalid @enderror",
                       attrs: {
                         type: "text",
                         name: "created_at",
@@ -56575,12 +56685,11 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "mt-1 text-sm text-gray-900",
-                  staticStyle: { "--aspect-ratio": "16/9" }
+                  staticClass:
+                    "mt-1 text-sm text-gray-900 aspect-w-16 aspect-h-16"
                 },
                 [
                   _c("iframe", {
-                    staticClass: "w-full h-auto relative",
                     attrs: {
                       width: "1600",
                       height: "900",
@@ -57495,7 +57604,7 @@ var render = function() {
         "container mx-auto bg-white px-6 p-4 my-24 shadow-sm border border-blue-600 rounded-md"
     },
     [
-      _c("h2", { staticClass: "text-3xl text-blue-700 font-bold mb-3" }, [
+      _c("h2", { staticClass: "text-3xl text-blue-600 font-bold mb-3" }, [
         _vm._v("Mi Perfil")
       ]),
       _vm._v(" "),

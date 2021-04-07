@@ -1,13 +1,10 @@
 module.exports = {
-    future: {
-        // removeDeprecatedGapUtilities: true,
-        // purgeLayersByDefault: true,
-    },
     purge: [
         './resources/**/*.blade.php',
         './resources/**/*.js',
         './resources/**/*.vue',
     ],
+    darkMode: false, // or 'media' or 'class'
     theme: {
         extend: {
             inset: {
@@ -28,6 +25,11 @@ module.exports = {
             }
         },
     },
-    variants: {},
-    plugins: [],
+    variants: {
+        extend: {},
+    },
+    plugins: [
+        require( '@tailwindcss/forms' ),
+        require( '@tailwindcss/aspect-ratio' ),
+    ],
 }
