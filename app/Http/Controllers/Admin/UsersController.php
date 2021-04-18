@@ -182,7 +182,11 @@ class UsersController extends Controller
 
             $user->roles()->sync($request->roles);
             $user->name = $request->name;
+            $user->lastname = $request->lastname;
+            $user->phone = $request->phone;
             $user->email = $request->email;
+            $user->save();
+
 
             return response()->json([
                 'message' => 'Successfully updated user!',
