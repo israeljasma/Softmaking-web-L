@@ -169,8 +169,8 @@ class UsersController extends Controller
                 'name'          => 'required',
                 'lastname'      => 'required|string|max:255',
                 'phone'         => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:9',
-                'email'         => 'required|email',
-                'roles'         => 'required|numeric'
+                'roles'         => 'required|numeric',
+                'email'         => 'required|string|email|max:255', Rule::unique('users')->ignore(Auth::id(), 'id'),
             ]);
 
             if($validator->fails()) {
@@ -275,6 +275,8 @@ class UsersController extends Controller
             $user = User::findOrFail(Auth::id());
 
             $user->name = $request->name;
+            $user->lastname = $request->lastname;
+            $user->phone = $request->phone;
             $user->email = $request->email;
             $user->save();
 
