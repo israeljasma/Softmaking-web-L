@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
@@ -264,7 +265,7 @@ class UsersController extends Controller
                 'name'          => 'required',
                 'lastname'      => 'required|string|max:255',
                 'phone'         => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9',
-                'email'         => 'required|string|email|max:255|unique:users'
+                'email'         => 'required|string|email|max:255', Rule::unique('users')->ignore(Auth::id(), 'id')
             ]);
 
             if($validator->fails()) {
