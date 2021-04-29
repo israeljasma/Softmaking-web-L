@@ -61,7 +61,7 @@ class BusinessesController extends Controller
             $validator = Validator::make($request->all(), [
                 'business_name'     => 'required|string|max:255',
                 'rut'               => 'required|cl_rut',
-                'adress'            => 'required|string|max:255',
+                'address'            => 'required|string|max:255',
                 'phone'             => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9',
                 'email'             => 'required|string|email|max:255',
                 'user_id'           => 'required'
@@ -74,7 +74,7 @@ class BusinessesController extends Controller
             $business = new Business([
                 'business_name'     => $request->business_name,
                 'rut'               => $request->rut,
-                'adress'            => $request->adress,
+                'address'            => $request->address,
                 'phone'             => $request->phone,
                 'email'             => $request->email,
                 'user_id'           => $request->user_id
@@ -82,7 +82,10 @@ class BusinessesController extends Controller
 
             $business->save();
 
-            return response()->json(['message' => 'Successfully created Business!'], 201);
+            return response()->json([
+                'id' => $business->id,
+                'message' => 'Successfully created Business!'
+            ], 201);
 
         }catch(\Exception $exception){
             return response()->json(['message' => 'Error: The Business was not created.'], 412);
@@ -152,20 +155,20 @@ class BusinessesController extends Controller
                 $validator = Validator::make($request->all(), [
                     'business_name'     => 'required|string|max:255',
                     'rut'               => 'required|cl_rut',
-                    'adress'            => 'required|string|max:255',
+                    'address'            => 'required|string|max:255',
                     'phone'             => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9',
                     'email'             => 'required|string|email|max:255',
                     'user_id'           => 'required'
                 ]);
-    
+
                 if($validator->fails()) {
                     return response()->json($validator->errors(), 412);
                 }
-    
+
                 $business->fill([
                     'business_name' => $request->business_name,
                     'rut'           => $request->rut,
-                    'adress'        => $request->adress,
+                    'address'        => $request->address,
                     'phone'         => $request->phone,
                     'email'         => $request->email,
                     'user_id'       => $request->user_id
@@ -178,20 +181,20 @@ class BusinessesController extends Controller
                 $validator = Validator::make($request->all(), [
                     'business_name'     => 'required|string|max:255',
                     'rut'               => 'required|cl_rut',
-                    'adress'            => 'required|string|max:255',
+                    'address'            => 'required|string|max:255',
                     'phone'             => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9',
                     'email'             => 'required|string|email|max:255',
                     'user_id'           => 'required'
                 ]);
-    
+
                 if($validator->fails()) {
                     return response()->json($validator->errors(), 412);
                 }
-    
+
                 $business->fill([
                     'business_name' => $request->business_name,
                     'rut'           => $request->rut,
-                    'adress'        => $request->adress,
+                    'address'        => $request->address,
                     'phone'         => $request->phone,
                     'email'         => $request->email,
                     'user_id'       => Auth::id()
@@ -228,12 +231,12 @@ class BusinessesController extends Controller
 
             if(Gate::allows('delete-business')){
                 $business = Business::where('id', $business_id)->where('user_id', $user_id);
-                $business->delete();                
+                $business->delete();
                 return response()->json(['message' => 'Successfully deleted Business!'], 201);
             }else{
                 $business = Business::where('id', $business_id)->where('user_id', Auth::id());
                 $business->delete();
-                return response()->json(['message' => 'Successfully deleted Business!'], 201);                
+                return response()->json(['message' => 'Successfully deleted Business!'], 201);
             }
         } catch (\Exception $exception) {
             return response()->json(['message' => 'Error: The Business was not found.'], 412);
