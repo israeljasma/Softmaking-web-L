@@ -109,9 +109,10 @@
 <script>
 export default {
   name: "updateprofile",
+  props: ['user'],
   data() {
     return {
-      user: null,
+    //   user: null,
       savingProfile: false,
     };
   },
@@ -120,18 +121,7 @@ export default {
       return Vue.filter("formatDate")(this.user.created_at);
     },
   },
-  mounted() {
-    axios
-      .get("/api/profile")
-      .then((res) => {
-        this.user = res.data;
-        // console.log(res);
-      })
-      .catch((err) => {
-        this.$toasted.error("Ha ocurrido al intentar cargar tus datos");
-        // console.log(err);
-      });
-  },
+  mounted() {},
   methods: {
     saveChanges: function () {
       let editedProfile = new FormData();

@@ -3,6 +3,11 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+// style.scss
+@import '~sweetalert2/src/variables';
+@import '~sweetalert2/src/sweetalert2';
+
+
 html {
     scroll-behavior: smooth;
 }

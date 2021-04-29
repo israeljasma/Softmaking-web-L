@@ -4,6 +4,7 @@ import App from "./components/App";
 
 import moment from 'moment';
 import Toasted from 'vue-toasted';
+import VueSweetalert2 from 'vue-sweetalert2';
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -33,7 +34,9 @@ Vue.use(Toasted, {
     position: "top-right",
     fitToScreen: true,
     duration : 5000
-})
+});
+
+Vue.use(VueSweetalert2);
 
 const app = new Vue( {
     el: '#app',

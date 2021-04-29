@@ -23,10 +23,13 @@ export default {
       exclude: [
         "profile",
         "invoices",
+        "business",
+        "enterprise",
         "invoice",
         "ticket",
         "CreateEditInvoice",
         "CreateEditClient",
+        "CreateEditBusiness",
       ],
     };
   },
