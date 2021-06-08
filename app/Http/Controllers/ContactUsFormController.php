@@ -44,7 +44,7 @@ class ContactUsFormController extends Controller {
             $validator = Validator::make($request->all(), [
                 'name'      => 'required',
                 'email'     => 'required|email',
-                'phone'     => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+                'phone'     => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9',
                 'subject'   => 'required',
                 'message'   => 'required'
             ]);

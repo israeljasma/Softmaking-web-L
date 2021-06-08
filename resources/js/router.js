@@ -19,6 +19,9 @@ import PageInvoices from "./pages/Invoices";
 import PageCreateEditInvoice from "./pages/CreateEditInvoice";
 import PageCreateEditClient from "./pages/CreateEditClient";
 import PageInvoice from "./pages/Invoice";
+import PageBusiness from "./pages/Business";
+import PageCreateEditBusiness from "./pages/CreateEditBusiness";
+import PageEnterprise from "./pages/Enterprise";
 import PageTickets from "./pages/Tickets";
 import PageTicket from "./pages/Ticket";
 import { roles } from "./roles";
@@ -137,6 +140,49 @@ const router = new VueRouter( {
                 userRoles: [ roles.admin, roles.superadmin ]
             },
         },
+
+
+        {
+            path: "/users/:userId/business",
+            name: "business",
+            component: PageBusiness,
+            meta: {
+                requiresAuth: true,
+                userRoles: [ roles.admin, roles.superadmin ]
+            },
+        },
+        {
+            path: "/users/:userId/business/:businessId",
+            name: "enterprise",
+            props: true,
+            component: PageEnterprise,
+            meta: {
+                requiresAuth: true,
+                userRoles: [ roles.admin, roles.superadmin ]
+            },
+        },
+        {
+            path: "/users/:userId/enterprise",
+            component: PageCreateEditBusiness,
+            name: "createBusiness",
+            props: true,
+            meta: {
+                requiresAuth: true,
+                userRoles: [ roles.admin, roles.superadmin ]
+            },
+        },
+        {
+            path: "/users/:userId/enterprise/:businessId",
+            component: PageCreateEditBusiness,
+            name: "editBusiness",
+            props: true,
+            meta: {
+                requiresAuth: true,
+                userRoles: [ roles.admin, roles.superadmin ]
+            },
+        },
+
+
         {
             path: "/tickets",
             name: "tickets",

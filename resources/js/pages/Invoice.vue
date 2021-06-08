@@ -38,14 +38,14 @@
             Documento de la factura
           </dt>
         </div>
-        <div class="mt-1 text-sm text-gray-900" style="--aspect-ratio: 16/9">
+        <div class="mt-1 text-sm text-gray-900 aspect-w-16 aspect-h-16">
           <iframe
             width="1600"
             height="900"
-            class="w-full h-auto relative"
             :src="'/storage/' + invoice.file"
             frameborder="0"
           ></iframe>
+            <!-- class="w-full h-auto relative" -->
         </div>
       </dl>
     </div>

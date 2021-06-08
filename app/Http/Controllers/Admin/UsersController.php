@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
@@ -168,8 +169,8 @@ class UsersController extends Controller
                 'name'          => 'required',
                 'lastname'      => 'required|string|max:255',
                 'phone'         => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:9',
-                'email'         => 'required|email',
-                'roles'         => 'required|numeric'
+                'roles'         => 'required|numeric',
+                'email'         => 'required|string|email|max:255', Rule::unique('users')->ignore(Auth::id(), 'id'),
             ]);
 
             if($validator->fails()) {
@@ -181,7 +182,11 @@ class UsersController extends Controller
 
             $user->roles()->sync($request->roles);
             $user->name = $request->name;
+            $user->lastname = $request->lastname;
+            $user->phone = $request->phone;
             $user->email = $request->email;
+            $user->save();
+
 
             return response()->json([
                 'message' => 'Successfully updated user!',
@@ -263,8 +268,8 @@ class UsersController extends Controller
             $validator = Validator::make($request->all(), [
                 'name'          => 'required',
                 'lastname'      => 'required|string|max:255',
-                'phone'         => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-                'email'         => 'required|string|email|max:255|unique:users'
+                'phone'         => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9',
+                'email'         => 'required|string|email|max:255', Rule::unique('users')->ignore(Auth::id(), 'id')
             ]);
 
             if($validator->fails()) {
@@ -274,6 +279,8 @@ class UsersController extends Controller
             $user = User::findOrFail(Auth::id());
 
             $user->name = $request->name;
+            $user->lastname = $request->lastname;
+            $user->phone = $request->phone;
             $user->email = $request->email;
             $user->save();
 

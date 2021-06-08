@@ -17,7 +17,7 @@ class CreateBusinessesTable extends Migration
             $table->id();
             $table->string('business_name');
             $table->string('rut');
-            $table->string('adress');
+            $table->string('address');
             $table->string('phone');
             $table->string('email');
             $table->bigInteger('user_id')->unsigned();
