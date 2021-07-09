@@ -74,58 +74,37 @@
         Algunos de nuestros clientes
       </h1>
       <div
+        v-if="clients.length > 0"
         class="grid md:grid-flow-col gap-2 w-full justify-center items-center px-16 md:px-4"
       >
         <a
-          href="https://nuevacapmar.cl"
+          v-for="client in clients"
+          :key="client.id"
+          :href="client.url_site"
           target="_blank"
           rel="noreferrer"
           class="mx-auto"
           ><img
             class="w-auto h-auto inline-block"
-            src="imgs/clients/capmar-logo.png"
-            alt="logo de Capmar"
+            :src="'/storage/' + client.url_logo"
+            :alt="client.description"
         /></a>
+      </div>
+      <div
+        v-else
+        class="grid md:grid-flow-col gap-2 w-full justify-center items-center px-16 md:px-4"
+      >
         <a
-          href="https://rk3.cl/"
+          v-for="client in dummy_clients"
+          :key="client.id"
+          :href="client.url_site"
           target="_blank"
           rel="noreferrer"
           class="mx-auto"
           ><img
             class="w-auto h-auto inline-block"
-            src="imgs/clients/rk3-logo.png"
-            alt="logo de RK3"
-        /></a>
-        <a
-          href="https://vyvingenieria.cl/"
-          target="_blank"
-          rel="noreferrer"
-          class="mx-auto"
-          ><img
-            class="w-auto h-auto inline-block"
-            src="imgs/clients/v&v-logo.png"
-            alt="logo de v&v"
-            style="filter: contrast(0.9)"
-        /></a>
-        <a
-          href="https://condimentosjeit.cl/"
-          target="_blank"
-          rel="noreferrer"
-          class="mx-auto"
-          ><img
-            class="w-auto h-auto inline-block md:w-11/12"
-            src="imgs/clients/jeit-logo.png"
-            alt="logo de JEIT"
-        /></a>
-        <a
-          href="https://www.redcruzdelmar.cl"
-          target="_blank"
-          rel="noreferrer"
-          class="mx-auto"
-          ><img
-            class="w-auto h-auto inline-block"
-            src="imgs/clients/ambcruzmar-logo.png"
-            alt="logo de ambulancias Cruz del Mar"
+            :src="client.url_logo"
+            :alt="client.description"
         /></a>
       </div>
     </section>
@@ -418,6 +397,7 @@
 <script>
 import { gsap, Back, TweenLite } from "gsap";
 import FormContact from "../components/FormContact";
+import dummy_clients from "../clients";
 
 export default {
   name: "Home",
@@ -425,13 +405,23 @@ export default {
     FormContact,
   },
   data() {
-    return {};
+    return {
+      clients: [],
+      dummy_clients
+    };
   },
   mounted() {
-    // console.log(gsap);
+    this.getClients();
     this.StartAnimation();
   },
   methods: {
+    getClients() {
+       axios
+      .get("/api/clients")
+      .then((res) => {
+        this.clients = res.data;
+      })
+    },
     StartAnimation() {
       const elements = [
         ".box",
