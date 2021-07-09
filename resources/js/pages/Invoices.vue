@@ -46,7 +46,7 @@
           >
             {{ invoice.name }}
           </td>
-          <td class="border-grey-light border hover:bg-gray-100 p-2 h-12">
+          <td class="border-grey-light border hover:bg-gray-100 p-2 h-12 overflow-ellipsis md:overflow-clip overflow-auto">
             {{ invoice.description }}
           </td>
           <td class="border-grey-light border hover:bg-gray-100 p-2 h-12">
@@ -73,10 +73,10 @@
               }"
               >Editar</router-link
             >
-            <router-link
+            <a
               class="px-3 md:py-1 border border-transparent text-base rounded text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:border-red-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
-              :to="{ path: '/' }"
-              >Eliminar</router-link
+              @click="deleteInvoice(invoice)"
+              >Eliminar</a
             >
           </td>
         </tr>
@@ -102,14 +102,50 @@ export default {
         axios
           .get(`/api/users/${this.userId}/invoices`)
           .then((response) => {
-            // console.log(response);
             this.invoices = response.data.invoices;
           })
           .catch((error) => {
-            // console.log(error);
+             this.$toasted.error(
+              "Ha ocurrido un error al cargar las facturas"
+            );
           });
       }
     },
+    deleteInvoice: function (invoice) {
+      Vue.swal({
+        title: '¿Estás seguro que deseas eliminar la factura?',
+        text: 'Al realizar esta acción, ya no será posible recuperar la factura',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'No, cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.delete(`/api/users/${this.userId}/invoices/${invoice.id}`, invoice).then( (res) => {
+                Vue.swal(
+                    'Eliminado!',
+                    'La factura ha sido eliminada',
+                    'success'
+                ).then( () => {
+                    // this.$router.go(0);
+                    this.getInvoices()
+                } )
+          } ).catch( (err) => {
+                Vue.swal(
+                    'Ha ocurrido un error',
+                    'Por favor, inténtelo nuevamente',
+                    'error'
+                )
+          } )
+        } else if (result.dismiss === Vue.swal.DismissReason.cancel) {
+          Vue.swal(
+            'Ha cancelado la operación',
+            'Tranquilo, no ha pasado nah :)',
+            'error'
+          )
+        }
+      })
+    }
   },
   computed: {},
   mounted() {
@@ -117,5 +153,3 @@ export default {
   },
 };
 </script>
-<style lang="">
-</style>

@@ -113,12 +113,13 @@ export default {
         axios
           .get(`/api/users/${this.userId}/business`)
           .then((response) => {
-            // console.log(response);
             this.business = response.data.Business;
           })
-          .catch((error) => {
-            // console.log(error);
-          });
+        .catch((error) => {
+            this.$toasted.error(
+                "Ha ocurrido un error al cargar las empresas"
+            );
+        });
       }
     },
   },

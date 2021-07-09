@@ -77,9 +77,11 @@ export default {
           .then((response) => {
             this.invoice = response.data.invoice[0];
           })
-          .catch((error) => {
-            // console.log(error);
-          });
+         .catch((error) => {
+            this.$toasted.error(
+                "Ha ocurrido un error al cargar las facturas"
+            );
+        });
       }
     },
   },

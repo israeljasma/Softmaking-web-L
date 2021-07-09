@@ -238,6 +238,7 @@ export default {
           })
           .finally(() => {
             this.saving = false;
+            this.$router.push({ name: 'clients'})
           });
       } else {
         let newClient = new FormData();
@@ -258,6 +259,7 @@ export default {
           })
           .finally(() => {
             this.saving = false;
+            this.$router.push({ name: 'clients'})
           });
       }
     },

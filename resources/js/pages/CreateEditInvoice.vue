@@ -220,6 +220,7 @@ export default {
           })
           .finally(() => {
             this.saving = false;
+            this.$router.push({ name: 'invoices', params: { userId: this.userId } })
           });
       } else {
         let newInvoice = new FormData();
@@ -240,6 +241,7 @@ export default {
           })
           .finally(() => {
             this.saving = false;
+            this.$router.push({ name: 'invoices', params: { userId: this.userId } })
           });
       }
     },
@@ -247,7 +249,6 @@ export default {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       this.invoice.file = files[0];
-      //   console.log(e);
     },
   },
 };

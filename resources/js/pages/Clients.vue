@@ -43,7 +43,7 @@
           <td class="border-gray-200 border hover:bg-gray-100 p-2 h-12">
             {{ client.name }}
           </td>
-          <td class="border-gray-200 border hover:bg-gray-100 p-2 h-12">
+          <td class="border-gray-200 border hover:bg-gray-100 p-2 h-12 overflow-ellipsis overflow-auto">
             {{ client.description }}
           </td>
           <td class="border-gray-200 border hover:bg-gray-100 p-2 h-12">
@@ -65,11 +65,11 @@
               :to="{ name: 'editClient', params: { clientId: client.id, clientElem: client } }"
               >Editar</router-link
             >
-            <!-- <router-link
+            <a
               class="px-3 md:py-1 border border-transparent text-base rounded text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:border-red-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
-              :to="{ name: 'client', params: { clientId: client.id } }"
-              >Eliminar</router-link
-            > -->
+              @click="deleteClient(client)"
+              >Eliminar</a
+            >
           </td>
         </tr>
       </tbody>
@@ -96,9 +96,46 @@ export default {
           this.clients = response.data;
         })
         .catch((error) => {
-        //   console.log(error);
+            this.$toasted.error(
+              "Ha ocurrido un error al cargar los clientes"
+            );
         });
     },
+    deleteClient: function (client) {
+        Vue.swal({
+            title: '¿Estás seguro que deseas remover al cliente?',
+            text: 'Al realizar esta acción, ya no será posible recuperarlo',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'No, cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`/api/clients/${client.id}`, client).then( (res) => {
+                        Vue.swal(
+                            'Eliminado!',
+                            'El cliente ha sido removido de la Base de Datos',
+                            'success'
+                        ).then( () => {
+                            // this.$router.go(0);
+                            this.getClients()
+                        } )
+                } ).catch( (err) => {
+                        Vue.swal(
+                            'Ha ocurrido un error',
+                            'Por favor, inténtelo nuevamente',
+                            'error'
+                        )
+                } )
+            } else if (result.dismiss === Vue.swal.DismissReason.cancel) {
+                Vue.swal(
+                    'Ha cancelado la operación',
+                    'Tranquilo, no ha pasado nah :)',
+                    'error'
+                )
+            }
+        })
+    }
   },
   computed: {},
   mounted() {
