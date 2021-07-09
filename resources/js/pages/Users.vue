@@ -43,38 +43,36 @@
             <router-link
               class="px-3 md:py-1 mr-2 border border-transparent text-base rounded text-white bg-gray-400 hover:bg-gray-500 focus:outline-none focus:border-gray-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
               :to="{ name: 'invoices', params: { userId: user.id } }"
-              >Ver</router-link
+              >Ver factura</router-link
             >
           </td>
           <td class="border-gray-200 border hover:bg-gray-100 p-2 h-12">
             <router-link
+              class="px-3 md:py-1 mr-2 border border-transparent text-base rounded text-white bg-gray-400 hover:bg-gray-500 focus:outline-none focus:border-gray-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
+              :to="{ name: 'user', params: { userId: user.id, userElem: user } }"
+              >Ver</router-link
+            >
+              <!-- TODO: crear vista para modificar usuarios -->
+            <!-- <router-link
               class="px-3 md:py-1 mr-2 border border-transparent text-base rounded text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:border-yellow-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
               :to="{ name: 'invoices', params: { userId: user.id } }"
               >Editar</router-link
-            >
-            <router-link
+            > -->
+            <a
               class="px-3 md:py-1 border border-transparent text-base rounded text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:border-red-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
-              :to="{ name: 'invoices', params: { userId: user.id } }"
-              >Eliminar</router-link
-            >
+              @click="deleteUser(user)"
+              >Eliminar</a>
           </td>
-          <user-profile-modal
-            :show="showModal(user.id)"
-            @close="toggleModal(user.id)"
-          />
         </tr>
       </tbody>
     </table>
   </div>
 </template>
 <script>
-import UserProfileModal from "../components/EditUserModal";
 export default {
   name: "users",
-  components: { UserProfileModal },
   data() {
     return {
-      activeModal: 0,
       users: [],
     };
   },
@@ -83,23 +81,49 @@ export default {
       axios
         .get("api/users")
         .then((response) => {
-        //   console.log(response);
           this.users = response.data;
         })
         .catch((error) => {
-        //   console.log(error);
+            this.$toasted.error(
+                "Ha ocurrido un error al cargar los usuarios"
+            );
         });
     },
-    showModal: function (id) {
-      return this.activeModal === id;
-    },
-    toggleModal: function (id) {
-      if (this.activeModal !== 0) {
-        this.activeModal = 0;
-        return false;
-      }
-      this.activeModal = id;
-    },
+    deleteUser: function (user) {
+      Vue.swal({
+        title: '¿Estás seguro que deseas eliminar el usuario?',
+        text: 'Al realizar esta acción, ya no será posible recuperar el usuario',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'No, cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.delete(`/api/users/${user.id}`, user).then( (res) => {
+                Vue.swal(
+                    'Eliminado!',
+                    'El usuario ha sido eliminada',
+                    'success'
+                ).then( () => {
+                    // this.$router.go(0);
+                    this.getUsers()
+                } )
+          } ).catch( (err) => {
+                Vue.swal(
+                    'Ha ocurrido un error',
+                    'Por favor, inténtelo nuevamente',
+                    'error'
+                )
+          } )
+        } else if (result.dismiss === Vue.swal.DismissReason.cancel) {
+          Vue.swal(
+            'Ha cancelado la operación',
+            'Tranquilo, no ha pasado nah :)',
+            'error'
+          )
+        }
+      })
+    }
   },
   computed: {},
   mounted() {
@@ -108,26 +132,26 @@ export default {
 };
 </script>
 <style lang="css">
-html,
-body {
-  height: 100%;
-}
+    html,
+    body {
+        height: 100%;
+    }
 
-@media (min-width: 640px) {
-  table {
-    display: inline-table !important;
-  }
+    @media (min-width: 640px) {
+    table {
+        display: inline-table !important;
+    }
 
-  thead tr:not(:first-child) {
-    display: none;
-  }
-}
+    thead tr:not(:first-child) {
+        display: none;
+    }
+    }
 
-td:not(:last-child) {
-  border-bottom: 0;
-}
+    td:not(:last-child) {
+        border-bottom: 0;
+    }
 
-th:not(:last-child) {
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-}
+    th:not(:last-child) {
+        border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    }
 </style>

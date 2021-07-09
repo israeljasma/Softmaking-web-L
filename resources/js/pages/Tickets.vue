@@ -1,7 +1,13 @@
 <template>
   <div class="container mx-auto px-6 p-4 my-24">
-    <h2 class="text-3xl text-blue-700 font-bold mb-3">Tickets</h2>
-
+    <div class="flex justify-between mb-3">
+        <h2 class="text-3xl text-blue-700 font-bold mb-3">Tickets</h2>
+        <router-link
+            :to="{ name: 'createTicket' }"
+            class="px-8 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-700 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
+            >Crear</router-link
+        >
+    </div>
     <table
       v-if="tickets.length > 0"
       class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-sm my-5"
@@ -52,12 +58,23 @@
           >
             <router-link
               class="px-3 md:py-1 mr-2 border border-transparent text-base rounded text-white bg-gray-400 hover:bg-gray-500 focus:outline-none focus:border-gray-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
-              :to="{
-                name: 'ticket',
-                params: { ticketId: ticket.id, ticketElem: ticket },
-              }"
+              :to="{ name: 'ticket', params: { ticketId: ticket.id } }"
               >Ver</router-link
             >
+            <!-- TODO: a la espera que se creen estos ENDPOINTS-->
+            <!-- <router-link
+              class="px-3 md:py-1 mr-2 border border-transparent text-base rounded text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:border-yellow-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
+              :to="{
+                name: 'editTicket',
+                params: { ticketId: ticket.id, ticketElem: ticket },
+              }"
+              >Editar</router-link
+            > -->
+            <!-- <a
+              class="px-3 md:py-1 border border-transparent text-base rounded text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:border-red-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg"
+              @click="deleteTicket(ticket)"
+              >Eliminar</a
+            > -->
           </td>
         </tr>
       </tbody>
@@ -82,13 +99,49 @@ export default {
         axios
           .get(`/api/tickets`)
           .then((response) => {
-            // console.log(response);
             this.tickets = response.data;
           })
-          .catch((error) => {
-            // console.log(error);
-          });
-      }
+            .catch((error) => {
+            this.$toasted.error(
+                "Ha ocurrido un error al cargar los tickets"
+            );
+        });
+      },
+    deleteClient: function (ticket) {
+        Vue.swal({
+            title: '¿Estás seguro que deseas eliminar el ticket?',
+            text: 'Al realizar esta acción, ya no será posible recuperarlo',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'No, cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`/api/tickets/${ticket.id}`, ticket).then( (res) => {
+                        Vue.swal(
+                            'Eliminado!',
+                            'El ticket ha sido eliminado',
+                            'success'
+                        ).then( () => {
+                            // this.$router.go(0);
+                            this.getTickets()
+                        } )
+                } ).catch( (err) => {
+                        Vue.swal(
+                            'Ha ocurrido un error',
+                            'Por favor, inténtelo nuevamente',
+                            'error'
+                        )
+                } )
+            } else if (result.dismiss === Vue.swal.DismissReason.cancel) {
+                Vue.swal(
+                    'Ha cancelado la operación',
+                    'Tranquilo, no ha pasado nah :)',
+                    'error'
+                )
+            }
+        })
+    }
   },
   computed: {},
   mounted() {

@@ -248,7 +248,6 @@ export default {
       axios
         .get(`/api/users/${this.user.id}/business`)
         .then((res) => {
-          console.log(res);
           if (res.data.Business.length > 0) {
             this.business = res.data.Business;
             this.editMode = true;
@@ -261,7 +260,6 @@ export default {
             "No se ha encontrado la empresa que estabas buscando"
           );
         });
-      console.log(this.business);
     },
     saveBusiness: function (e) {
       if (this.editMode && e.id) {
@@ -305,7 +303,6 @@ export default {
           .then((res) => {
             this.$toasted.success("Se ha guardado correctamente la empresa");
             e.id = res.data.id;
-            // console.log(res.data.id)
           })
           .catch((err) => {
             this.errorMsg = err.response.data || [];
