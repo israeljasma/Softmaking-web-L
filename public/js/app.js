@@ -60203,11 +60203,13 @@ var render = function() {
                           "border-gray-200 border hover:bg-gray-100 p-2 h-12"
                       },
                       [
-                        _vm._v(
-                          "\n          " +
-                            _vm._s(client.url_logo) +
-                            "\n        "
-                        )
+                        _c("img", {
+                          staticClass: "w-24 md:w-48",
+                          attrs: {
+                            src: "/storage/" + client.url_logo,
+                            alt: client.name
+                          }
+                        })
                       ]
                     ),
                     _vm._v(" "),

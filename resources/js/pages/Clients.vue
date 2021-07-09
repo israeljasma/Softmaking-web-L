@@ -47,7 +47,7 @@
             {{ client.description }}
           </td>
           <td class="border-gray-200 border hover:bg-gray-100 p-2 h-12">
-            {{ client.url_logo }}
+              <img class="w-24 md:w-48" :src="'/storage/' + client.url_logo" :alt="client.name">
           </td>
           <td
             class="border-gray-200 border hover:bg-gray-100 p-2 h-12 overflow-auto"
