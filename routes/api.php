@@ -37,6 +37,7 @@ Route::resource('contact', 'ContactUsFormController', ['except' => ['index', 'cr
 //Routes with auth
 Route::group(['middleware' => ['auth:sanctum']], function(){
 
+    Route::resource('report', 'ReportController', ['except' => ['create', 'edit']]);
     Route::resource('users', 'Admin\UsersController', ['except' => ['create']]);
     Route::resource('users/{user}/invoices', 'Admin\invoicesDocumentController', ['except' => []]);
     Route::resource('users/{user}/business', 'BusinessesController', ['except' => []]);

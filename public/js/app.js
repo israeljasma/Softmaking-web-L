@@ -4674,6 +4674,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _roles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../roles */ "./resources/js/roles.js");
 //
 //
 //
@@ -4686,17 +4687,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "dashboard",
   data: function data() {
-    return {};
+    return {
+      counts: [],
+      roles: _roles__WEBPACK_IMPORTED_MODULE_0__["roles"]
+    };
   },
   computed: {
     isLoggedIn: function isLoggedIn() {
       return this.$store.getters.isLoggedIn;
+    },
+    userRole: function userRole() {
+      return this.$store.getters.userRole;
     }
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    var _this = this;
+
+    if (this.userRole === _roles__WEBPACK_IMPORTED_MODULE_0__["roles"].superadmin || this.userRole === _roles__WEBPACK_IMPORTED_MODULE_0__["roles"].admin) {
+      axios.get("api/report").then(function (res) {
+        console.log(res.data.counts);
+        _this.counts = res.data.counts[0];
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -6780,7 +6819,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#navbar {\n  transition: transform 200ms ease-in-out;\n}\n#navbar.navbar--hidden {\n  box-shadow: none;\n  transform: translate3d(0, -100%, 0);\n}\r\n", ""]);
+exports.push([module.i, "#navbar {\n  transition: transform 200ms ease-in-out;\n}\n#navbar.navbar--hidden {\n  box-shadow: none;\n  transform: translate3d(0, -100%, 0);\n}\n", ""]);
 
 // exports
 
@@ -61715,33 +61754,84 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass:
+        "container mx-auto bg-white px-6 p-4 my-24 shadow-sm border border-blue-600 rounded-md"
+    },
+    [
+      _c("h2", { staticClass: "text-3xl text-blue-700 font-bold mb-3" }, [
+        _vm._v("Dashboard")
+      ]),
+      _vm._v(" "),
+      _vm.userRole === _vm.roles.superadmin || _vm.userRole === _vm.roles.admin
+        ? _c("div", [
+            _c("h2", { staticClass: "text-2xl text-blue-700 font-bold mb-1" }, [
+              _vm._v("Resumen")
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "mb-3" }, [
+              _vm._v(
+                "\n            Esto es un resumen de la cantidad de elementos existentes en las\n            principales tablas de la Base de Datos.\n        "
+              )
+            ]),
+            _vm._v(" "),
+            _vm.counts
+              ? _c(
+                  "div",
+                  { staticClass: "w-full flex gap-1 justify-between mx-auto" },
+                  _vm._l(Object.entries(_vm.counts), function(ref) {
+                    var key = ref[0]
+                    var value = ref[1]
+                    return _c(
+                      "div",
+                      {
+                        key: "count-" + key,
+                        staticClass:
+                          "bg-blue-600 flex flex-col justify-center items-center border-2 border-blue-600 rounded-md w-40 h-40"
+                      },
+                      [
+                        _c(
+                          "h1",
+                          {
+                            staticClass:
+                              "text-2xl text-white font-bold mb-3 capitalize"
+                          },
+                          [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(key) +
+                                "\n                "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "p",
+                          {
+                            staticClass: "text-3xl text-center font-extrabold"
+                          },
+                          [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(value) +
+                                "\n                "
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  }),
+                  0
+                )
+              : _vm._e()
+          ])
+        : _vm._e()
+    ]
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "container mx-auto bg-white px-6 p-4 my-24 shadow-sm border border-blue-600 rounded-sm"
-      },
-      [
-        _c("h2", { staticClass: "text-3xl text-blue-700 font-bold mb-3" }, [
-          _vm._v("Dashboard")
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "\n    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae est facilis\n    perspiciatis asperiores, veniam voluptas reiciendis quas voluptates\n    repudiandae similique porro libero sapiente iure doloremque inventore.\n    Quos, earum iste. Perspiciatis!\n  "
-          )
-        ])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

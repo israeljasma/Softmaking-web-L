@@ -385,7 +385,7 @@ export default {
       showNavbar: true,
       lastScrollPosition: 0,
       isOpenDropdown: false,
-      roles: roles,
+      roles,
     };
   },
   computed: {
