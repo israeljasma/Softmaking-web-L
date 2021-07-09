@@ -13,6 +13,7 @@ import PageNotFound from "./pages/NotFound";
 import PageDashboard from "./pages/Dashboard";
 import PageProfile from "./pages/Profile";
 import PageUsers from "./pages/Users";
+import PageUser from "./pages/User";
 import PageClients from "./pages/Clients";
 import PageMessages from "./pages/Messages";
 import PageInvoices from "./pages/Invoices";
@@ -24,6 +25,7 @@ import PageCreateEditBusiness from "./pages/CreateEditBusiness";
 import PageEnterprise from "./pages/Enterprise";
 import PageTickets from "./pages/Tickets";
 import PageTicket from "./pages/Ticket";
+import PageCreateEditTicket from "./pages/CreateEditTicket";
 import { roles } from "./roles";
 import store from "./store";
 
@@ -67,6 +69,16 @@ const router = new VueRouter( {
             path: "/users",
             name: "users",
             component: PageUsers,
+            meta: {
+                requiresAuth: true,
+                userRoles: [ roles.admin, roles.superadmin ]
+            },
+        },
+        {
+            path: "/user/:userId",
+            name: "user",
+            component: PageUser,
+            props: true,
             meta: {
                 requiresAuth: true,
                 userRoles: [ roles.admin, roles.superadmin ]
@@ -202,6 +214,27 @@ const router = new VueRouter( {
                 userRoles: [ roles.admin, roles.superadmin ]
             }
         },
+        {
+            path: "/ticket",
+            name: "createTicket",
+            component: PageCreateEditTicket,
+            props: true,
+            meta: {
+                requiresAuth: true,
+                userRoles: [ roles.admin, roles.superadmin ]
+            }
+        },
+        {
+            path: "/ticket/:ticketId",
+            name: "editTicket",
+            component: PageCreateEditTicket,
+            props: true,
+            meta: {
+                requiresAuth: true,
+                userRoles: [ roles.admin, roles.superadmin ]
+            }
+        },
+
         {
             path: "/messages",
             name: "messages",

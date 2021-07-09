@@ -36,7 +36,12 @@ Vue.use(Toasted, {
     duration : 5000
 });
 
-Vue.use(VueSweetalert2);
+const options = {
+  confirmButtonColor: '#41b882',
+  cancelButtonColor: '#ff7674',
+};
+
+Vue.use(VueSweetalert2, options);
 
 const app = new Vue( {
     el: '#app',

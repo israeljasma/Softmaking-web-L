@@ -22,14 +22,17 @@ export default {
     return {
       exclude: [
         "profile",
-        "invoices",
+        "clients",
         "business",
         "enterprise",
+        "invoices",
         "invoice",
+        "tickets",
         "ticket",
         "CreateEditInvoice",
         "CreateEditClient",
         "CreateEditBusiness",
+        "CreateEditTicket",
       ],
     };
   },
