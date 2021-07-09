@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto bg-white px-6 p-4 my-24 shadow-sm border border-blue-600 rounded-sm">
     <h2 class="text-3xl text-blue-700 font-bold mb-3">Dashboard</h2>
-
+    <!-- TODO: Hacer algo a lo mejor de analitica para rellenar la seccion DASHBOARD -->
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae est facilis
       perspiciatis asperiores, veniam voluptas reiciendis quas voluptates
@@ -21,9 +21,7 @@ export default {
       return this.$store.getters.isLoggedIn;
     },
   },
-  mounted() {
-    // console.log(this.$store.getters.isLoggedIn);
-  },
+  mounted() {},
 };
 </script>
 <style>

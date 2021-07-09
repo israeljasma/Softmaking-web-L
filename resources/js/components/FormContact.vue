@@ -238,12 +238,10 @@ export default {
       axios
         .post("api/contact", this.contact)
         .then((response) => {
-          //   console.log(response);
           this.showModal = true;
           this.msg = response.data.message;
         })
         .catch((err) => {
-          //   console.log(err.response.data);
           this.errorMsg = err.response.data || [];
         })
         .finally(() => {

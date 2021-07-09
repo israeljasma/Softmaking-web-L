@@ -25,11 +25,9 @@ export default {
       .get("/api/profile")
       .then((res) => {
         this.user = res.data;
-        // console.log(res);
       })
       .catch((err) => {
         this.$toasted.error("Ha ocurrido al intentar cargar tus datos");
-        // console.log(err);
       });
   },
   data() {

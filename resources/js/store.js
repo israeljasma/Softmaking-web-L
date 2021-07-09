@@ -51,7 +51,6 @@ const store = new Vuex.Store( {
                         password: credentials.password,
                     } )
                         .then( response => {
-                            // console.log(response)
                             const user = response.data.user
                             const userRole = response.data.rol
                             const token = response.data.access_token
@@ -69,7 +68,6 @@ const store = new Vuex.Store( {
                             resolve( response )
                         } )
                         .catch( error => {
-                            // console.log(error)
                             localStorage.removeItem( 'access_token' );
                             localStorage.removeItem( 'user' );
                             localStorage.removeItem( 'user_role' );
@@ -98,7 +96,6 @@ const store = new Vuex.Store( {
                             resolve( response )
                         } )
                         .catch( error => {
-                            // console.log( error )
                             localStorage.removeItem( 'access_token' )
                             localStorage.removeItem( 'user' );
                             localStorage.removeItem( 'user_role' );

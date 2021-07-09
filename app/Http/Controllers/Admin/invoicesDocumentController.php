@@ -33,14 +33,14 @@ class invoicesDocumentController extends Controller
             }
 
             if(Gate::allows('generic-administration')){
-                
+
                 $invoices = InvoiceDocument::where('user_id', $user->getKey())->get();
                 return response()->json(['invoices' => $invoices], 200);
             }else{
-                
+
                 $invoices = InvoiceDocument::where('user_id', Auth::id())->get();
                 return response()->json(['invoices' => $invoices], 200);
-            }    
+            }
         } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'Error: invoice were not found.'], 412);
@@ -107,34 +107,6 @@ class invoicesDocumentController extends Controller
             }catch(\Exception $exception){
                 return response()->json(['message' => 'Error: The invoice was not created.'], 412);
             }
-
-
-
-        // $this->validate($request, [
-        //     'name'          => 'required',
-        //     'description'   => 'required',
-        //     'date'          => 'required',
-        //     'file'          => 'required|mimes:pdf'
-        // ]);
-        // $data = new InvoiceDocument;
-        // if($request->file('file')){
-        //     $file=$request->file('file');
-        //     $random = Str::random(40);
-        //     $fileName = $random.'.'.$file->getClientOriginalExtension();
-        //     $request->file('file')->storeAs('public',$fileName);
-        //     $data->file = $fileName;            
-        // }
-
-        // $data->name=$request->name;
-        // $data->description=$request->description;
-        // $data->date=$request->date;
-        // $data->user_id=$user->id;
-
-        // $data->save();
-
-        // $invoices = InvoiceDocument::where('user_id', $user->getKey())->get();
-
-        // return redirect()->route('admin.invoices.index', [$user]);
     }
 
     /**
@@ -152,16 +124,16 @@ class invoicesDocumentController extends Controller
             }
 
             if(Gate::allows('generic-administration')){
-                
+
                 $invoice = InvoiceDocument::with('user')->where('id', $invoice->id)->where('user_id', $user->id)->get();
                 return response()->json(['invoice' => $invoice], 200);
             }else{
-                
+
                 // $invoices = InvoiceDocument::where('user_id', Auth::id())->get();
                 // return response()->json(['invoices' => $invoices], 200);
                 $invoice = InvoiceDocument::with('user')->where('id', $invoice->id)->where('user_id', Auth::id())->get();
                 return response()->json(['invoice' => $invoice], 200);
-            }            
+            }
             // if(empty($invoice)){
             //     return response()->json(['message' => 'Error: Users were not found.'], 412);
             // }
@@ -188,9 +160,9 @@ class invoicesDocumentController extends Controller
             if(!User::findOrFail($user->id)){
                 return response()->json(['message' => 'Error: Users were not found.'], 412);
             }
-            
+
             $invoice = InvoiceDocument::with('user')->where('id', $invoice->id)->where('user_id', $user->id)->get();
-            
+
             if(!$invoice){
                 return response()->json(['message' => 'Error: Users were not found.'], 412);
             }
@@ -227,7 +199,7 @@ class invoicesDocumentController extends Controller
             if($validator->fails()) {
                 return response()->json($validator->errors(), 412);
             }
-            
+
             $invoice = InvoiceDocument::findOrFail($invoice->id);
 
             $invoice->fill([
@@ -245,45 +217,16 @@ class invoicesDocumentController extends Controller
                 Storage::delete('public/'.$invoice->file);
                 $invoice->file = $fileName;
             }
-            //if($request->file('file')){
-              //  error_log("llega aqui???????");
-                //$file=$request->file('file');
-                //$random = Str::random(40);
-                //$fileName = $random.'.'.$file->getClientOriginalExtension();
-                //$request->file('file')->storeAs('public',$fileName);
-                //$invoice->file = $fileName;       
-            //}else{
-                //return response()->json(['message' => 'Error: The invoice was not created.'], 412);
-            //}
 
-            //error_log("Se paso el if!!!!!!!!");
             $invoice->save();
-
-            // $invoices = InvoiceDocument::with('user')->where('user_id', $user->getKey())->get();
 
             return response()->json(['message' => 'Successfully updated invoice!'], 200);
 
             }catch(\Exception $exception){
-                return response()->json(['message' => 'Error: The invoice was not update.'], 412);
+                return response()->json([
+                    'message' => 'Error: The invoice was not update.'
+                ], 412);
             }
-
-        // $invoiceUser = InvoiceDocument::find($invoice->id);
-        // if($request->file){
-        //     $file=$request->file('file');
-        //     $random = Str::random(40);
-        //     $fileName = $random.'.'.$file->getClientOriginalExtension();
-        //     $request->file('file')->storeAs('public',$fileName);
-        //     Storage::delete('public/'.$invoiceUser->file);
-        //     $invoiceUser->file = $fileName;
-        // }
-        // $invoiceUser->name=$request->name;
-        // $invoiceUser->description=$request->description;
-        // $invoiceUser->date=$request->date;
-        // $invoiceUser->user_id=$user->id;
-
-        // $invoiceUser->save();
-        
-        // return redirect()->route('admin.invoices.index',['user' => $user->id]);
     }
 
     /**
@@ -299,14 +242,14 @@ class invoicesDocumentController extends Controller
             if(Gate::denies('delete-invoices')){
                 return response()->json([
                     'message' => "Access denied. You don't have permission to access"], 403);
-            }
+                }
 
-            if(!User::findOrFail($user->id)){
+                if(!User::findOrFail($user->id)){
                 return response()->json(['message' => 'Error: Users were not found.'], 412);
             }
-            
-            $invoice = InvoiceDocument::where('id', $invoice->id)->where('user_id', $user->id)->get();
-            
+
+            $invoice = InvoiceDocument::where('id', $invoice->id)->where('user_id', $user->id)->first();
+
             if(!$invoice){
                 return response()->json(['message' => 'Error: Users were not found.'], 412);
             }
@@ -322,34 +265,6 @@ class invoicesDocumentController extends Controller
                 'message' => 'Error: The invoice was not found.'], 412);
         };
 
-
-
-        // if(Gate::denies('delete-invoices')){
-        //     return redirect()->route('home');
-        // }
-
-        // $invoice = InvoiceDocument::find($invoice->id);
-        // Storage::delete('public/'.$invoice->file);
-        // $invoice->delete();
-        
-        // $invoices = InvoiceDocument::all();
-        // return redirect()->route('admin.invoices.index', ['user' => $user]);
-        
-        
-        //dd(Storage::delete('storage/app/public/'.$invoice->file));
-        //dd($files = Storage::files('public'));
-        
-        //dd($files = Storage::files('public'));
-        // if(Storage::exists($invoice->file)){
-
-        //     \Storage::delete('/public/storage'.$invoice->file);
-        
-        //   }else{
-        
-        //     dd('File does not exists.');
-        //     //dd($invoice->file);
-        
-        //   }
     }
 
     // public function indexUser(){
