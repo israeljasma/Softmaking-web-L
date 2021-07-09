@@ -86,7 +86,7 @@ class AuthController extends Controller
                 'rol' => $user->roles->first()->name ], 200);
         } catch (\Exception $exception) {
             return response()->json([
-                'message' => 'Error: unauthorized access.'], 401);
+                'message' => 'El nombre de usuario y la contraseña que ingresaste no coinciden con nuestros registros. Por favor, revisa e inténtalo de nuevo.'], 401);
         }
     }
 
