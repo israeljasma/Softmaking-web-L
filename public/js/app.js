@@ -4709,6 +4709,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "dashboard",
@@ -6800,7 +6802,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".fade-enter-active,\n.fade-leave-active {\n  transition: opacity 0.3s;\n}\n.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.fade-enter-active,\n.fade-leave-active {\n  transition: opacity 0.3s;\n}\n.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n", ""]);
 
 // exports
 
@@ -6819,7 +6821,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#navbar {\n  transition: transform 200ms ease-in-out;\n}\n#navbar.navbar--hidden {\n  box-shadow: none;\n  transform: translate3d(0, -100%, 0);\n}\n", ""]);
+exports.push([module.i, "\n#navbar {\n  transition: transform 200ms ease-in-out;\n}\n#navbar.navbar--hidden {\n  box-shadow: none;\n  transform: translate3d(0, -100%, 0);\n}\n", ""]);
 
 // exports
 
@@ -6838,7 +6840,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "html,\nbody {\n  height: 100%;\n}\n@media (min-width: 640px) {\ntable {\n    display: inline-table !important;\n}\nthead tr:not(:first-child) {\n    display: none;\n}\n}\ntd:not(:last-child) {\n  border-bottom: 0;\n}\nth:not(:last-child) {\n  border-bottom: 2px solid rgba(0, 0, 0, 0.1);\n}\n", ""]);
+exports.push([module.i, "\nhtml,\nbody {\n  height: 100%;\n}\n@media (min-width: 640px) {\ntable {\n    display: inline-table !important;\n}\nthead tr:not(:first-child) {\n    display: none;\n}\n}\ntd:not(:last-child) {\n  border-bottom: 0;\n}\nth:not(:last-child) {\n  border-bottom: 2px solid rgba(0, 0, 0, 0.1);\n}\n", ""]);
 
 // exports
 
@@ -6857,7 +6859,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "html,\nbody {\n  height: 100%;\n}\n@media (min-width: 640px) {\ntable {\n    display: inline-table !important;\n}\nthead tr:not(:first-child) {\n    display: none;\n}\n}\ntd:not(:last-child) {\n  border-bottom: 0;\n}\nth:not(:last-child) {\n  border-bottom: 2px solid rgba(0, 0, 0, 0.1);\n}\n", ""]);
+exports.push([module.i, "\nhtml,\nbody {\n  height: 100%;\n}\n@media (min-width: 640px) {\ntable {\n    display: inline-table !important;\n}\nthead tr:not(:first-child) {\n    display: none;\n}\n}\ntd:not(:last-child) {\n  border-bottom: 0;\n}\nth:not(:last-child) {\n  border-bottom: 2px solid rgba(0, 0, 0, 0.1);\n}\n", ""]);
 
 // exports
 
@@ -6876,7 +6878,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "html,\nbody {\n  height: 100%;\n}\n@media (min-width: 640px) {\ntable {\n    display: inline-table !important;\n}\nthead tr:not(:first-child) {\n    display: none;\n}\n}\ntd:not(:last-child) {\n  border-bottom: 0;\n}\nth:not(:last-child) {\n  border-bottom: 2px solid rgba(0, 0, 0, 0.1);\n}\n", ""]);
+exports.push([module.i, "\nhtml,\nbody {\n    height: 100%;\n}\n@media (min-width: 640px) {\ntable {\n    display: inline-table !important;\n}\nthead tr:not(:first-child) {\n    display: none;\n}\n}\ntd:not(:last-child) {\n    border-bottom: 0;\n}\nth:not(:last-child) {\n    border-bottom: 2px solid rgba(0, 0, 0, 0.1);\n}\n", ""]);
 
 // exports
 
@@ -61780,7 +61782,10 @@ var render = function() {
             _vm.counts
               ? _c(
                   "div",
-                  { staticClass: "w-full flex gap-1 justify-between mx-auto" },
+                  {
+                    staticClass:
+                      "grid md:grid-flow-col mx-auto border border-blue-600 rounded-md divide-y md:divide-y-0 divide-blue-500 md:divide-x md:divide-blue-500"
+                  },
                   _vm._l(Object.entries(_vm.counts), function(ref) {
                     var key = ref[0]
                     var value = ref[1]
@@ -61789,14 +61794,14 @@ var render = function() {
                       {
                         key: "count-" + key,
                         staticClass:
-                          "bg-blue-600 flex flex-col justify-center items-center border-2 border-blue-600 rounded-md w-40 h-40"
+                          "flex flex-1 flex-col justify-center items-center h-36 mx-4 md:mx-0 md:my-4"
                       },
                       [
                         _c(
                           "h1",
                           {
                             staticClass:
-                              "text-2xl text-white font-bold mb-3 capitalize"
+                              "text-2xl text-blue-500 font-bold mb-3 capitalize"
                           },
                           [
                             _vm._v(

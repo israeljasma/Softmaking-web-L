@@ -13,15 +13,17 @@
             </p>
 
             <div
-                class="w-full flex gap-1 justify-between mx-auto"
+                class="grid md:grid-flow-col mx-auto border border-blue-600 rounded-md divide-y md:divide-y-0 divide-blue-500 md:divide-x md:divide-blue-500"
                 v-if="counts"
             >
                 <div
-                    class="bg-blue-600 flex flex-col justify-center items-center border-2 border-blue-600 rounded-md w-40 h-40"
+                    class="flex flex-1 flex-col justify-center items-center h-36 mx-4 md:mx-0 md:my-4"
                     v-for="[key, value] in Object.entries(counts)"
                     :key="'count-' + key"
                 >
-                    <h1 class="text-2xl text-white font-bold mb-3 capitalize">
+                    <h1
+                        class="text-2xl text-blue-500 font-bold mb-3 capitalize"
+                    >
                         {{ key }}
                     </h1>
                     <p class="text-3xl text-center font-extrabold">
