@@ -115,6 +115,8 @@ export default {
           password: this.password,
         })
         .then((response) => {
+          this.email = null;
+          this.password = null;
           this.$router.push({ path: "dashboard" });
         })
         .catch((error) => {

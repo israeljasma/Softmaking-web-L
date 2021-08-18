@@ -5733,6 +5733,9 @@ __webpack_require__.r(__webpack_exports__);
         email: this.email,
         password: this.password
       }).then(function (response) {
+        _this.email = null;
+        _this.password = null;
+
         _this.$router.push({
           path: "dashboard"
         });
