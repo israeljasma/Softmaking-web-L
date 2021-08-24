@@ -59,7 +59,7 @@ class CommentsController extends Controller
                 ]);
 
                 $comment->save();
-                
+
                 // send mail if the user commenting is not the ticket owner
                 // if ($comment->ticket->user->id !== Auth::user()->id) {
                 //     $mailer->sendTicketComments($comment->ticket->user, Auth::user(), $comment->ticket, $comment);
@@ -67,7 +67,7 @@ class CommentsController extends Controller
 
                 return response()->json([
                     'message' => 'Successfully created comment!',
-                    'comment' => $comment
+                    'comment' => $comment->load(['user'])
                 ], 201);
             }else{
                 // Verifica que sea el usuario logueado sea el solicitante si este no es admin

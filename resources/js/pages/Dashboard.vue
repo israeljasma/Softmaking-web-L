@@ -59,7 +59,6 @@ export default {
             this.userRole === roles.admin
         ) {
             axios.get("api/report").then(res => {
-                console.log(res.data.counts);
                 this.counts = res.data.counts[0];
             });
         }

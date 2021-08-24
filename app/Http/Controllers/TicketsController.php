@@ -22,11 +22,11 @@ class TicketsController extends Controller
     {
         try {
             if(Gate::allows('generic-administration')){
-                
+
                 $tickets = Ticket::with('category')->get();
                 return response()->json($tickets, 200);
             }else{
-                
+
                 $tickets = Ticket::with('category')->where('user_id', Auth::id())->get();
                 return response()->json($tickets, 200);
             }
@@ -44,10 +44,9 @@ class TicketsController extends Controller
     public function create()
     {
         try {
-            
             $categories = Category::all();
             return response()->json($categories, 200);
-            
+
         } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'Error: categories were not found.'], 412);
@@ -106,14 +105,13 @@ class TicketsController extends Controller
     {
         try {
             if(Gate::allows('generic-administration')){
-                
                 // cualquier usuario admin
-                $ticket = Ticket::with('user', 'Comments', 'Comments.user', 'category')->find($ticket->id);
+                $ticket = Ticket::with(['user','Comments.user', 'category'])->find($ticket->id);
                 return response()->json(['ticket' => $ticket], 200);
             }else{
 
                 // Verifica que sea el usuario logueado el solicitante si este no es admin
-                $ticket = Ticket::with('user', 'Comments', 'Comments.user', 'category')->where('id', $ticket->id)->where('user_id', Auth::id())->get();
+                $ticket = Ticket::with(['user','Comments.user', 'category'])->where('id', $ticket->id)->where('user_id', Auth::id())->get();
                 return response()->json(['ticket' => $ticket], 200);
             }
         } catch (\Exception $exception) {

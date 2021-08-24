@@ -9,6 +9,7 @@ import PageLogout from "./pages/Logout";
 import PageRegister from "./pages/Register";
 import PageForgotPassword from "./pages/ForgotPassword";
 import PageResetPassword from "./pages/ResetPassword";
+import PageForbidden from "./pages/Forbidden";
 import PageNotFound from "./pages/NotFound";
 import PageDashboard from "./pages/Dashboard";
 import PageProfile from "./pages/Profile";
@@ -282,6 +283,11 @@ const router = new VueRouter( {
             component: PageNotFound
         },
         {
+            path: "/403",
+            name: '403',
+            component: PageForbidden
+        },
+        {
             path: "*",
             redirect: '/404',
         }
@@ -295,7 +301,7 @@ router.beforeEach( ( to, from, next ) => {
             if ( to.matched.some( record => record.meta.userRoles.includes( store.state.userRole ) ) ) {
                 next();
             } else {
-                next( '/' );
+                next( { name: '403' } );
             }
         } else {
             next( { name: 'login' } )

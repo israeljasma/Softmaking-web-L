@@ -104,12 +104,19 @@
                     </dt>
                     <dd
                         v-if="ticket.comments.length > 0"
-                        class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 space-y-3 p-3 border border-gray-200 rounded"
+                        class="flex flex-col h-44 mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 space-y-3 p-3 border border-gray-200 bg-white rounded overflow-y-auto"
                     >
+                        <div class="flex sticky top-0 z-50">
+                            <a
+                                class="px-3 md:py-1 border border-transparent text-base rounded text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:border-blue-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg ml-auto"
+                                @click="addComment(ticket)"
+                                >Agregar comentario</a
+                            >
+                        </div>
                         <div
                             v-for="comment in ticket.comments"
                             :key="comment.id"
-                            class="p-3 border border-gray-200 rounded"
+                            class="p-3 border border-gray-200 bg-gray-50 rounded"
                         >
                             <span
                                 class="text-gray-600 uppercase tracking-wider"
@@ -123,8 +130,13 @@
                     </dd>
                     <dd
                         v-else
-                        class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 space-y-3 p-3 border border-gray-200 rounded"
+                        class="flex flex-col mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 space-y-3 p-3 border border-gray-200 rounded"
                     >
+                        <a
+                            class="px-3 md:py-1 border border-transparent text-base rounded text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:border-blue-500 focus:shadow-outline-blue transition duration-150 ease-in-out md:text-lg mx-auto text-center"
+                            @click="addComment(ticket)"
+                            >Agregar comentario</a
+                        >
                         <p class="text-center text-gray-300">
                             No hay comentarios en este ticket
                         </p>
@@ -152,6 +164,48 @@ export default {
         };
     },
     methods: {
+        addComment: function() {
+            this.$swal({
+                title: "Comentario",
+                input: "text",
+                inputPlaceholder: "Escribe tu comentario aquí",
+                showCancelButton: true,
+                showCloseButton: true,
+                confirmButtonText: "Confirmar",
+                cancelButtonText: "Cancelar",
+                preConfirm: value => {
+                    if (!value) {
+                        this.$swal.showValidationMessage(
+                            "No puede enviar un comentario en blanco"
+                        );
+                    }
+                }
+            }).then(result => {
+                if (result.isConfirmed) {
+                    let comment = {
+                        ticket_id: this.ticket.id,
+                        comment: result.value
+                    };
+                    axios
+                        .post(`/api/tickets/comment`, comment)
+                        .then(result => {
+                            this.$swal(
+                                "Enviado",
+                                "Se ha guardado el comentario con éxito",
+                                "success"
+                            );
+                            this.ticket.comments.unshift(result.data.comment);
+                        })
+                        .catch(err => {
+                            this.$swal(
+                                "Cancelado",
+                                "Ha ocurrido un error al intentar guardar el comentario",
+                                "error"
+                            );
+                        });
+                }
+            });
+        },
         getTicket: function() {
             if (this.ticketId) {
                 axios
