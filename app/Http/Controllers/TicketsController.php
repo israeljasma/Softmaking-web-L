@@ -109,9 +109,8 @@ class TicketsController extends Controller
                 $ticket = Ticket::with(['user','Comments.user', 'category'])->find($ticket->id);
                 return response()->json(['ticket' => $ticket], 200);
             }else{
-
                 // Verifica que sea el usuario logueado el solicitante si este no es admin
-                $ticket = Ticket::with(['user','Comments.user', 'category'])->where('id', $ticket->id)->where('user_id', Auth::id())->get();
+                $ticket = Ticket::with(['user','Comments.user', 'category'])->where('id', $ticket->id)->where('user_id', Auth::id())->first();
                 return response()->json(['ticket' => $ticket], 200);
             }
         } catch (\Exception $exception) {

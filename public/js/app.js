@@ -2936,8 +2936,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Navbar",
@@ -58918,9 +58916,7 @@ var render = function() {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              _vm.isLoggedIn &&
-              (_vm.userRole === _vm.roles.superadmin ||
-                _vm.userRole === _vm.roles.admin)
+              _vm.isLoggedIn
                 ? _c(
                     "router-link",
                     {
@@ -59227,9 +59223,7 @@ var render = function() {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              _vm.isLoggedIn &&
-              (_vm.userRole === _vm.roles.superadmin ||
-                _vm.userRole === _vm.roles.admin)
+              _vm.isLoggedIn
                 ? _c(
                     "router-link",
                     {
@@ -84681,7 +84675,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _pages_Tickets__WEBPACK_IMPORTED_MODULE_23__["default"],
     meta: {
       requiresAuth: true,
-      userRoles: [_roles__WEBPACK_IMPORTED_MODULE_26__["roles"].admin, _roles__WEBPACK_IMPORTED_MODULE_26__["roles"].superadmin]
+      userRoles: [_roles__WEBPACK_IMPORTED_MODULE_26__["roles"].admin, _roles__WEBPACK_IMPORTED_MODULE_26__["roles"].superadmin, _roles__WEBPACK_IMPORTED_MODULE_26__["roles"].cliente]
     }
   }, {
     path: "/tickets/:ticketId",
@@ -84690,7 +84684,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     props: true,
     meta: {
       requiresAuth: true,
-      userRoles: [_roles__WEBPACK_IMPORTED_MODULE_26__["roles"].admin, _roles__WEBPACK_IMPORTED_MODULE_26__["roles"].superadmin]
+      userRoles: [_roles__WEBPACK_IMPORTED_MODULE_26__["roles"].admin, _roles__WEBPACK_IMPORTED_MODULE_26__["roles"].superadmin, _roles__WEBPACK_IMPORTED_MODULE_26__["roles"].cliente]
     }
   }, {
     path: "/ticket",
@@ -84699,7 +84693,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     props: true,
     meta: {
       requiresAuth: true,
-      userRoles: [_roles__WEBPACK_IMPORTED_MODULE_26__["roles"].admin, _roles__WEBPACK_IMPORTED_MODULE_26__["roles"].superadmin]
+      userRoles: [_roles__WEBPACK_IMPORTED_MODULE_26__["roles"].admin, _roles__WEBPACK_IMPORTED_MODULE_26__["roles"].superadmin, _roles__WEBPACK_IMPORTED_MODULE_26__["roles"].cliente]
     }
   }, {
     path: "/ticket/:ticketId",
@@ -84708,7 +84702,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     props: true,
     meta: {
       requiresAuth: true,
-      userRoles: [_roles__WEBPACK_IMPORTED_MODULE_26__["roles"].admin, _roles__WEBPACK_IMPORTED_MODULE_26__["roles"].superadmin]
+      userRoles: [_roles__WEBPACK_IMPORTED_MODULE_26__["roles"].admin, _roles__WEBPACK_IMPORTED_MODULE_26__["roles"].superadmin, _roles__WEBPACK_IMPORTED_MODULE_26__["roles"].cliente]
     }
   }, {
     path: "/messages",

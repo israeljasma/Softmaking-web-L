@@ -159,8 +159,7 @@
         >
         <router-link
           v-if="
-            isLoggedIn &&
-            (userRole === roles.superadmin || userRole === roles.admin)
+            isLoggedIn
           "
           class="ml-4 font-bold text-gray-500 hover:text-gray-400 transition duration-150 ease-in-out"
           to="/tickets"
@@ -318,8 +317,7 @@
         >
         <router-link
           v-if="
-            isLoggedIn &&
-            (userRole === roles.superadmin || userRole === roles.admin)
+            isLoggedIn
           "
           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
           to="/tickets"

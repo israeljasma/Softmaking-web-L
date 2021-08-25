@@ -18,10 +18,10 @@ class CategoriesController extends Controller
     public function index()
     {
         try {
-            if(Gate::denies('generic-administration')){
-                return response()->json([
-                    'message' => "Access denied. You don't have permission to access"], 403);
-            }
+            // if(Gate::denies('generic-administration')){
+            //     return response()->json([
+            //         'message' => "Access denied. You don't have permission to access"], 403);
+            // }
 
             $category = Category::all();
 

@@ -88,7 +88,7 @@ class CommentsController extends Controller
 
                     return response()->json([
                         'message' => 'Successfully created comment!',
-                        $comment
+                        'comment' => $comment->load(['user'])
                     ], 200);
                 }
 

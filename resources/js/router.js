@@ -202,7 +202,7 @@ const router = new VueRouter( {
             component: PageTickets,
             meta: {
                 requiresAuth: true,
-                userRoles: [ roles.admin, roles.superadmin ]
+                userRoles: [ roles.admin, roles.superadmin, roles.cliente ]
             }
         },
         {
@@ -212,7 +212,7 @@ const router = new VueRouter( {
             props: true,
             meta: {
                 requiresAuth: true,
-                userRoles: [ roles.admin, roles.superadmin ]
+                userRoles: [ roles.admin, roles.superadmin, roles.cliente ]
             }
         },
         {
@@ -222,7 +222,7 @@ const router = new VueRouter( {
             props: true,
             meta: {
                 requiresAuth: true,
-                userRoles: [ roles.admin, roles.superadmin ]
+                userRoles: [ roles.admin, roles.superadmin, roles.cliente ]
             }
         },
         {
@@ -232,7 +232,7 @@ const router = new VueRouter( {
             props: true,
             meta: {
                 requiresAuth: true,
-                userRoles: [ roles.admin, roles.superadmin ]
+                userRoles: [ roles.admin, roles.superadmin, roles.cliente ]
             }
         },
 
