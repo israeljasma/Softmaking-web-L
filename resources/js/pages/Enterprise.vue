@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <div>
         EMPRESA
     </div>
@@ -8,6 +8,3 @@ export default {
 
 }
 </script>
-<style lang="">
-
-</style>

@@ -174,17 +174,16 @@ export default {
       axios
         .get(`/api/users/${this.userId}/business/${this.businessId}`)
         .then((res) => {
-          if (res.data.Business.length > 0) {
-            this.business = res.data.Business[0];
+          if (res.data.length > 0) {
+            this.business = res.data;
             this.editMode = true;
           } else {
             this.msg = "No se ha encontrado la empresa";
+            this.showSwalToast("No se ha encontrado la empresa", "error", 3000)
           }
         })
         .catch((err) => {
-          this.$toasted.error(
-            "No se ha encontrado la empresa que estabas buscando"
-          );
+            this.showSwalToast("No se ha encontrado la empresa", "error", 3000)
         });
     },
     saveBusiness: function () {
@@ -206,12 +205,10 @@ export default {
             editedBusiness
           )
           .then((res) => {
-            this.$toasted.success("Se ha actualizado correctamente la empresa");
+            this.showSwalToast("Se ha actualizado correctamente la empresa", "success", 2000)
           })
           .catch((err) => {
-            this.$toasted.error(
-              "Ha ocurrido un error al actualizar los datos de la empresa"
-            );
+            this.showSwalToast("Ha ocurrido un error al actualizar los datos de la empresa", "error", 3000)
           })
           .finally(() => {
             this.saving = false;
@@ -230,10 +227,10 @@ export default {
         axios
           .post(`/api/users/${this.userId}/business`, newBusiness)
           .then((res) => {
-            this.$toasted.success("Se ha guardado correctamente la empresa");
+            this.showSwalToast("Se ha guardado correctamente la empresa", "success", 2000)
           })
           .catch((err) => {
-            this.$toasted.error("Ha ocurrido un error al guardar la empresa");
+            this.showSwalToast("Ha ocurrido un error al guardar la empresa", "error", 3000)
           })
           .finally(() => {
             this.saving = false;

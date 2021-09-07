@@ -84,9 +84,7 @@ export default {
           this.users = response.data;
         })
         .catch((error) => {
-            this.$toasted.error(
-                "Ha ocurrido un error al cargar los usuarios"
-            );
+            this.showSwalToast("Ha ocurrido un error al cargar los usuarios", "error", 3000)
         });
     },
     deleteUser: function (user) {

@@ -208,9 +208,7 @@ export default {
         })
         .catch((err) => {
           this.msg = "No se ha encontrado el cliente";
-          this.$toasted.error(
-            "No se ha encontrado el cliente que estabas buscando"
-          );
+          this.showSwalToast("No se ha encontrado el cliente que estabas buscando", "error", 3000)
         });
     },
     saveClient: function () {
@@ -227,14 +225,10 @@ export default {
         axios
           .post(`/api/clients/${this.clientId}`, editedClient)
           .then((res) => {
-            this.$toasted.success(
-              "Se ha actualizado correctamente los datos del cliente"
-            );
+            this.showSwalToast("Se ha actualizado correctamente los datos del cliente", "success", 2000)
           })
           .catch((err) => {
-            this.$toasted.error(
-              "Ha ocurrido un error al actualizar los datos del cliente"
-            );
+            this.showSwalToast("Ha ocurrido un error al actualizar los datos del cliente", "error", 3000)
           })
           .finally(() => {
             this.saving = false;
@@ -252,10 +246,10 @@ export default {
         axios
           .post(`/api/clients`, newClient)
           .then((res) => {
-            this.$toasted.success("Se ha guardado correctamente el cliente");
+            this.showSwalToast("Se ha guardado correctamente el cliente", "success", 2000)
           })
           .catch((err) => {
-            this.$toasted.error("Ha ocurrido un error al guardar el cliente");
+            this.showSwalToast("Ha ocurrido un error al guardar el cliente", "error", 3000)
           })
           .finally(() => {
             this.saving = false;
@@ -281,5 +275,3 @@ export default {
   },
 };
 </script>
-<style lang="">
-</style>

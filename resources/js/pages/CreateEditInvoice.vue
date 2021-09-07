@@ -186,12 +186,11 @@ export default {
             this.editMode = true;
           } else {
             this.msg = "No se ha encontrado la factura";
+            this.showSwalToast("No se ha encontrado la factura", "error", 3000)
           }
         })
         .catch((err) => {
-          this.$toasted.error(
-            "No se ha encontrado la factura que estabas buscando"
-          );
+          this.showSwalToast("No se ha encontrado la factura que estabas buscando", "error", 3000) 
         });
     },
     saveInvoice: function () {
@@ -211,12 +210,10 @@ export default {
             editedInvoice
           )
           .then((res) => {
-            this.$toasted.success("Se ha actualizado correctamente la factura");
+            this.showSwalToast("Se ha actualizado correctamente la factura", "success", 2000) 
           })
           .catch((err) => {
-            this.$toasted.error(
-              "Ha ocurrido un error al actualizar los datos de la factura"
-            );
+            this.showSwalToast("Ha ocurrido un error al actualizar los datos de la factura", "error", 3000) 
           })
           .finally(() => {
             this.saving = false;
@@ -234,10 +231,10 @@ export default {
         axios
           .post(`/api/users/${this.userId}/invoices`, newInvoice)
           .then((res) => {
-            this.$toasted.success("Se ha guardado correctamente la factura");
+            this.showSwalToast("Se ha guardado correctamente la factura", "success", 2000) 
           })
           .catch((err) => {
-            this.$toasted.error("Ha ocurrido un error al guardar la factura");
+            this.showSwalToast("Ha ocurrido un error al guardar la factura", "error", 3000) 
           })
           .finally(() => {
             this.saving = false;
@@ -253,5 +250,3 @@ export default {
   },
 };
 </script>
-<style lang="">
-</style>

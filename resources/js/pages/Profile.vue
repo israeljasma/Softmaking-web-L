@@ -27,7 +27,7 @@ export default {
         this.user = res.data;
       })
       .catch((err) => {
-        this.$toasted.error("Ha ocurrido al intentar cargar tus datos");
+        this.showSwalToast("Ha ocurrido al intentar cargar tus datos", "error", 3000)
       });
   },
   data() {

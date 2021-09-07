@@ -76,9 +76,7 @@ export default {
           this.messages = response.data;
         })
         .catch((error) => {
-            this.$toasted.error(
-                "Ha ocurrido un error al cargar los mensajes o correos"
-            );
+            this.showSwalToast("Ha ocurrido un error al cargar los mensajes o correos", "error", 3000)
         })
     },
   },

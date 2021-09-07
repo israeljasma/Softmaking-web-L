@@ -112,11 +112,11 @@ export default {
           password_confirmation: this.password_confirmation,
         })
         .then((res) => {
-          this.$toasted.success("La contraseña ha sido cambiada con éxito");
+          this.showSwalToast("La contraseña ha sido cambiada con éxito", "success", 3000)
           this.$router.push({ name: "login" });
         })
         .catch((err) => {
-          this.$toasted.error("El token proporcionado no es válido");
+          this.showSwalToast("El token proporcionado no es válido", "error", 3000)
         })
         .finally(() => {
           this.sending = false;

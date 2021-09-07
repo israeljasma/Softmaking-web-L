@@ -164,16 +164,16 @@ const router = new VueRouter( {
                 userRoles: [ roles.admin, roles.superadmin ]
             },
         },
-        {
-            path: "/users/:userId/business/:businessId",
-            name: "enterprise",
-            props: true,
-            component: PageEnterprise,
-            meta: {
-                requiresAuth: true,
-                userRoles: [ roles.admin, roles.superadmin ]
-            },
-        },
+        // {
+        //     path: "/users/:userId/business/:businessId",
+        //     name: "enterprise",
+        //     props: true,
+        //     component: PageEnterprise,
+        //     meta: {
+        //         requiresAuth: true,
+        //         userRoles: [ roles.admin, roles.superadmin ]
+        //     },
+        // },
         {
             path: "/users/:userId/enterprise",
             component: PageCreateEditBusiness,

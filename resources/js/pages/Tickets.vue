@@ -101,11 +101,9 @@ export default {
           .then((response) => {
             this.tickets = response.data;
           })
-            .catch((error) => {
-            this.$toasted.error(
-                "Ha ocurrido un error al cargar los tickets"
-            );
-        });
+          .catch((error) => {
+            this.showSwalToast("Ha ocurrido un error al cargar los tickets", "error", 3000)
+          });
       },
     deleteClient: function (ticket) {
         Vue.swal({
@@ -149,5 +147,3 @@ export default {
   },
 };
 </script>
-<style lang="">
-</style>

@@ -201,22 +201,21 @@ export default {
   },
   methods: {
     deleteBusiness: function (b, index) {
-      this.$swal({
+      Vue.swal({
         title:
           "<h1 class='text-xl text-blue-700 font-bold mb-3'>¿Estás seguro que deseas remover esta empresa?</h1>",
         text: "No puedes revertir tu acción",
-        type: "warning",
+        icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Si, eliminar empresa",
         cancelButtonText: "No, conservarla",
         showCloseButton: true,
-        showLoaderOnConfirm: true,
       }).then((result) => {
         if (result.value) {
           axios
             .delete(`/api/users/${this.user.id}/business/${b.id}`)
             .then((result) => {
-              this.$swal(
+              Vue.swal(
                 "Eliminado",
                 "Ha eliminado con éxito esta empresa",
                 "success"
@@ -224,14 +223,14 @@ export default {
               this.business.splice(index, 1);
             })
             .catch((err) => {
-              this.$swal(
+              Vue.swal(
                 "Cancelado",
                 "Ha ocurrido un error al intentar eliminar la empresa",
                 "error"
               );
             });
         } else {
-          this.$swal("Cancelado", "No se ha hecho ningún cambio", "info");
+          Vue.swal("Cancelado", "No se ha eliminado", "info");
         }
       });
     },
@@ -248,17 +247,16 @@ export default {
       axios
         .get(`/api/users/${this.user.id}/business`)
         .then((res) => {
-          if (res.data.Business.length > 0) {
-            this.business = res.data.Business;
+          if (res.data.length > 0) {
+            this.business = res.data;
             this.editMode = true;
           } else {
             this.msg = "No se ha encontrado la empresa";
+            this.showSwalToast("No se ha encontrado la empresa que estabas buscando", "error", 3000)
           }
         })
         .catch((err) => {
-          this.$toasted.error(
-            "No se ha encontrado la empresa que estabas buscando"
-          );
+          this.showSwalToast("No se ha encontrado la empresa que estabas buscando", "error", 3000)
         });
     },
     saveBusiness: function (e) {
@@ -277,12 +275,10 @@ export default {
         axios
           .post(`/api/users/${this.user.id}/business/${e.id}`, editedBusiness)
           .then((res) => {
-            this.$toasted.success("Se ha actualizado correctamente la empresa");
+            this.showSwalToast("Se ha actualizado correctamente la empresa", "success", 2000)
           })
           .catch((err) => {
-            this.$toasted.error(
-              "Ha ocurrido un error al actualizar los datos de la empresa"
-            );
+            this.showSwalToast("Ha ocurrido un error al actualizar los datos de la empresa", "error", 3000)
           })
           .finally(() => {
             this.saving = false;
@@ -301,12 +297,12 @@ export default {
         axios
           .post(`/api/users/${this.user.id}/business`, newBusiness)
           .then((res) => {
-            this.$toasted.success("Se ha guardado correctamente la empresa");
+            this.showSwalToast("Se ha guardado correctamente la empresa", "success", 2000)
             e.id = res.data.id;
           })
           .catch((err) => {
             this.errorMsg = err.response.data || [];
-            this.$toasted.error("Ha ocurrido un error al guardar la empresa");
+            this.showSwalToast("Ha ocurrido un error al guardar la empresa", "error", 3000)
           })
           .finally(() => {
             this.saving = false;

@@ -72,9 +72,7 @@ export default {
             this.user = response.data;
           })
          .catch((error) => {
-            this.$toasted.error(
-                "Ha ocurrido un error al cargar el usuario"
-            );
+            this.showSwalToast("Ha ocurrido un error al cargar el usuario", "error", 3000)
         });
       }
     },

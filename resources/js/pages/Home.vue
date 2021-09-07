@@ -78,13 +78,14 @@
         class="grid md:grid-flow-col gap-2 w-full justify-center items-center px-16 md:px-4"
       >
         <a
-          v-for="client in clients"
-          :key="client.id"
+          v-for="(client, index) in clients"
+          :key="index"
           :href="client.url_site"
           target="_blank"
           rel="noreferrer"
           class="mx-auto"
-          ><img
+          >
+          <img
             class="w-auto h-auto inline-block"
             :src="'/storage/' + client.url_logo"
             :alt="client.description"
@@ -118,7 +119,7 @@
       ></div>
       <div class="relative">
         <h1
-          class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700 z-10 fade-horizontal"
+          class="title z-10 fade-horizontal"
         >
           ¡Tenemos lo que necesitas!
         </h1>
@@ -139,7 +140,7 @@
     <section id="services" class="container mx-auto my-12 md:my-48">
       <div class="relative">
         <h1
-          class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700 fade-vertical"
+          class="title fade-vertical"
         >
           Actividades de la empresa
         </h1>
@@ -238,7 +239,7 @@
     >
       <div class="relative fade-horizontal">
         <h1
-          class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700 fade-horizontal"
+          class="title fade-horizontal"
         >
           Mantengámonos en contacto
         </h1>
@@ -285,7 +286,7 @@
     <section id="rrss" class="mx-auto px-4 md:px-12 py-12 md:py-48 bg-gray-100">
       <div class="relative">
         <h1
-          class="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700 fade-vertical"
+          class="title fade-vertical"
         >
           Puedes seguirnos en nuestras redes sociales
         </h1>
@@ -448,10 +449,10 @@ export default {
           trigger: "#clients",
           toggleActions: "play pause resume reset",
         },
-        y: "+=50",
+        y: "+=20",
         opacity: 0,
-        duration: 1,
-        stagger: 0.2,
+        duration: 3,
+        stagger: 0.15,
       });
 
       gsap.from("#about .fade-horizontal", {
@@ -483,8 +484,8 @@ export default {
         },
         x: "-=100",
         opacity: 0,
-        duration: 1,
-        stagger: 0.3,
+        duration: 0.8,
+        stagger: 0.2,
       });
 
       gsap.from("#rrss .fade-vertical", {

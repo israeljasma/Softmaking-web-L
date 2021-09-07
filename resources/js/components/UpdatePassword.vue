@@ -118,17 +118,13 @@ export default {
             password_confirmation: this.password_confirmation,
           })
           .then((res) => {
-            this.$toasted.success(
-              "Se ha actualizado correctamente tu contraseña"
-            );
+            this.showSwalToast("Se ha actualizado correctamente tu contraseña", "success", 3000)
           })
           .catch((err) => {
             const { data } = err.response;
             this.errorMsg = data;
 
-            this.$toasted.error(
-              "Ha ocurrido un error al actualizar tu contraseña"
-            );
+            this.showSwalToast("Ha ocurrido un error al actualizar tu contraseña", "error", 3000)
           })
           .finally(() => {
             this.savingPassword = false;

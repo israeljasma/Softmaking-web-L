@@ -1,51 +1,48 @@
+import App from "./components/App.vue";
 import router from "./router";
-import store from './store';
-import App from "./components/App";
+import store from "./store";
 
-import moment from 'moment';
-import Toasted from 'vue-toasted';
-import VueSweetalert2 from 'vue-sweetalert2';
+import axios from "axios";
+
+import moment from "moment";
+import VueSweetalert2 from "vue-sweetalert2";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TweenLite } from "gsap/gsap-core";
+import swal from "./plugins/swal";
+
+window.Vue = require("vue");
 
 gsap.registerPlugin(ScrollTrigger, TweenLite);
 
-require( './bootstrap' );
+require("./bootstrap");
 
-window.Vue = require( 'vue' );
-
-const accessToken = localStorage.getItem( 'access_token' );
-if ( accessToken ) {
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
+const accessToken = localStorage.getItem("access_token");
+if (accessToken) {
+    axios.defaults.headers.common["Authorization"] = "Bearer " + accessToken;
 }
 
-moment.locale('es');
-Vue.filter('formatDate', function(val) {
+moment.locale("es");
+Vue.filter("formatDate", function(val) {
     if (val) {
         // return moment(String(val)).format('MM/DD/YYYY hh:mm')
-        return moment(String(val)).format('LLLL')
+        return moment(String(val)).format("LLLL");
     }
 });
 
-Vue.use(Toasted, {
-    theme: "toasted-primary",
-    position: "top-right",
-    fitToScreen: true,
-    duration : 5000
-});
+Vue.use(swal);
 
 const options = {
-  confirmButtonColor: '#41b882',
-  cancelButtonColor: '#ff7674',
+    confirmButtonColor: "#41b882",
+    cancelButtonColor: "#ff7674"
 };
 
 Vue.use(VueSweetalert2, options);
 
-const app = new Vue( {
-    el: '#app',
-    router,                // <-- register router with Vue
+const app = new Vue({
+    el: "#app",
+    router,
     store,
-    render: ( h ) => h( App ) // <-- render App component
-} );
+    render: h => h(App)
+});

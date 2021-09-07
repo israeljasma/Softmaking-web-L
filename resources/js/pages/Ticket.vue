@@ -165,7 +165,7 @@ export default {
     },
     methods: {
         addComment: function() {
-            this.$swal({
+            Vue.swal({
                 title: "Comentario",
                 input: "text",
                 inputPlaceholder: "Escribe tu comentario aquí",
@@ -175,7 +175,7 @@ export default {
                 cancelButtonText: "Cancelar",
                 preConfirm: value => {
                     if (!value) {
-                        this.$swal.showValidationMessage(
+                        Vue.swal.showValidationMessage(
                             "No puede enviar un comentario en blanco"
                         );
                     }
@@ -189,7 +189,7 @@ export default {
                     axios
                         .post(`/api/tickets/comment`, comment)
                         .then(result => {
-                            this.$swal(
+                            Vue.swal(
                                 "Enviado",
                                 "Se ha guardado el comentario con éxito",
                                 "success"
@@ -197,7 +197,7 @@ export default {
                             this.ticket.comments.unshift(result.data.comment);
                         })
                         .catch(err => {
-                            this.$swal(
+                            Vue.swal(
                                 "Cancelado",
                                 "Ha ocurrido un error al intentar guardar el comentario",
                                 "error"
@@ -214,9 +214,7 @@ export default {
                         this.ticket = response.data.ticket;
                     })
                     .catch(error => {
-                        this.$toasted.error(
-                            "Ha ocurrido un error al cargar el ticket"
-                        );
+                        this.showSwalToast("Ha ocurrido un error al cargar el ticket", "error", 3000)
                     });
             }
         }

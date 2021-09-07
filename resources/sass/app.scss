@@ -7,47 +7,54 @@
 @import '~sweetalert2/src/variables';
 @import '~sweetalert2/src/sweetalert2';
 
-
-html {
-    scroll-behavior: smooth;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-    font-family: 'Raleway', sans-serif;
-}
-
-body {
-    font-family: 'Roboto', sans-serif;
-}
-
-.router-link-active {
-    color: #3182ce;
-}
-
-[style*="--aspect-ratio"] > :first-child {
-    width: 100%;
-}
-[style*="--aspect-ratio"] > img {
-    height: auto;
-}
-
-@supports (--custom:property) {
-    [style*="--aspect-ratio"] {
-        position: relative;
+@layer components {
+    .title {
+        @apply text-3xl md:text-5xl font-bold text-center pb-3 mb-3 bg-clip-text text-transparent bg-gradient-to-b from-blue-500 to-blue-700;
     }
-    [style*="--aspect-ratio"]::before {
-        content: '';
-        display: block;
-        padding-bottom: calc(100% / (var(--aspect-ratio)));
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
     }
+    
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-family: 'Raleway', sans-serif;
+    }
+    
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+    
+    .router-link-active {
+        color: #3182ce;
+    }
+    
     [style*="--aspect-ratio"] > :first-child {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
+        width: 100%;
+    }
+    [style*="--aspect-ratio"] > img {
+        height: auto;
+    }
+    
+    @supports (--custom:property) {
+        [style*="--aspect-ratio"] {
+            position: relative;
+        }
+        [style*="--aspect-ratio"]::before {
+            content: '';
+            display: block;
+            padding-bottom: calc(100% / (var(--aspect-ratio)));
+        }
+        [style*="--aspect-ratio"] > :first-child {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+        }
     }
 }

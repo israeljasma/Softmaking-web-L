@@ -75,14 +75,12 @@ export default {
       axios
         .post("api/password/email", { email: this.email })
         .then((res) => {
-          this.$toasted.success(
-            "Enlace para restablecer la contraseña enviado a su correo electrónico"
-          );
+          this.showSwalToast("Enlace para restablecer la contraseña enviado a su correo electrónico", "error", 3000)
         })
         .catch((err) => {
-          this.$toasted.error(
+          this.showSwalToast(
             "Ha ocurrido un error al intentar enviar en enlace para restablecer la contraseña"
-          );
+          , "error", 3000)
         })
         .finally(() => {
           this.sending = false;

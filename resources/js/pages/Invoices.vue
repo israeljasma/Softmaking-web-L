@@ -105,9 +105,7 @@ export default {
             this.invoices = response.data.invoices;
           })
           .catch((error) => {
-             this.$toasted.error(
-              "Ha ocurrido un error al cargar las facturas"
-            );
+            this.showSwalToast("Ha ocurrido un error al cargar las facturas", "error", 3000)
           });
       }
     },

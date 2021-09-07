@@ -113,12 +113,10 @@ export default {
         axios
           .get(`/api/users/${this.userId}/business`)
           .then((response) => {
-            this.business = response.data.Business;
+            this.business = response.data;
           })
         .catch((error) => {
-            this.$toasted.error(
-                "Ha ocurrido un error al cargar las empresas"
-            );
+            this.showSwalToast("Ha ocurrido un error al cargar las empresas", "error", 3000)
         });
       }
     },
@@ -129,5 +127,3 @@ export default {
   },
 };
 </script>
-<style lang="">
-</style>

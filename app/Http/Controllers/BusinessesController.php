@@ -27,10 +27,10 @@ class BusinessesController extends Controller
 
             if(Gate::allows('generic-administration')){
                 $business = Business::where('user_id', $user->getKey())->get();
-                return response()->json(['Business' => $business], 200);
+                return response()->json($business, 200);
             }else{
                 $business = Business::where('user_id', Auth::id())->get();
-                return response()->json(['Business' => $business], 200);
+                return response()->json($business, 200);
             }
         } catch (\Exception $exception) {
             return response()->json([
@@ -109,10 +109,10 @@ class BusinessesController extends Controller
 
             if(Gate::allows('generic-administration')){
                 $business = Business::where('id', $business_id)->where('user_id', $user_id)->get();
-                return response()->json(['Business' => $business], 200);
+                return response()->json($business, 200);
             }else{
                 $business = Business::where('id', $business_id)->where('user_id', Auth::id())->get();
-                return response()->json(['Business' => $business], 200);
+                return response()->json($business, 200);
             }
         } catch (\Exception $exception) {
             return response()->json([

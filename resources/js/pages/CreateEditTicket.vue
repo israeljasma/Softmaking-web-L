@@ -193,9 +193,7 @@ export default {
                     this.categories = res.data;
                 })
                 .catch(err => {
-                    this.$toasted.error(
-                        "Hubo un error al cargar las categorías"
-                    );
+                    this.showSwalToast("Hubo un error al cargar las categorías", "error", 3000) 
                 });
         },
         getTicket: function() {
@@ -207,9 +205,7 @@ export default {
                 })
                 .catch(err => {
                     this.msg = "No se ha encontrado el ticket";
-                    this.$toasted.error(
-                        "No se ha encontrado el ticket que estabas buscando"
-                    );
+                    this.showSwalToast("No se ha encontrado el ticket que estabas buscando", "error", 3000)
                 });
         },
         saveTicket: function() {
@@ -226,14 +222,10 @@ export default {
                 axios
                     .post(`/api/tickets/${this.ticketId}`, editedTicket)
                     .then(res => {
-                        this.$toasted.success(
-                            "Se ha actualizado correctamente los datos del ticket"
-                        );
+                        this.showSwalToast("Se ha actualizado correctamente los datos del ticket", "success", 2000)
                     })
                     .catch(err => {
-                        this.$toasted.error(
-                            "Ha ocurrido un error al actualizar los datos del ticket"
-                        );
+                        this.showSwalToast("Ha ocurrido un error al actualizar los datos del ticket", "error", 3000)
                     })
                     .finally(() => {
                         this.saving = false;
@@ -250,14 +242,10 @@ export default {
                 axios
                     .post(`/api/tickets`, newTicket)
                     .then(res => {
-                        this.$toasted.success(
-                            "Se ha guardado correctamente el ticket"
-                        );
-                    })
+                        this.showSwalToast("Se ha guardado correctamente el ticket", "success", 2000)
+                     })
                     .catch(err => {
-                        this.$toasted.error(
-                            "Ha ocurrido un error al guardar el ticket"
-                        );
+                        this.showSwalToast("Ha ocurrido un error al guardar el ticket", "error", 3000)
                     })
                     .finally(() => {
                         this.saving = false;
