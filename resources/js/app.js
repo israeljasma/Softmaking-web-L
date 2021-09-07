@@ -12,7 +12,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TweenLite } from "gsap/gsap-core";
 import swal from "./plugins/swal";
 
-window.Vue = require("vue");
+window.Vue = require("vue").default;
 
 gsap.registerPlugin(ScrollTrigger, TweenLite);
 
