@@ -269,7 +269,7 @@ class UsersController extends Controller
                 'name'          => 'required',
                 'lastname'      => 'required|string|max:255',
                 'phone'         => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9',
-                'email'         => 'required|string|email|max:255', Rule::unique('users')->ignore(Auth::id(), 'id')
+                // 'email'         => 'required|string|email|max:255', Rule::unique('users')->ignore(Auth::id(), 'id')
             ]);
 
             if($validator->fails()) {
@@ -281,7 +281,7 @@ class UsersController extends Controller
             $user->name = $request->name;
             $user->lastname = $request->lastname;
             $user->phone = $request->phone;
-            $user->email = $request->email;
+            // $user->email = $request->email;
             $user->save();
 
             return response()->json(['message' => 'Successfully updated user profile!'], 201);

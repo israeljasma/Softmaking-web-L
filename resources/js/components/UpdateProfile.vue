@@ -15,7 +15,7 @@
           id="name"
           required
           autofocus
-          class="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('name') is-invalid @enderror"
+          class="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
         />
       </div>
       <div class="mb-3">
@@ -29,7 +29,7 @@
           id="lastname"
           required
           autofocus
-          class="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('lastname') is-invalid @enderror"
+          class="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
         />
       </div>
       <div class="mb-3">
@@ -43,38 +43,57 @@
             id="phone"
             required
             autofocus
-            class="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('phone') is-invalid @enderror"
+            class="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
           />
       </div>
       <div class="mb-3">
         <label for="email" class="block text-sm font-medium text-gray-700"
           >Correo</label
         >
-        <input
-          v-model="user.email"
-          type="email"
-          name="email"
-          id="email"
-          disabled
-          autofocus
-          class="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('email') is-invalid @enderror"
-        />
+        <p class="block text-md font-medium text-gray-400  cursor-not-allowed">
+            <input
+            v-model="user.email"
+            type="email"
+            name="email"
+            id="email"
+            disabled
+            autofocus
+            class="bg-gray-100 mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md cursor-not-allowed"
+            />
+        </p>
       </div>
       <div class="mb-3">
         <label for="created_at" class="block text-sm font-medium text-gray-700"
           >Estás desde el</label
         >
-        <p class="block text-md font-medium text-gray-600">
+        <p class="block text-md font-medium text-gray-400">
           <input
             v-model="created_at"
             type="text"
             name="created_at"
             id="created_at"
             disabled
-            class="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md @error('created_at') is-invalid @enderror"
+            class="bg-gray-100 mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md cursor-not-allowed"
           />
         </p>
       </div>
+
+        <div
+            v-if="errorMsg"
+            class="bg-red-100 border-t border-b border-red-500 text-dark-700 px-4 py-3 mb-5"
+            role="alert"
+        >
+            <h1 class="text-md font-bold mb-2">
+            Corrija los siguientes errores:
+            </h1>
+            <p
+            v-for="(err, index) in errorMsg"
+            :key="'err-' + index"
+            class="text-sm ml-1"
+            >
+            - {{ err.join(", ") }}
+            </p>
+        </div>
       <button
         class="w-full flex mx-auto items-center justify-center py-2 px-4 mt-2 shadow-sm text-md font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         type="submit"
@@ -114,6 +133,7 @@ export default {
     return {
     //   user: null,
       savingProfile: false,
+      errorMsg: null,
     };
   },
   computed: {
@@ -136,10 +156,12 @@ export default {
       axios
         .post(`/api/profile/update`, editedProfile)
         .then((res) => {
-          this.$toasted.success("Se ha actualizado correctamente tus datos");
+          this.showSwalToast("Se ha actualizado correctamente tus datos", "success", 3000)
         })
-        .catch((err) => {
-          this.$toasted.error("Ha ocurrido un error al actualizar tus datos");
+        .catch((error) => {
+          this.showSwalToast("Ha ocurrido un error al actualizar tus datos", "error", 3000)
+          const { data } = error.response;
+          this.errorMsg = data;
         })
         .finally(() => {
           this.savingProfile = false;
